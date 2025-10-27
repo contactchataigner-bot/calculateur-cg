@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head> <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Calculateur CG – Ma journée</title>
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:#f6f7f9;color:#222}
+    header{position:sticky;top:0;background:#fff;border-bottom:1px solid #e6e8eb;padding:12px 16px}
+    h1{font-size:18px;margin:0}
+    main{max-width:900px;margin:16px auto;padding:0 12px}
+    .card{background:#fff;border:1px solid #e6e8eb;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 0 0 rgba(0,0,0,0)}
+    .row{display:grid;grid-template-columns:1.3fr 100px 110px 36px;gap:8px;align-items:center}
+    .row input, .row select{width:100%;padding:10px;border:1px solid #d8dbe0;border-radius:10px;font-size:14px}
+    .row .cg{background:#f3f6ff;border:1px dashed #c7d2fe}
+    .row button{border:0;background:#f3f4f6;border-radius:10px;height:40px;cursor:pointer}
+    .row button:hover{background:#eee}
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+    .toolbar input{flex:1;min-width:180px}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef6f3;color:#0d6e3c;font-weight:600;font-size:13px}
+    .total{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-radius:12px;background:#0d6efd;color:#fff;font-weight:700}
+    .muted{color:#666;font-size:12px}
+    .actions{display:flex;gap:8px;flex-wrap:wrap}
+    .btn{border:0;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:600}
+    .btn-ghost{background:#eef2ff;color:#1e40af}
+    .btn-danger{background:#fee2e2;color:#991b1b}
+    .hint{font-size:12px;color:#666;margin-top:6px}
+    .footer{margin-top:12px;font-size:12px;color:#666;text-align:center}
+    .warn{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:10px;padding:10px}
+  </style>
+  </head>
+<body>
+<script>
+/* Colle ici le contenu de ton aliments.csv entre les backticks */
+const CSV_ALIMENTS = `
+ALIMENT;Charge glycémique pour 100g;;;;
+Lait concentré non sucré;3;;;;
+Lait concentré sucré;34;;;;
+Lait amandes sucré, enrichi calcium voir aussi boisson végétale;1;;;;
+Boisson végétale amandes sucré, enrichi calcium;1;;;;
+Lait millet amande noisette estimation voir aussi boisson végétale;9;;;;
+Boisson végétale riz et moka estimation;9;;;;
+Boisson végétale millet amande noisette estimation;9;;;;
+Boisson végétale avoine vanille estimation;5,5;;;;
+Boisson végétale au sarrasin (buckwheat) estimation;5;;;;
+Lait amandes nature non sucré voir aussi boisson végétale;0;;;;
+Boisson végétale amandes nature non sucré;0;;;;
+Lait avoine nature voir aussi boisson végétale;2,5;;;;
+Boisson végétale avoine nature;2,5;;;;
+Lait de chèvre entier cru;1;;;;
+Lait de chèvre entier UHT;1;;;;
+Lait de chèvre demi écrémé;1;;;;
+Lait de coco;1;;;;
+Lait de riz, voir aussi boisson végétale;10;;;;
+Boisson végétale au riz;10;;;;
+Boisson végétale riz épeautre amandes;8;;;;
+Boisson végétale riz épeautre noisettes;7,5;;;;
+Boisson végétale riz millet macadamia;8;;;;
+Boisson végétale riz chocolat noisette estimation;10;;;;
+Boisson végétale riz châtaigne avoine;9;;;;
+Boisson végétale riz cacao estimation;11;;;;
+Boisson végétale noisettes;1;;;;
+Lait de soja nature voir aussi boisson végétale;0,5;;;;
+Boisson végétale coco;1;;;;
+Boisson végétale noix de cajou;0,35;;;;
+Boisson végétale au soja nature;0,5;;;;
+Boisson végétale au chanvre sans sucre;0;;;;
+Boisson végétale amande chocolat estimation;7;;;;
+Boisson végétale amande vanille estimation;1;;;;
+Lait de vache entier UHT;1;;;;
+Lait de vache écrémé ;3;;;;
+Lait écrémé en poudre ;32,5;;;;
+Lait entier en poudre;11,5;;;;
+Lait en poudre 1/2 écrémé;13;;;;
+Lait fermenté à boire nature;1;;;;
+Kéfir de lait;2;;;;
+Haricots Flageolets verts bouilli/cuit à l’eau;3;;;;
+Haricots flageolet surgelés;6,5;;;;
+Haricots rouges bouilli/cuits à l’eau;4;;;;
+Haricots blancs, bouilli/cuit à l’eau;4;;;;
+Haricots coco, bouilli/cuits à l’eau;5;;;;
+Lentilles vertes, bouillie/cuite à l’eau;4;;;;
+Lentilles blondes, bouillie/cuite à l’eau;5;;;;
+Lentilles corail, bouillie / cuite à l’eau;4,5;;;;
+Petits pois surgelés, cuits;3;;;;
+Petits pois purée;3;;;;
+Petits pois cuits;3,5;;;;
+Pois cassés, bouilli/cuit à l’eau;15;;;;
+Fèves cuites;7;;;;
+Pois chiches, bouilli/cuit à l’eau;5;;;;
+Alcamatin estimation;30;;;;
+Cacao raw powder, Purasana estimation;3;;;;
+Poudre de cacao cru,Purasana estimation;3;;;;
+Bouillie de millet Alcamatin estimation;30;;;;
+Amarante;21;;;;
+Flocons d’avoine;23;;;;
+Muesli moyen sans sucre ajouté;30,8;;;;
+Crousty 3 chocolats, Auchan, estimation;48,30;;;;
+Cruesli chocolat au lait, Quaker, estimation;41,30;;;;
+Muesli bio flocons d’avoine et noix, estimation;13,12;;;;
+Son d’avoine;20,5;;;;
+Flocon d’épeautre;30;;;;
+Blé (type Ebly);14;;;;
+Boulgour;37;;;;
+Céréales (petit dej);55,5;;;;
+Corn flakes natures;75;;;;
+Maïs ;10;;;;
+Maïs en conserve;10;;;;
+Orge perlé cuit;15;;;;
+Petit épeautre;24;;;;
+Quinoa;10;;;;
+Riz blanc cuit;67;;;;
+Riz Basmati cuit;12;;;;
+Riz complet cuit;20;;;;
+Riz sauvage cuit;10;;;;
+Riz gluant;29;;;;
+Riz thai cuit;15,5;;;;
+Tapioca;75;;;;
+Lupins, délice en morceaux, estimation;11;;;;
+Délice en morceaux, Lupins, estimation;11;;;;
+Semoule de maïs, polenta;53;;;;
+Semoule blé cuite;16;;;;
+weetabix céréales;61;;;;
+Chips;31;;;;
+Gingembre racine;1;;;;
+Gingembre confit;8,71;;;;
+Pomme de terre au four sans peau;24,5;;;;
+Pomme de terre au four avec peau;22,5;;;;
+Pomme de terre duchesse surgelées cuite;36;;;;
+Pomme de terre dauphine surgelée, cuite;37;;;;
+Pomme de terre cuites vapeur;19;;;;
+Pomme de terre sauté, pré-frite, surgelée, cuite;28;;;;
+Patates douces, cuite;6;;;;
+Pomme de terre Frites;40;;;;
+Purée de Pomme de terre;17;;;;
+Purée de pomme de terre en flocons;15;;;;
+Topinambourg;8;;;;
+Farine d’Avoine;27;;;;
+FitOlin (farine de lin minceur);7;;;;
+Farine d’Arrow root;10;;;;
+Farine d’Amarante;26,5;;;;
+Linette (farine de lin);7,5;;;;
+Farine de Blé tendre T80;67;;;;
+Farine de Blé T110;58;;;;
+Farine de Blé intégrale  T150;55;;;;
+Farine de Blé T45;69;;;;
+Farine de Blé T55;67;;;;
+Farine de Chataignes;46;;;;
+Farine de Coco;8;;;;
+Farine de pois chiches;16,5;;;;
+Farine de Grand épeautre T110;32;;;;
+Farine de Grand épeautre complète T130;31;;;;
+Farine de Grand épeautre intégrale T150;27;;;;
+Farine de Kamut;32;;;;
+Farine de Lentilles;18;;;;
+Farine de Lupin;1,5;;;;
+Maïzena (choisir arrow root);73;;;;
+Fécule de maïs (choisir plutôt arrow root);73;;;;
+Farine de maïs;55;;;;
+Poudre de Noisettes;2,5;;;;
+Poudre d’Amandes;1,5;;;;
+Farine de Quinoa;26;;;;
+Farine de millet;45;;;;
+Farine de Petit épautre;25;;;;
+Farine de Riz;70;;;;
+Farine de Sarrasin (sans gluten);27,5;;;;
+Farine de Soja;6;;;;
+Farine de Souchet;22;;;;
+Farine de Seigle complète;20;;;;
+Bagel;33;;;;
+Baguette blanche ;58,5;;;;
+Biscottes;54;;;;
+Blini ;39;;;;
+Brioche;7,5;;;;
+Crêpe V1 pâte MC;7,5;;;;
+Crêpe V2 lait d’amande MC;7;;;;
+Crêpe mille trous;7;;;;
+Croissant;38;;;;
+Crumpet anglais MC;14;;;;
+Crozet à la châtaigne;69;;;;
+Foccacia MC;20;;;;
+Gaufres salées légères MC;12;;;;
+Gaufres rapides MC;8;;;;
+Gaufres liégeoises rapides MC;17;;;;
+Génoise rapide MC;11;;;;
+Krisprolls;33;;;;
+Muffin anglais MC;16;;;;
+Naan nature ou fromage MC;14,5;;;;
+Naan ail MC;14,5;;;;
+Nachos MC;11,5;;;;
+Pain au son;27;;;;
+Pain azyme;45;;;;
+Pain au lait artisanal;27;;;;
+Pain au lait MC;15;;;;
+Pain au levain en moyenne;35;;;;
+Pain blanc;100;;;;
+Pain complet ;96;;;;
+Pain au Kamut;32;;;;
+Pain de mie;42;;;;
+Pain de mie MC;33;;;;
+Pain hamburger classique;42,5;;;;
+Pain bun MC hamburger;15,5;;;;
+Pain épeautre intégral;27;;;;
+Pain de seigle complet;29;;;;
+Pain des fleurs sarrasin;49;;;;
+Pain géorgien MC;17;;;;
+Pain noir allemand;18;;;;
+Pain au chocolat;48;;;;
+Pain aux raisins;39,13;;;;
+Pain grillé;32,5;;;;
+Pain santé Méthode Chataigner;17;;;;
+Pancake MC;8;;;;
+Pâte sablée MC;24;;;;
+Riz soufflé en galette;64;;;;
+Scones anglais MC;17,5;;;;
+Wasa estimation;21,70;;;;
+Wasa fibres estimation;16,10;;;;
+Pâte à lasagnes MC;17;;;;
+Pâte à lasagnes au sarrasin MC;15;;;;
+Pâte à pizza chou-fleur MC;0,5;;;;
+Pâtes au blé complet cuites;12;;;;
+Pâtes de riz;21;;;;
+Vermicelles de riz;21;;;;
+Nouilles de riz;21;;;;
+Pâtes aux œufs cuites;13;;;;
+Pâtes blanches al dente;16;;;;
+Pâtes blanches cuisson normale;35;;;;
+Pâtes blanches bien cuites;45;;;;
+Pâte brisée MC;18;;;;
+Pâte feuilletée;32;;;;
+Pâte feuilletée maison FitOlin;12;;;;
+Pâtes fraiches aux œufs cuites;13;;;;
+Pâte gnocchis;24;;;;
+Gnocchis;24;;;;
+Abricot ;5;;;;
+Ananas;7;;;;
+Avocat;1;;;;
+Banane ;13;;;;
+Banane mûre;76;;;;
+Baies de goji;14,5;;;;
+Banane plantain cuite;20;;;;
+Brugnon ;3;;;;
+Cassis;1,5;;;;
+Cerise ;8;;;;
+Châtaigne;22;;;;
+Citron;0,5;;;;
+Citron zeste;1;;;;
+Clémentine;3;;;;
+Coing;5;;;;
+Datte ;45;;;;
+Figue;5;;;;
+Fraise ;2;;;;
+Framboises;2;;;;
+Fruit de la passion;3;;;;
+Goyave;6;;;;
+Grenade ;5;;;;
+Groseilles;2;;;;
+Kaki ;7;;;;
+Kiwi ;6;;;;
+Litchi au sirop;13;;;;
+Litchi ;8;;;;
+Mandarine;3;;;;
+Mangue ;7;;;;
+Mélange fruits rouges surgelés;2;;;;
+Melon;11;;;;
+Mirabelle ;7;;;;
+Mûre ;2;;;;
+Myrtille;3;;;;
+Nectarine ;3;;;;
+Nefle;5;;;;
+Orange (attention CG + élevée si mangée seule);4;;;;
+Papaye;5;;;;
+Pamplemousse ;2;;;;
+Pastèque ;6;;;;
+Pêche ;4,5;;;;
+Poire (attention CG + élevée si mangée seule);6,5;;;;
+Pomme (attention CG + élevée si mangée seule);4;;;;
+Pomme au four;10;;;;
+Prune;4;;;;
+Purée de prunes (Frutto puro) estimation;10;;;;
+Pruneaux cuits;10;;;;
+Raisin ;82;;;;
+Rhubarbe cuite;5;;;;
+Tomate ;1;;;;
+Aubergines;0,5;;;;
+Ail;6;;;;
+artichaut;1;;;;
+Asperge blanche;0,5;;;;
+Asperge verte;0,5;;;;
+Betteraves crues;5;;;;
+Betteraves cuites;5;;;;
+Blettes;0,5;;;;
+Brocoli;0;;;;
+Carottes crues;1;;;;
+Carottes cuites;3;;;;
+Cèleri rave cuit;4;;;;
+Cèleri rave cru;1,5;;;;
+Cèleri branche;0,5;;;;
+Champignons;1;;;;
+Champignons de paris;0,5;;;;
+Choux de Bruxelle cuits;1;;;;
+Choux blanc;1;;;;
+Choux rouge;1;;;;
+Choux fleur;0,5;;;;
+Choux Kale;1,35;;;;
+Kale choux;1,35;;;;
+Choucroute cuite;1;;;;
+Citrouilles;4,5;;;;
+Concombre;0,5;;;;
+Coeur de palmier;2;;;;
+Courges;4;;;;
+Courgettes;0,5;;;;
+Endives;0,5;;;;
+Épinard;0,13;;;;
+Fenouil;0,5;;;;
+Graines germées;0;;;;
+Haricots verts ;1;;;;
+Haricots beurre cuit;1,5;;;;
+Haricots blancs;4;;;;
+Haricot mungo, pousse de soja;1;;;;
+Laitue;0,18;;;;
+Mache;0;;;;
+Mélange légumes surgelés;5,5;;;;
+Navet cuit;1;;;;
+Olive;1;;;;
+Oseille;0;;;;
+Oignon cuit;1;;;;
+Panais;11,5;;;;
+Petits pois;4;;;;
+Poireau;0,5;;;;
+Poivrons;1;;;;
+Potiron;4;;;;
+Pomme de terre cuite puis refroidie ;12;;;;
+Pomme de terre au four, vapeur ou bouillie;19;;;;
+Pomme de terre frites;30;;;;
+Radis;0;;;;
+radis noir;1;;;;
+Rutabaga, choux;3;;;;
+Sasifis;4;;;;
+Soja graine;3;;;;
+Tomates;1;;;;
+Tempeh;1;;;;
+Topinambour;8;;;;
+Menthe feuilles;0;;;;
+Coriandre, persil, herbes de Provence;0;;;;
+Basilic feuilles;0;;;;
+Cacahuètes grillées salées;1;;;;
+Graines de Chia;0,08;;;;
+Graines de Courges;0,5;;;;
+Graines de Lin;5;;;;
+Graines de Sarrasin;26;;;;
+Graines de Sésame;3;;;;
+Graines de Soja;3;;;;
+Graines de Tournesol;2;;;;
+Huile de coco;0;;;;
+Huile de Lin;0;;;;
+Huile d’Olive;0;;;;
+Margarine diverse;0;;;;
+Huile de Pépins de Raisin;0;;;;
+Beurre clarifié, ghee;0;;;;
+Beurre ;0;;;;
+Huile de Sésame;0;;;;
+Vita Coco;0;;;;
+Vita chia;0;;;;
+Saint Hubert omégas 3;0;;;;
+Margarine St hubert omégas 3;0;;;;
+Margarine Primevère bio;0;;;;
+Huile d’arachide;0;;;;
+Huile de paraffine;0;;;;
+Huile de Tournesol;0;;;;
+Crème allégée vache ;0,5;;;;
+Crème d’Amande de cuisine;0;;;;
+Crème fraîche de Brebis;1;;;;
+Crème fraîche de Chèvre;1;;;;
+Crème de Coco;0;;;;
+Crème fraîche entière de vache ;0;;;;
+Crème Fleurette ;0;;;;
+Crème de soja;0;;;;
+Mascarpone;1;;;;
+Crème de Riz;8,5;;;;
+Oeuf bio si possible bleu blanc coeur;0,5;;;;
+Bœuf;0,5;;;;
+Autruche;0;;;;
+Charcuterie;0;;;;
+Jambon;0;;;;
+Viande;0;;;;
+Kangourou;0;;;;
+Steak, steak haché nature;0;;;;
+Cheval;0;;;;
+Caille;0;;;;
+Chèvre;0;;;;
+Dinde;0;;;;
+Foie d'agneau;0;;;;
+Foie de veau;0;;;;
+Foie de morue (super riche en vit D et oméga 3);0;;;;
+Gibier;0;;;;
+Veau;0;;;;
+Pigeon;0;;;;
+Lapin;0;;;;
+Poulet;0;;;;
+Seitan ;4;;;;
+Tofu, tofu lacto fermenté (estimation);1;;;;
+Produits de la mer, crustacées…;0;;;;
+Escargots;0;;;;
+Poisson blanc;0;;;;
+Mollusques;0;;;;
+Coquillages;0;;;;
+Poisson gras (omégas 3);0;;;;
+Fromage Brebis corse, Pyrénées;0;;;;
+Fromage Feta;0,5;;;;
+Fromage bleu, roquefort…;0;;;;
+Fromage Fondu;3;;;;
+Fromage Gruyère;0;;;;
+Fromage Mozzarella de bufflonne;0;;;;
+Fromage Parmesan;0;;;;
+Fromage Raifort;6;;;;
+Fromage Camembert;0;;;;
+Fromage à tartiner;2;;;;
+Fromage de chèvre;0;;;;
+Vinaigre balsamique;1,5;;;;
+Vinaigre cidre;0;;;;
+Sucre Blanc ;70;;;;
+Amidon modifié;89;;;;
+Chantifix;71;;;;
+Sucre Coco;33;;;;
+Sucre Complet/intégral;66,5;;;;
+Sucre Eritritol;0;;;;
+Miel;49;;;;
+Miel d'accacia;28;;;;
+Sucre Roux ;68;;;;
+Sirop de blé, sirop de riz;85;;;;
+Sirop de glucose;100;;;;
+Sirop de maïs;76;;;;
+Sirop d’agave (attention au fructose libre qu’il contient);23;;;;
+Sucrettes, édulcorants;0;;;;
+Bières;3;;;;
+Alcool / incalculable;0;;;;
+Thé, tisane;0;;;;
+Café du matin +9% d’augmentation glycémie;0;;;;
+Café du midi +15% d’augmentation glycémie;0;;;;
+Café le soir +26% d’augmentation glycémie;0;;;;
+Café en poudre;3;;;;
+Foodspring Sparkling aminos, IG non testé, contient de la caféine et des édulcorants perturbateur du microbiote intestinal;0;;;;
+Thé chai latte au miel, lait de chèvre;1;;;;
+Boisson No café frappé;3;;;;
+Cidre;1;;;;
+Café de céréales instantané type Yannoh (comptez le poids de la cuillère de 10g pas de votre bol comprenant de l’eau);27;;;;
+Soda normal;7;;;;
+soda 0;0;;;;
+Chocolat au lait;4;;;;
+Eau;0;;;;
+Eau de coco;0;;;;
+Décoction ayurvédique;0,5;;;;
+Isotonic (gatorade powerade);4;;;;
+Jus Breuss;6;;;;
+Jus d'orange;12;;;;
+Jus de pommes;7;;;;
+Jus de tomate;1;;;;
+Jus multifruits;8;;;;
+Jus la vie en rose;2;;;;
+Jus soleil indien;1,5;;;;
+Jus détox;0,5;;;;
+Jus vert;0,5;;;;
+Jus légumes provençal;3;;;;
+Lait de poule;1;;;;
+Jus de carotte;8;;;;
+Jus d’orange;12;;;;
+Jus de pamplemousse;8;;;;
+Ricoré au lait Neslé, estimation (comptez le poids de la cuillère de 10g pas de votre bol comprenant de l’eau);10,60;;;;
+Ricoré nature, estimation (comptez le poids de la cuillère de 10g pas de votre bol comprenant de l’eau);4;;;;
+Boisson Laxajus;8;;;;
+Limonade;6,5;;;;
+Lait de coco;1,5;;;;
+Lait d'or;2;;;;
+Jus de pruneaux MC;7;;;;
+Pepsi avec sucre;7;;;;
+Coca avec sucre;7;;;;
+Soda sans sucre ou 0;0;;;;
+Sodas en moyenne;7;;;;
+Thé glacé maison sucré au miel;4;;;;
+Boisson Virgin mojito MC ;1;;;;
+Boisson Virgin Mojicha MC;4;;;;
+Tonic;4;;;;
+Yannoh vanille;22;;;;
+Abricots sirop (boîte) ;10;;;;
+Ananas  (boîte) ;10;;;;
+Barres chocolatée sucrée;53;;;;
+Barre muesli aux fruits secs;32;;;;
+Bonbons;133;;;;
+Bonbons dragibus;160;;;;
+Boule de maïs soufflée au miel;46;;;;
+Chocolat blanc;26;;;;
+Chocolat noir > 40%  cacao;26;;;;
+Chocolat  noir> 70%  cacao;11;;;;
+Chocolat lait;26;;;;
+Confiture (en moyenne) ;38;;;;
+Cookies industriels;92;;;;
+Mars et barres chocolatées;122;;;;
+Gâteaux en moyenne (si pas maison);82;;;;
+Doughnuts;74;;;;
+Donuts industriels;37;;;;
+Pâte à tartiner type Nutella;32;;;;
+Pâte d'amandes;25;;;;
+Pêches au sirop (boîte);7;;;;
+Pop corn nature;32;;;;
+Crème glacée en bac;73;;;;
+Sorbet sucré ;19;;;;
+Compote de pomme sans sucre ajouté;19;;;;
+Glace en bâton type magnum;22;;;;
+Abricots secs;18;;;;
+Amandes;1,5;;;;
+Bananes séchées;42;;;;
+Canneberge ou cranberries;34,5;;;;
+Dattes;67;;;;
+Figues sèches;33;;;;
+Noix de coco;3;;;;
+Noix de Pécan;0,5;;;;
+Noix;1,5;;;;
+Noix Amazonie, Brésil;1,5;;;;
+Noisette;1;;;;
+Noix de cajou;5,5;;;;
+Olive noire;0;;;;
+Pomme séchée;20;;;;
+Pistaches;2;;;;
+Pruneau;29;;;;
+Raisins secs;58;;;;
+Tomate séchée;15;;;;
+Sauce Barbecue;14;;;;
+Coulis de tomate;3,5;;;;
+Concentré de tomates;5;;;;
+Harissa;0;;;;
+Ketchup;15;;;;
+Moutarde;2,5;;;;
+Sauce tomates;5;;;;
+Sauce Tamari (soja fermenté);3,5;;;;
+Agar-agar;0,5;;;;
+Ail, gousse ;6,5;;;;
+Anis étoilé (badiane);2,5;;;;
+Arrow Root fécule;11;;;;
+Bicarbonate de soude;0;;;;
+Cannelle en poudre ;1,5;;;;
+Cardamome;2;;;;
+Clou de girofle;3;;;;
+Cumin en poudre;2;;;;
+Curcuma en poudre;2;;;;
+Echalotes;2;;;;
+Epices (en moyenne);2;;;;
+Gélatine animale déconseillée;0;;;;
+Gingembre racine;0,5;;;;
+Gingembre moulu;9;;;;
+Levure de boulanger;12;;;;
+Levure chimique remplacer par bicarbonate;12;;;;
+Menthe feuille;0;;;;
+Oignon cuit;1;;;;
+Herbe de Provence;0;;;;
+Oignon cru;1;;;;
+Piment;3;;;;
+Poivre noir;2;;;;
+Vanille;1;;;;
+Thym;0;;;;
+Poisson pané;5,5;;;;
+Sardine à l’huile (privilégiez l’huile d'olive);0;;;;
+Saumon fumé;0;;;;
+Surimi attention aux additifs;6;;;;
+Tarama attention aux additifs;3,5;;;;
+Sushi;15;;;;
+Crustacés;0;;;;
+Filet de harengs;0;;;;
+Crevettes;0;;;;
+Homard;0;;;;
+Ecrevisse;0;;;;
+Huitre;0;;;;
+Moule;0;;;;
+Langouste, langoustine;0;;;;
+Crabe;0;;;;
+Purée Amandes;2;;;;
+Beurre de cacahuete;2,5;;;;
+Crème de Marrons/chataignes nature;12,5;;;;
+Purée de Noisettes;2;;;;
+Purée de Noix de cajoux;11;;;;
+Purée de Pistache;2;;;;
+Tahin, purée de sésame;6;;;;
+Purée de Sésame, tahin;6;;;;
+Petit suisse aromatisé 1/2 écrémé;15;;;;
+Skyr yaourt ;2;;;;
+Yaourt Skyr;2;;;;
+Gervita, fromage blanc et crème fouettée;6;;;;
+Fromage frais aux fruits, carrefour, estimation;3,60;;;;
+Petit Gervais aux fruits, Danone, estimation;4;;;;
+Danonino, petit suisse aux fruits, estimation;4;;;;
+Petit suisse Gervais aux fruits, estimation;4,5;;;;
+Petit suisse nature, estimation;1;;;;
+Danette au chocolat, estimation;7;;;;
+Danette vanille, estimation;5;;;;
+Danette caramel salé, estimation;6;;;;
+Danette Caramel, estimation;6;;;;
+Flanby Nestlé, estimation;6;;;;
+Fromage blanc 0%;1,2;;;;
+Fromage blanc 3%;1;;;;
+Fromage blanc nature ou aux fruits en moyenne;2;;;;
+Dessert au soja non sucré;1,5;;;;
+Dessert au lait de riz non sucré;14,5;;;;
+Dessert végétal sauf riz et soja, non sucré;6;;;;
+Yaourt, dessert végétal sauf riz et soja, non sucré;6;;;;
+Yaourt, dessert au lait de riz non sucré;14,5;;;;
+Yaourt, dessert au soja non sucré;1,5;;;;
+Yaourt 0% aux fruits sucré, déconseillé;19;;;;
+Yaourt au lait animal consommé seul, estimation;5;;;;
+Yaourt sans lactose si consommé seul hors des repas, estimation;6,4;;;;
+Yaourt sans lactose si consommé pendant un repas;1,5;;;;
+Yaourt 1/2 écrémé aromatisé sucré;19;;;;
+Yaourt 1/2 écrémé sucré;15;;;;
+Yaourt à boire sucré;17;;;;
+Yaourt allégé;4;;;;
+Yaourt aux fruits;14;;;;
+Yaourt lait de chèvre aromatisé, sucré, estimation;8;;;;
+Yaourt au lait de chèvre, nature 5%;0,5;;;;
+Yaourt de brebis à la grecque;5;;;;
+Yaourt au lait de brebis aromatisé sucré;3,35;;;;
+Yaourt de brebis marque Vrai nature;1,5;;;;
+Yaourt style à la grecque, topping miel;6;;;;
+Yoghurt greek style, honey topped;6;;;;
+Yaourt lait entier nature sucré;14,5;;;;
+Yaourt nature en moyenne, attention estimation 115 si consommé seul;1,26;;;;
+Biscuits salés apéritif;42;;;;
+Tortillas chips de maïs ;25;;;;
+Cacahuètes grillées salées;2;;;;
+Crackers fromage;36;;;;
+Crackers;87;;;;
+Houmous, purée de pois chiches;3;;;;
+Pâtisserie en moyenne;24;;;;
+Biscuit sucré;45,5;;;;
+Biscuits fourrés chocolat au lait Evernat, estimation;14,50;;;;
+Croissant ordinaire;79;;;;
+Flan patissier de boulangerie;24;;;;
+Croissant au beurre;23;;;;
+Brioche;30;;;;
+Brioche fit lait de chèvre;14;;;;
+Brioche fit lait de soja;14;;;;
+Brioche fit lait de vache;14;;;;
+Pain au lait artisanal;27;;;;
+Chausson aux pommes;17;;;;
+Petit beurre;37;;;;
+Pain au chocolat;25;;;;
+Spéculos;37;;;;
+Eclair au chocolat;15,5;;;;
+Maquereaux au vin blanc (estimation);1;;;;
+Nems en moyenne si frits (estimation);15;;;;
+Nems en moyenne si cuits au four (estimation);9;;;;
+Galette bretonne blé noir, sarrasin (estimation);19;;;;
+Feuille de brick;36;;;;
+Crêpe garnie aux oeufs MC;5;;;;
+Yummi avocat MC;2;;;;
+Croque madame;9,50;;;;
+Sauce blanche MC;2;;;;
+Salade cléopâtre avec sauce blanche MC;3;;;;
+Mélange fruits rouge surgelés;2;;;;
+Aubergine à la japonaise MC;4;;;;
+Marmite à la japonaise MC;4;;;;
+Tartare de saumon MC;5;;;;
+Lasagne MC;7;;;;
+Épeautre petiti dej banane MC;15;;;;
+Épeautre petit dej pomme MC;12;;;;
+Amlou MC;2;;;;
+Celeri remoulade MC;3;;;;
+Tartare d’algues MC;3;;;;
+Poireaux vinaigrette;1;;;;
+Quiche sans pâte MC;2;;;;
+Oeuf coque avec 2 mouillettes MC;5;;;;
+Oeuf imparfait centenaire;3;;;;
+Guacamole MC;1;;;;
+Fajitas poulet MC;5,5;;;;
+Taboulé de quinoa MC;3;;;;
+Petit pain santé poêlé MC;17;;;;
+Houmous maison MC;4;;;;
+Poulet mariné au citron MC;1;;;;
+Fauxmage de macadamia MC;0,5;;;;
+Salade asiatique avec sauce MC;2;;;;
+Marmite à la japonaise MC;4;;;;
+Curry rouge de gambas MC;1;;;;
+Salade du sud ouest MC;3,5;;;;
+Omelette roulée à la dinde MC;0,5;;;;
+Salade chou chinois et fenouil MC;1;;;;
+Poisson à la vietnamienne MC;2;;;;
+Crème végétale coco vanille MC;3,50;;;;
+Tiramisu maison MC;24;;;;
+Frozen banana MC;12;;;;
+Confiture maison MC;4;;;;
+Crème Ché Dau Do MC;6;;;;
+Carotte cake MC;15;;;;
+Gâteau cannelé cannelle MC;12;;;;
+Pudding coco-chia MC;7;;;;
+Pain d’épice végan MC;19;;;;
+Pain d’épices normal MC;11;;;;
+Créme glacée fruits rouges MC;9;;;;
+Cheesecake MC;6;;;;
+Charlotte poire chocolat MC;22;;;;
+Crème de myrtille fitolin MC;5;;;;
+Mixte d’oignons libanais MC;1;;;;
+Ratatouille MC;2,5;;;;
+Chantilly MC;7;;;;
+Salade de betteraves MC;5;;;;
+Omelette chakchouka libanaise MC;1;;;;
+Blanc-manger MC;3;;;;
+Jus du poète MC;3;;;;
+Croque monsieur au poulet MC;6;;;;
+Epinards au kéfir MC;1;;;;
+Nage de st Jacques et quinoa MC;2,5;;;;
+Oeufs au lait MC;2;;;;
+Jus des 4 mousquetaires MC ;1;;;;
+Muffin avocat saumon MC;4;;;;
+Brocolis rotis MC;0;;;;
+Oeufs mollets épinards MC;1,5;;;;
+Croquants aux amandes MC;16,5;;;;
+Jus de l’abuela MC;0;;;;
+Oeufs mimosas MC;0,5;;;;
+Soupe de lentilles corail coco MC;2;;;;
+Pain de saumon MC;2;;;;
+Mousse au chocolat MC;3;;;;
+Jus grand-mère MC;0,5;;;;
+Muffin anglais oeufs Bénédicte MC;4;;;;
+Soupe thaï raviolis vapeur MC;2;;;;
+Flan thé vert MC;1;;;;
+Sablés amandes et noix MC;10;;;;
+Jus Betty boom MC;5;;;;
+Faux gras MC;2;;;;
+Soupe butternut éclats de châtaignes MC;5;;;;
+Energie balls MC;46;;;;
+Jus choublette MC;0,5;;;;
+Crêpe saumon fromage MC;2,5;;;;
+Verrine butternut coco MC;2;;;;
+Choucroute de la mer patate douce MC;4;;;;
+Fondant chocolat amande MC;3;;;;
+Gimbéré arrangé MC;5;;;;
+Toast oeufs lardons poulet MC;8,5;;;;
+Soupe à l’oignon MC;0,5;;;;
+Chou farci à la viande MC;0,5;;;;
+Pana cotta vanille/framboise MC;3;;;;
+Tout avocat saumon MC;9;;;;
+Salade d’endives MC;2;;;;
+Gratin de patate douces et cabillaud MC;3;;;;
+Crumble de poire au FitOlin MC;9;;;;
+Galettes de patates douces et polenta MC;23;;;;
+Lentilles en salade orientale MC;10;;;;
+Saumon grillé purée de brocoli pécorino MC;0,10;;;;
+Crème de citron FitOlin MC;6;;;;
+Açai bowl MC;6;;;;
+Velouté de fenouil MC;2;;;;
+Endives au jambon MC;1;;;;
+Châtaignes grillées à la poêle MC;22;;;;
+Fitshake MC;2;;;;
+Salade d’hiver mi-cuite MC;4;;;;
+Saumon pimenté fenouil nouille de riz MC;3;;;;
+Tuiles aux amandes MC;9;;;;
+Tzatziki MC;1;;;;
+Calamar libanais sauce tarator MC;6;;;;
+Flan coco MC;0,5;;;;
+Omelette berrichonne;17;;;;
+Tapas espagnol aïoli et pain MC;7;;;;
+Gambas à l’ail MC;1;;;;
+Gratin de légumes libanais;1;;;;
+Mousse au chocolat pois chiches MC;9;;;;
+Pâté végétal à tartiner MC;2,5;;;;
+Asperge sauce mousseline MC;0,6;;;;
+Soufflé d’oeufs au four MC;0;;;;
+Palets bretons MC;15;;;;
+Oeufs Bénédicte au saumon et pain de mie MC;3,5;;;;
+Tomates vinaigrette MC;1;;;;
+Poulet korma MC;1;;;;
+Fitshake café glacé MC;6;;;;
+Carpaccio de courgette MC;1;;;;
+Pizza d’aubergine au chèvre MC;1;;;;
+Cake fondant au citron MC;11;;;;
+Carottes râpées sauce au miel MC;3;;;;
+Saumon grillé épinards à la crème MC;1;;;;
+Tarte au citron MC;11;;;;
+Muffins salés MC;9;;;;
+Frittata d’asperge et petits pois MC;1;;;;
+Pana cotta au chocolat MC;6;;;;
+Amarante du sportif MC;12;;;;
+Gazpacho avocat concombre MC;1;;;;
+Salade caesar MC;5;;;;
+Tarte fine aux fraises MC;9;;;;
+Salade concombre fraise menthe MC;5;;;;
+Oeufs à la mexicaine MC;2;;;;
+Taboulé libanais boulgour MC;9;;;;
+Escalope de poulet milanaise MC;5;;;;
+Fleur de courgette MC;1;;;;
+Toast avocat chèvre MC;5;;;;
+Salade de papaye verte MC;7;;;;
+Poulet thaï MC;1;;;;
+Pâtes sobą ;30;;;;
+Mangue shake kéfir de lait MC;3,5;;;;
+Gaufre au saumon MC;1,5;;;;
+Tajine de poulet MC;17;;;;
+Salade de fêta libanaise MC;1,5;;;;
+Sorbet bâton pastèque MC;13;;;;
+Galettes de courgette MC;1;;;;
+Caviar d’aubergine MC;1;;;;
+Moules farcies Midyé libanaises MC;4,5;;;;
+Smoothie glacé aux fruits d’été MC;15;;;;
+Blinis fromage frais saumon aneth MC;23;;;;
+Concombre farci saumon chèvre MC;0,5;;;;
+Bhaji d’aubergine MC;2;;;;
+Soupe de fruit rouge MC;3;;;;
+Cake fêta olive MC;6;;;;
+Sucré salé de chou blanc libanais MC;1;;;;
+Ceviche de loup;1;;;;
+Clafoutis MC;3,5;;;;
+Soupe de poisson croutons à l’ail MC;2;;;;
+Scones au blanc de poulet et fromage MC;5,5;;;;
+Caviar d'aubergine libanais rapide et pain mita MC;20;;;;
+Gigot d’agneau et haricots blancs tomate MC;3;;;;
+Artichauts mayonnaise amande MC;4;;;;
+Crème d’avocat et chia au kéfir MC;6;;;;
+Carpaccio de boeuf MC;0,5;;;;
+Frites au four MC;74;;;;
+Flan au café MC;6;;;;
+Sandwich pain au lait poulet fromage MC;4;;;;
+Salade au roquefort et noix MC;1,5;;;;
+Risotto de quinoa aux champignons MC;4;;;;
+Crumble pommes raisins MC;9;;;;
+Omelette aux champignons MC;1;;;;
+Pizza libanaise MC;10;;;;
+Crème vanille FitOlin MC;2,5;;;;
+Houmous libanais MC;3;;;;
+Tava de légumes libanais MC;1;;;;
+Poulet entier libanais MC;3;;;;
+Cornes de gazelle MC;11,5;;;;
+Houmous à la tomate MC;20;;;;
+Velouté potiron châtaignes ;7;;;;
+St Jacques purée de céleri aux truffes MC;4;;;;
+Baklawa libanais MC;18;;;;
+Toast de patates douces MC;7;;;;
+Cèleri rémoulade MC;1;;;;
+Poulet aux amandes et riz basmati MC;15;;;;
+Cookies d’Avrile MC;16;;;;
+Omelette aux fines herbes MC;1;;;;
+Velouté de chou-fleur coco MC;1;;;;
+Lasagnes végétariennes MC;4,5;;;;
+Rillettes de sardines et salade d’algues MC;12;;;;
+Bagel au saumon MC;20;;;;
+Terrine de châtaigne fenouil MC;10;;;;
+Pot au feu MC;2;;;;
+Ile flottante MC;5;;;;
+Oeuf cocotte et pain maison MC;6;;;;
+Soupe de patate douce MC;2,5;;;;
+Blanquette de poulet champignons MC;1;;;;
+Pain géorgien au fromage MC;3,5;;;;
+Verrines mâche chèvre MC;1;;;;
+Couscous végétarien MC;18;;;;
+Couscous végétarien oignons confits miel datte MC;24;;;;
+Brownie patate douce MC;10;;;;
+Patate douce rôtie MC;7;;;;
+Crème chocolat FitOlin rapide MC;3;;;;
+Tartiflette de patates douces MC;3;;;;
+Omelette fluffy MC;1;;;;
+Bailla, salade libanaise MC;12;;;;
+Filet de bar endives braisées MC;2;;;;
+Tourte niçoise aux blettes sucrée;32;;;;
+Toast patates douces au jambon MC;2,5;;;;
+Falafels libanais MC;5;;;;
+Mug cake FitOlin MC;6,5;;;;
+Soupe de légumes d’hiver MC;3,5;;;;
+Granola maison MC;18;;;;
+Ailes de poulet marinées libanaises MC;1;;;;
+Salade piquante libanaise MC;1,5;;;;
+Tartelette fraise rhubarbe MC;11;;;;
+Salade de printemps MC;1;;;;
+Shakshuka libanaise MC;2;;;;
+Paella valenciana MC;34;;;;
+Fondue au chocolat MC;14;;;;
+Cloud eggs sur toast MC;6,5;;;;
+Chirashi au saumon MC;20;;;;
+Framboisier express MC;6;;;;
+Avocat cocotte oeuf MC;1;;;;
+Fatayer libanais chaussons épinards MC;4;;;;
+Poivrons farcis ricotta MC;1,5;;;;
+Tartelette pomme gingembre MC;22;;;;
+Crêpe à l’amandella MC;12;;;;
+Houmous petits pois MC;2,5;;;;
+Pintade au chou MC;7;;;;
+Crêpe complète MC;3,5;;;;
+Pamplemousse au crabe MC;8,5;;;;
+Moussaka MC;3;;;;
+Laxabowl MC;2,5;;;;
+Mini pizza amandella coco MC;12;;;;
+Frittata brocoli MC;1;;;;
+Salade carottes betteraves MC;3;;;;
+Filet de cabillaud grillé MC;0,5;;;;
+Oeuf en cocotte de tomate MC;1;;;;
+Tatin de courgette chèvre miel MC;11;;;;
+Chou rouge libanais MC;1;;;;
+Bounty glacé MC;3;;;;
+Saumon à l’unilatéral MC;1;;;;
+Fleurs d’oeufs en poivron MC;1;;;;
+Aubergines parmigiana MC;5;;;;
+Muffins myrtille orange MC;8;;;;
+Mouhamara, crème de poivrons, pita MC;12;;;;
+Côte d’agneau libanaise riz basmati MC;9,5;;;;
+Brochette de crevettes poivrons, quinoa MC;12,5;;;;
+Empanadas d’Argentine MC;10;;;;
+Soupe de cerise MC;2,5;;;;
+Saumon gravelax avocat MC;2;;;;
+Cannelés MC;12;;;;
+Daurade mahi-mahi Créole MC;7;;;;
+Banana bread MC;19;;;;
+Salade verte sans frontière MC;1;;;;
+Poivrons à l’ail MC;1;;;;
+Oeufs à la diable MC;1;;;;
+Tarte tatin MC;16,5;;;;
+Tostada tomate rallada jambon MC;10;;;;
+Pêches au thon MC;2;;;;
+Magret de canard, haricots verts, pdt MC;10;;;;
+Chocolat chaud italien MC;5;;;;
+Gazpacho, tartines poivrons ail MC;10;;;;
+Pizza du matin MC;10;;;;
+Soupe froide italienne MC;1;;;;
+Gambas flambées pastis et riz basmati MC;3;;;;
+Guacamole et nachos MC;10;;;;
+Poisson et tomates provençales MC;1,5;;;;
+Oeufs durs farcis avocat MC;6;;;;
+Salade de chou chinois MC;4;;;;
+Houmous du chef libanais MC;1,5;;;;
+Pad thaï crevette tofu MC;4,5;;;;
+Rouleaux de printemps betterave MC;3;;;;
+Kefta libanais MC;1;;;;
+Tarte à la châtaigne MC;17;;;;
+Scone au fromage MC;10;;;;
+Salade fattouche libanaise MC;10;;;;
+Gâteau moelleux châtaigne MC;14;;;;
+Soupe au pistou MC;4;;;;
+Crumpet amlou baies MC;11;;;;
+Légumes rôtis bolognaise MC;3;;;;
+Tarte aux prunes alsacienne MC;15;;;;
+Poisson cru tahitienne MC;6;;;;
+Muffin oeuf bacon MC;4;;;;
+Salade de fenouil cru marocaine MC;1;;;;
+Cassoulet toulousain confit MC;3;;;;
+Gâteau d’automne MC;20;;;;
+Gâteau chocolat courgette MC;12;;;;
+Beureks arméniens MC;16;;;;
+Lasagnes de légumes sans pâte MC;1;;;;
+Bavarois myrtille MC;19;;;;
+Soupe au chou, tartine à l’ail MC;5;;;;
+Tortilla espagnole MC;16;;;;
+Terrine de sanglier MC;1;;;;
+Potée au chou MC;5;;;;
+Compote de banane MC;19;;;;
+Scampis diabolo MC;1;;;;
+Cappuccino pois cassés MC;4;;;;
+Burger maison MC;13;;;;
+Frites de patates douces MC;6;;;;
+Galette frangipane MC;19;;;;
+Courge spaghetti carbo de la mer MC;2,5;;;;
+Brioche fit garnie MC;15;;;;
+Soupe carotte cumin MC;4;;;;
+Chili con seitan MC;11;;;;
+Bûche chocolat châtaigne MC;6;;;;
+Tartine fromage frais jambon MC;13;;;;
+Salade de foies de volaille MC;4;;;;
+Quenelles de brochet MC;4;;;;
+Financiers citron MC;20;;;;
+Velouté de châtaignes MC;8;;;;
+Mille feuilles de pancake salé MC;5;;;;
+Avocat crevette MC;1;;;;
+Courgette farcie au poulet et riz MC;8;;;;
+Tarte potiron MC;17;;;;
+Soupe de lentilles vertes MC;1;;;;
+Dolce bowl MC;10;;;;
+Couscous libanais MC;16;;;;
+namoura, dessert libanais MC;30;;;;
+Galette aux pommes de terre berrichonne MC;11;;;;
+Pizza de chou-fleur MC;1;;;;
+Quinoa au lait MC;10;;;;
+Soupe de courge châtaignes MC;4,5;;;;
+Quiche fromage chèvre MC;9;;;;
+Burger du rebelle MC;23,5;;;;
+Chocolat viennois MC;6;;;;
+Purée potirons truffe MC;3,5;;;;
+Laxabowl poire MC;5;;;;
+Oignons rings MC;18;;;;
+Spaghettis de courgette carbonara MC;1,5;;;;
+Milkshake mango-choco MC;4;;;;
+Salade simple libanaise et pain pita MC;18;;;;
+Crêpe mille trous et amlou MC;5;;;;
+Salade d’endive pomme raisin MC;7;;;;
+Flan ricotta courgette et pain MC;10;;;;
+Crème brûlée MC;5;;;;
+Chou-fleur vapeur mayonnaise MC;1;;;;
+Courgettes farcies libanaise MC;4;;;;
+Far aux pruneaux breton MC;18;;;;
+Buddha bowl MC;8;;;;
+Crumble framboises FitOlin MC;7,5;;;;
+Salade fenouil menthe pamplemousse MC;1;;;;
+Pizza 4 fromages MC;10;;;;
+Clafoutis abricots MC;7;;;;
+Salade champignons amande MC;1;;;;
+Petit déjeuner trompe l’oeil MC;5;;;;
+Tarte soleil MC;11;;;;
+Poulet laqué sésame poivrons MC;2;;;;
+Compote de rhubarbe MC;7;;;;
+Pancake fourré amandella MC;3,5;;;;
+Salade marocaine MC;1;;;;
+Risotto truffe MC;13;;;;
+Mousse de framboises MC;3;;;;
+Accra de courge sauce chien MC;6;;;;
+Foccacia di Recco MC;10;;;;
+Gözlems turcs végans MC;4,5;;;;
+Poire pochée aux épices MC;15;;;;
+Soupe harira MC;8;;;;
+`.trim();
+function parseAliments(csv) {
+  // Normalise les fins de ligne
+  const text = csv.replace(/\r\n?/g, '\n').trim();
+  const lines = text.split('\n');
+  if (!lines.length) return [];
+  // Détection du séparateur sur la LIGNE D’EN-TÊTE uniquement
+  const header = lines[0];
+  const count = s => (header.match(new RegExp('\\' + s, 'g')) || []).length;
+  const cSemis = count(';'), cCommas = count(','), cTabs = count('\t');
+  let sep = ';';
+  if (cSemis >= cCommas && cSemis >= cTabs && cSemis > 0) sep = ';'
+  else if (cCommas >= cTabs && cCommas > 0) sep = ','
+  else if (cTabs > 0) sep = '\t';
+
+  const headers = header.split(sep).map(h => h.trim());
+
+  const idxName = headers.findIndex(h => /aliment/i.test(h));
+  const idxCg   = headers.findIndex(h => /(charge).*?(100|cg)/i.test(h));
+  const nameCol = idxName !== -1 ? idxName : 0;
+  const cgCol   = idxCg   !== -1 ? idxCg   : 1;
+
+  const out = [];
+  for (let i = 1; i < lines.length; i++) {
+    if (!lines[i].trim()) continue;
+    const cells = lines[i].split(sep).map(s => s.trim());
+
+    const name = (cells[nameCol] || '').replace(/^"|"$/g, '');
+    let cgStr  = (cells[cgCol]   || '').replace(/^"|"$/g, '');
+
+    if (!name || !cgStr) continue;
+
+    // virgule décimale -> point
+    cgStr = cgStr.replace(',', '.');
+
+    const cg100 = Number(cgStr);
+    if (!Number.isFinite(cg100)) continue;
+
+    out.push({ name, cg100 });
+  }
+  return out;
+}
+</script>
+</head>
+<body>
+<header>
+  <h1>Ma journée – Calculateur de charge glycémique</h1>
+</header>
+
+<main>
+  <div class="card">
+   <div class="toolbar">
+  <input id="search"
+         type="text"
+         list="foods-list"
+         placeholder="Rechercher un aliment…"
+         autocomplete="off" />
+  <button id="add">+ Ajouter l’aliment</button>
+  <button id="save">Sauvegarder</button>
+  <button id="clearAll" class="btn-danger">Vider la journée</button>
+</div>
+</div>
+<datalist id="foods-list"></datalist>
+
+  <div id="rows"></div>
+
+  <div class="card total">
+    <div>Total charge glycémique du jour</div>
+    <div id="total">0.0</div>
+  </div>
+
+  <div class="card warn">
+    Rien n’est envoyé en ligne. Vos données restent sur cet appareil (LocalStorage).  
+    Si vous effacez l’historique/cookies du navigateur, la journée sera réinitialisée.
+  </div>
+
+  <div class="footer">© Méthode Chataigner</div>
+</main>
+
+<script>
+// ===== Logique app =====
+const FOODS = parseAliments(CSV_ALIMENTS);
+console.log('Aliments chargés :', FOODS.length, FOODS.slice(0,5));
+
+const $rows   = document.getElementById('rows');
+const $list   = document.getElementById('foods-list');
+const $search = document.getElementById('search');
+const $total  = document.getElementById('total');
+const KEY     = 'cg_journee_v1';
+// Protège les caractères spéciaux pour l'HTML
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, m =>
+    m === '&' ? '&amp;'  :
+    m === '<' ? '&lt;'   :
+    m === '>' ? '&gt;'   :
+    m === '"' ? '&quot;' : '&#39;'
+  );
+}
+function hydrate(list){
+  $rows.innerHTML = '';
+  (list || []).forEach(r => addRow(r));
+}
+function fillDatalist(){
+  if (!Array.isArray(FOODS) || !FOODS.length) return;
+  $list.innerHTML = FOODS
+    .map(f => `<option value="${escapeHtml(f.name)}"></option>`)
+    .join('');
+}
+function load(){
+  try {
+    return JSON.parse(localStorage.getItem(KEY) || '[]');
+  } catch (e) {
+    return [];
+  }
+}
+function updateTotal(){
+  let t = 0;
+  // additionne toutes les valeurs CG affichées dans les lignes
+  $rows.querySelectorAll('.card .cg-item').forEach(input => {
+    const n = Number(String(input.value).replace(',', '.'));
+    if (Number.isFinite(n)) t += n;
+  });
+  // affiche un total avec 1 décimale
+  $total.textContent = (Math.round(t * 10) / 10).toFixed(1);
+}
+// Attache les écouteurs quand le DOM est prêt
+// --- utilitaires nombres/format ---
+function parseNumber(s){
+  const n = Number(String(s ?? '').replace(',', '.').trim());
+  return Number.isFinite(n) ? n : 0;
+}
+function format(x){
+  return Number.isFinite(x) ? (Math.round(x * 10) / 10).toFixed(1) : '';
+}
+
+// --- retrouver un aliment par son nom (insensible à la casse/espaces) ---
+function findFoodByName(name){
+  const n = String(name || '').trim().toLowerCase();
+  return FOODS.find(f => f.name.toLowerCase() === n) || null;
+}
+
+// --- gabarit HTML d'une ligne ---
+function rowTemplate(row){
+  return `
+    <div class="card">
+      <div class="row">
+        <input class="food" list="foods-list" placeholder="Aliment"
+               value="${escapeHtml(row.food || '')}">
+        <input class="grams" type="number" min="0" step="1" placeholder="g"
+               value="${row.grams ?? ''}">
+        <input class="cg-item" type="text" readonly value="${format(row.cg)}">
+        <button type="button" class="btn-ghost" data-action="del">🗑</button>
+      </div>
+    </div>`;
+}
+
+// --- ajouter une ligne et brancher les événements ---
+function addRow(row = {}){
+  $rows.insertAdjacentHTML('beforeend', rowTemplate(row));
+  const card  = $rows.lastElementChild;
+  const $food = card.querySelector('.food');
+  const $g    = card.querySelector('.grams');
+  const $cg   = card.querySelector('.cg-item');
+  const $del  = card.querySelector('[data-action="del"]');
+
+  function recompute(){
+    const f   = findFoodByName($food.value);
+    const g   = parseNumber($g.value);
+    const cg  = f ? (f.cg100 * g / 100) : 0;
+    $cg.value = format(cg);
+    save();
+    updateTotal();
+  }
+
+  $food.addEventListener('input', recompute);
+  $g.addEventListener('input',   recompute);
+  if ($del){
+    $del.addEventListener('click', () => {
+      card.remove();
+      save();
+      updateTotal();
+    });
+  }
+  // calcul initial si valeurs préremplies
+  recompute();
+}
+
+// --- sérialisation / persistance ---
+function serialize(){
+  return Array.from($rows.querySelectorAll('.card')).map(card => ({
+    food:  card.querySelector('.food').value,
+    grams: parseNumber(card.querySelector('.grams').value)
+  }));
+}
+function save(){
+  localStorage.setItem(KEY, JSON.stringify(serialize()));
+}
+window.addEventListener('DOMContentLoaded', () => {
+  fillDatalist();
+  hydrate(load());
+  updateTotal();
+
+  const $btnAdd   = document.getElementById('add');
+  const $btnSave  = document.getElementById('save');
+  const $btnClear = document.getElementById('clearAll');
+
+  if ($btnAdd) $btnAdd.addEventListener('click', () => {
+    const s = $search.value.trim();
+    if (s) { addRow({ food: s, grams: '' }); $search.value = ''; }
+    else   { addRow(); }
+    save(); updateTotal();
+  });
+
+  if ($btnClear) $btnClear.addEventListener('click', () => {
+    if (!confirm("Vider votre journée ?")) return;
+    localStorage.removeItem(KEY);
+    $rows.innerHTML = '';
+    updateTotal();
+  });
+
+  if ($btnSave) $btnSave.addEventListener('click', () => {
+    save();
+    alert('Journée sauvegardée sur cet appareil ✅');
+  });
+});
+</script>
+</body>
+</html>
