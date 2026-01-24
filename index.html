@@ -1065,6 +1065,11 @@ function parseAliments(csv) {
          list="foods-list"
          placeholder="Rechercher un aliment…"
          autocomplete="off" />
+     <select id="lang" style="margin-left:8px">
+  <option value="fr">FR</option>
+  <option value="es">ES</option>
+  <option value="en">EN</option>
+</select>
   <button id="add">+ Ajouter l’aliment</button>
   <button id="save">Sauvegarder</button>
   <button id="clearAll" class="btn-danger">Vider la journée</button>
@@ -1186,7 +1191,6 @@ function addRow(row = {}){
     save();
     updateTotal();
   }
-
   $food.addEventListener('input', recompute);
   $g.addEventListener('input',   recompute);
   if ($del){
@@ -1210,10 +1214,43 @@ function serialize(){
 function save(){
   localStorage.setItem(KEY, JSON.stringify(serialize()));
 }
-window.addEventListener('DOMContentLoaded', () => {
+  // Langue détectée (fallback FR)
+let LANG = (navigator.language||'fr').slice(0,2);
+if (!['fr','es','en'].includes(LANG)) LANG='fr';
+
+// Libellés UI
+const I18N = {
+  fr:{ title:"Ma journée – Calculateur de charge glycémique",
+       search_ph:"Rechercher un aliment…", add:"+ Ajouter l’aliment",
+       save:"Sauvegarder", clear:"Vider la journée",
+       total_title:"Charge glycémique totale du jour" },
+  es:{ title:"Mi día – Calculadora de Carga Glucémica",
+       search_ph:"Buscar un alimento…", add:"+ Añadir alimento",
+       save:"Guardar", clear:"Borrar el día",
+       total_title:"Carga glucémica total del día" },
+  en:{ title:"My Day – Glycemic Load Calculator",
+       search_ph:"Search a food…", add:"+ Add food",
+       save:"Save", clear:"Clear day",
+       total_title:"Daily total glycemic load" }
+};
+
+// Applique les libellés
+function applyI18n(){
+  const t = I18N[LANG];
+  document.querySelector('h1').textContent = t.title;
+  document.getElementById('search').placeholder = t.search_ph;
+  document.getElementById('add').textContent = t.add;
+  document.getElementById('save').textContent = t.save;
+  document.getElementById('clearAll').textContent = t.clear;
+  document.querySelector('.card.total > div:first-child').textContent = t.total_title;
+}
+window.addEventListener('DOMContentLoaded', () => {const $lang = document.getElementById('lang');
+if ($lang){ $lang.value = LANG; $lang.addEventListener('change', ()=>{ LANG=$lang.value; applyI18n(); }); }
+applyI18n();
   fillDatalist();
   hydrate(load());
   updateTotal();
+                                                   });
 
   const $btnAdd   = document.getElementById('add');
   const $btnSave  = document.getElementById('save');
