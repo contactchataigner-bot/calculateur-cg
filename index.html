@@ -32,982 +32,2095 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin
 <script>
 /* Colle ici le contenu de ton aliments.csv entre les backticks */
 const CSV_ALIMENTS = `
-ALIMENT;Charge glycémique pour 100g;;;;
-Lait concentré non sucré;3;;;;
-Lait concentré sucré;34;;;;
-Lait amandes sucré, enrichi calcium voir aussi boisson végétale;1;;;;
-Boisson végétale amandes sucré, enrichi calcium;1;;;;
-Lait millet amande noisette estimation voir aussi boisson végétale;9;;;;
-Boisson végétale riz et moka estimation;9;;;;
-Boisson végétale millet amande noisette estimation;9;;;;
-Boisson végétale avoine vanille estimation;5,5;;;;
-Boisson végétale au sarrasin (buckwheat) estimation;5;;;;
-Lait amandes nature non sucré voir aussi boisson végétale;0;;;;
-Boisson végétale amandes nature non sucré;0;;;;
-Lait avoine nature voir aussi boisson végétale;2,5;;;;
-Boisson végétale avoine nature;2,5;;;;
-Lait de chèvre entier cru;1;;;;
-Lait de chèvre entier UHT;1;;;;
-Lait de chèvre demi écrémé;1;;;;
-Lait de coco;1;;;;
-Lait de riz, voir aussi boisson végétale;10;;;;
-Boisson végétale au riz;10;;;;
-Boisson végétale riz épeautre amandes;8;;;;
-Boisson végétale riz épeautre noisettes;7,5;;;;
-Boisson végétale riz millet macadamia;8;;;;
-Boisson végétale riz chocolat noisette estimation;10;;;;
-Boisson végétale riz châtaigne avoine;9;;;;
-Boisson végétale riz cacao estimation;11;;;;
-Boisson végétale noisettes;1;;;;
-Lait de soja nature voir aussi boisson végétale;0,5;;;;
-Boisson végétale coco;1;;;;
-Boisson végétale noix de cajou;0,35;;;;
-Boisson végétale au soja nature;0,5;;;;
-Boisson végétale au chanvre sans sucre;0;;;;
-Boisson végétale amande chocolat estimation;7;;;;
-Boisson végétale amande vanille estimation;1;;;;
-Lait de vache entier UHT;1;;;;
-Lait de vache écrémé ;3;;;;
-Lait écrémé en poudre ;32,5;;;;
-Lait entier en poudre;11,5;;;;
-Lait en poudre 1/2 écrémé;13;;;;
-Lait fermenté à boire nature;1;;;;
-Kéfir de lait;2;;;;
-Haricots Flageolets verts bouilli/cuit à l’eau;3;;;;
-Haricots flageolet surgelés;6,5;;;;
-Haricots rouges bouilli/cuits à l’eau;4;;;;
-Haricots blancs, bouilli/cuit à l’eau;4;;;;
-Haricots coco, bouilli/cuits à l’eau;5;;;;
-Lentilles vertes, bouillie/cuite à l’eau;4;;;;
-Lentilles blondes, bouillie/cuite à l’eau;5;;;;
-Lentilles corail, bouillie / cuite à l’eau;4,5;;;;
-Petits pois surgelés, cuits;3;;;;
-Petits pois purée;3;;;;
-Petits pois cuits;3,5;;;;
-Pois cassés, bouilli/cuit à l’eau;15;;;;
-Fèves cuites;7;;;;
-Pois chiches, bouilli/cuit à l’eau;5;;;;
-Alcamatin estimation;30;;;;
-Cacao raw powder, Purasana estimation;3;;;;
-Poudre de cacao cru,Purasana estimation;3;;;;
-Bouillie de millet Alcamatin estimation;30;;;;
-Amarante;21;;;;
-Flocons d’avoine;23;;;;
-Muesli moyen sans sucre ajouté;30,8;;;;
-Crousty 3 chocolats, Auchan, estimation;48,30;;;;
-Cruesli chocolat au lait, Quaker, estimation;41,30;;;;
-Muesli bio flocons d’avoine et noix, estimation;13,12;;;;
-Son d’avoine;20,5;;;;
-Flocon d’épeautre;30;;;;
-Blé (type Ebly);14;;;;
-Boulgour;37;;;;
-Céréales (petit dej);55,5;;;;
-Corn flakes natures;75;;;;
-Maïs ;10;;;;
-Maïs en conserve;10;;;;
-Orge perlé cuit;15;;;;
-Petit épeautre;24;;;;
-Quinoa;10;;;;
-Riz blanc cuit;67;;;;
-Riz Basmati cuit;12;;;;
-Riz complet cuit;20;;;;
-Riz sauvage cuit;10;;;;
-Riz gluant;29;;;;
-Riz thai cuit;15,5;;;;
-Tapioca;75;;;;
-Lupins, délice en morceaux, estimation;11;;;;
-Délice en morceaux, Lupins, estimation;11;;;;
-Semoule de maïs, polenta;53;;;;
-Semoule blé cuite;16;;;;
-weetabix céréales;61;;;;
-Chips;31;;;;
-Gingembre racine;1;;;;
-Gingembre confit;8,71;;;;
-Pomme de terre au four sans peau;24,5;;;;
-Pomme de terre au four avec peau;22,5;;;;
-Pomme de terre duchesse surgelées cuite;36;;;;
-Pomme de terre dauphine surgelée, cuite;37;;;;
-Pomme de terre cuites vapeur;19;;;;
-Pomme de terre sauté, pré-frite, surgelée, cuite;28;;;;
-Patates douces, cuite;6;;;;
-Pomme de terre Frites;40;;;;
-Purée de Pomme de terre;17;;;;
-Purée de pomme de terre en flocons;15;;;;
-Topinambourg;8;;;;
-Farine d’Avoine;27;;;;
-FitOlin (farine de lin minceur);7;;;;
-Farine d’Arrow root;10;;;;
-Farine d’Amarante;26,5;;;;
-Linette (farine de lin);7,5;;;;
-Farine de Blé tendre T80;67;;;;
-Farine de Blé T110;58;;;;
-Farine de Blé intégrale  T150;55;;;;
-Farine de Blé T45;69;;;;
-Farine de Blé T55;67;;;;
-Farine de Chataignes;46;;;;
-Farine de Coco;8;;;;
-Farine de pois chiches;16,5;;;;
-Farine de Grand épeautre T110;32;;;;
-Farine de Grand épeautre complète T130;31;;;;
-Farine de Grand épeautre intégrale T150;27;;;;
-Farine de Kamut;32;;;;
-Farine de Lentilles;18;;;;
-Farine de Lupin;1,5;;;;
-Maïzena (choisir arrow root);73;;;;
-Fécule de maïs (choisir plutôt arrow root);73;;;;
-Farine de maïs;55;;;;
-Poudre de Noisettes;2,5;;;;
-Poudre d’Amandes;1,5;;;;
-Farine de Quinoa;26;;;;
-Farine de millet;45;;;;
-Farine de Petit épautre;25;;;;
-Farine de Riz;70;;;;
-Farine de Sarrasin (sans gluten);27,5;;;;
-Farine de Soja;6;;;;
-Farine de Souchet;22;;;;
-Farine de Seigle complète;20;;;;
-Bagel;33;;;;
-Baguette blanche ;58,5;;;;
-Biscottes;54;;;;
-Blini ;39;;;;
-Brioche;7,5;;;;
-Crêpe V1 pâte MC;7,5;;;;
-Crêpe V2 lait d’amande MC;7;;;;
-Crêpe mille trous;7;;;;
-Croissant;38;;;;
-Crumpet anglais MC;14;;;;
-Crozet à la châtaigne;69;;;;
-Foccacia MC;20;;;;
-Gaufres salées légères MC;12;;;;
-Gaufres rapides MC;8;;;;
-Gaufres liégeoises rapides MC;17;;;;
-Génoise rapide MC;11;;;;
-Krisprolls;33;;;;
-Muffin anglais MC;16;;;;
-Naan nature ou fromage MC;14,5;;;;
-Naan ail MC;14,5;;;;
-Nachos MC;11,5;;;;
-Pain au son;27;;;;
-Pain azyme;45;;;;
-Pain au lait artisanal;27;;;;
-Pain au lait MC;15;;;;
-Pain au levain en moyenne;35;;;;
-Pain blanc;100;;;;
-Pain complet ;96;;;;
-Pain au Kamut;32;;;;
-Pain de mie;42;;;;
-Pain de mie MC;33;;;;
-Pain hamburger classique;42,5;;;;
-Pain bun MC hamburger;15,5;;;;
-Pain épeautre intégral;27;;;;
-Pain de seigle complet;29;;;;
-Pain des fleurs sarrasin;49;;;;
-Pain géorgien MC;17;;;;
-Pain noir allemand;18;;;;
-Pain au chocolat;48;;;;
-Pain aux raisins;39,13;;;;
-Pain grillé;32,5;;;;
-Pain santé Méthode Chataigner;17;;;;
-Pancake MC;8;;;;
-Pâte sablée MC;24;;;;
-Riz soufflé en galette;64;;;;
-Scones anglais MC;17,5;;;;
-Wasa estimation;21,70;;;;
-Wasa fibres estimation;16,10;;;;
-Pâte à lasagnes MC;17;;;;
-Pâte à lasagnes au sarrasin MC;15;;;;
-Pâte à pizza chou-fleur MC;0,5;;;;
-Pâtes au blé complet cuites;12;;;;
-Pâtes de riz;21;;;;
-Vermicelles de riz;21;;;;
-Nouilles de riz;21;;;;
-Pâtes aux œufs cuites;13;;;;
-Pâtes blanches al dente;16;;;;
-Pâtes blanches cuisson normale;35;;;;
-Pâtes blanches bien cuites;45;;;;
-Pâte brisée MC;18;;;;
-Pâte feuilletée;32;;;;
-Pâte feuilletée maison FitOlin;12;;;;
-Pâtes fraiches aux œufs cuites;13;;;;
-Pâte gnocchis;24;;;;
-Gnocchis;24;;;;
-Abricot ;5;;;;
-Ananas;7;;;;
-Avocat;1;;;;
-Banane ;13;;;;
-Banane mûre;76;;;;
-Baies de goji;14,5;;;;
-Banane plantain cuite;20;;;;
-Brugnon ;3;;;;
-Cassis;1,5;;;;
-Cerise ;8;;;;
-Châtaigne;22;;;;
-Citron;0,5;;;;
-Citron zeste;1;;;;
-Clémentine;3;;;;
-Coing;5;;;;
-Datte ;45;;;;
-Figue;5;;;;
-Fraise ;2;;;;
-Framboises;2;;;;
-Fruit de la passion;3;;;;
-Goyave;6;;;;
-Grenade ;5;;;;
-Groseilles;2;;;;
-Kaki ;7;;;;
-Kiwi ;6;;;;
-Litchi au sirop;13;;;;
-Litchi ;8;;;;
-Mandarine;3;;;;
-Mangue ;7;;;;
-Mélange fruits rouges surgelés;2;;;;
-Melon;11;;;;
-Mirabelle ;7;;;;
-Mûre ;2;;;;
-Myrtille;3;;;;
-Nectarine ;3;;;;
-Nefle;5;;;;
-Orange (attention CG + élevée si mangée seule);4;;;;
-Papaye;5;;;;
-Pamplemousse ;2;;;;
-Pastèque ;6;;;;
-Pêche ;4,5;;;;
-Poire (attention CG + élevée si mangée seule);6,5;;;;
-Pomme (attention CG + élevée si mangée seule);4;;;;
-Pomme au four;10;;;;
-Prune;4;;;;
-Purée de prunes (Frutto puro) estimation;10;;;;
-Pruneaux cuits;10;;;;
-Raisin ;82;;;;
-Rhubarbe cuite;5;;;;
-Tomate ;1;;;;
-Aubergines;0,5;;;;
-Ail;6;;;;
-artichaut;1;;;;
-Asperge blanche;0,5;;;;
-Asperge verte;0,5;;;;
-Betteraves crues;5;;;;
-Betteraves cuites;5;;;;
-Blettes;0,5;;;;
-Brocoli;0;;;;
-Carottes crues;1;;;;
-Carottes cuites;3;;;;
-Cèleri rave cuit;4;;;;
-Cèleri rave cru;1,5;;;;
-Cèleri branche;0,5;;;;
-Champignons;1;;;;
-Champignons de paris;0,5;;;;
-Choux de Bruxelle cuits;1;;;;
-Choux blanc;1;;;;
-Choux rouge;1;;;;
-Choux fleur;0,5;;;;
-Choux Kale;1,35;;;;
-Kale choux;1,35;;;;
-Choucroute cuite;1;;;;
-Citrouilles;4,5;;;;
-Concombre;0,5;;;;
-Coeur de palmier;2;;;;
-Courges;4;;;;
-Courgettes;0,5;;;;
-Endives;0,5;;;;
-Épinard;0,13;;;;
-Fenouil;0,5;;;;
-Graines germées;0;;;;
-Haricots verts ;1;;;;
-Haricots beurre cuit;1,5;;;;
-Haricots blancs;4;;;;
-Haricot mungo, pousse de soja;1;;;;
-Laitue;0,18;;;;
-Mache;0;;;;
-Mélange légumes surgelés;5,5;;;;
-Navet cuit;1;;;;
-Olive;1;;;;
-Oseille;0;;;;
-Oignon cuit;1;;;;
-Panais;11,5;;;;
-Petits pois;4;;;;
-Poireau;0,5;;;;
-Poivrons;1;;;;
-Potiron;4;;;;
-Pomme de terre cuite puis refroidie ;12;;;;
-Pomme de terre au four, vapeur ou bouillie;19;;;;
-Pomme de terre frites;30;;;;
-Radis;0;;;;
-radis noir;1;;;;
-Rutabaga, choux;3;;;;
-Sasifis;4;;;;
-Soja graine;3;;;;
-Tomates;1;;;;
-Tempeh;1;;;;
-Topinambour;8;;;;
-Menthe feuilles;0;;;;
-Coriandre, persil, herbes de Provence;0;;;;
-Basilic feuilles;0;;;;
-Cacahuètes grillées salées;1;;;;
-Graines de Chia;0,08;;;;
-Graines de Courges;0,5;;;;
-Graines de Lin;5;;;;
-Graines de Sarrasin;26;;;;
-Graines de Sésame;3;;;;
-Graines de Soja;3;;;;
-Graines de Tournesol;2;;;;
-Huile de coco;0;;;;
-Huile de Lin;0;;;;
-Huile d’Olive;0;;;;
-Margarine diverse;0;;;;
-Huile de Pépins de Raisin;0;;;;
-Beurre clarifié, ghee;0;;;;
-Beurre ;0;;;;
-Huile de Sésame;0;;;;
-Vita Coco;0;;;;
-Vita chia;0;;;;
-Saint Hubert omégas 3;0;;;;
-Margarine St hubert omégas 3;0;;;;
-Margarine Primevère bio;0;;;;
-Huile d’arachide;0;;;;
-Huile de paraffine;0;;;;
-Huile de Tournesol;0;;;;
-Crème allégée vache ;0,5;;;;
-Crème d’Amande de cuisine;0;;;;
-Crème fraîche de Brebis;1;;;;
-Crème fraîche de Chèvre;1;;;;
-Crème de Coco;0;;;;
-Crème fraîche entière de vache ;0;;;;
-Crème Fleurette ;0;;;;
-Crème de soja;0;;;;
-Mascarpone;1;;;;
-Crème de Riz;8,5;;;;
-Oeuf bio si possible bleu blanc coeur;0,5;;;;
-Bœuf;0,5;;;;
-Autruche;0;;;;
-Charcuterie;0;;;;
-Jambon;0;;;;
-Viande;0;;;;
-Kangourou;0;;;;
-Steak, steak haché nature;0;;;;
-Cheval;0;;;;
-Caille;0;;;;
-Chèvre;0;;;;
-Dinde;0;;;;
-Foie d'agneau;0;;;;
-Foie de veau;0;;;;
-Foie de morue (super riche en vit D et oméga 3);0;;;;
-Gibier;0;;;;
-Veau;0;;;;
-Pigeon;0;;;;
-Lapin;0;;;;
-Poulet;0;;;;
-Seitan ;4;;;;
-Tofu, tofu lacto fermenté (estimation);1;;;;
-Produits de la mer, crustacées…;0;;;;
-Escargots;0;;;;
-Poisson blanc;0;;;;
-Mollusques;0;;;;
-Coquillages;0;;;;
-Poisson gras (omégas 3);0;;;;
-Fromage Brebis corse, Pyrénées;0;;;;
-Fromage Feta;0,5;;;;
-Fromage bleu, roquefort…;0;;;;
-Fromage Fondu;3;;;;
-Fromage Gruyère;0;;;;
-Fromage Mozzarella de bufflonne;0;;;;
-Fromage Parmesan;0;;;;
-Fromage Raifort;6;;;;
-Fromage Camembert;0;;;;
-Fromage à tartiner;2;;;;
-Fromage de chèvre;0;;;;
-Vinaigre balsamique;1,5;;;;
-Vinaigre cidre;0;;;;
-Sucre Blanc ;70;;;;
-Amidon modifié;89;;;;
-Chantifix;71;;;;
-Sucre Coco;33;;;;
-Sucre Complet/intégral;66,5;;;;
-Sucre Eritritol;0;;;;
-Miel;49;;;;
-Miel d'accacia;28;;;;
-Sucre Roux ;68;;;;
-Sirop de blé, sirop de riz;85;;;;
-Sirop de glucose;100;;;;
-Sirop de maïs;76;;;;
-Sirop d’agave (attention au fructose libre qu’il contient);23;;;;
-Sucrettes, édulcorants;0;;;;
-Bières;3;;;;
-Alcool / incalculable;0;;;;
-Thé, tisane;0;;;;
-Café du matin +9% d’augmentation glycémie;0;;;;
-Café du midi +15% d’augmentation glycémie;0;;;;
-Café le soir +26% d’augmentation glycémie;0;;;;
-Café en poudre;3;;;;
-Foodspring Sparkling aminos, IG non testé, contient de la caféine et des édulcorants perturbateur du microbiote intestinal;0;;;;
-Thé chai latte au miel, lait de chèvre;1;;;;
-Boisson No café frappé;3;;;;
-Cidre;1;;;;
-Café de céréales instantané type Yannoh (comptez le poids de la cuillère de 10g pas de votre bol comprenant de l’eau);27;;;;
-Soda normal;7;;;;
-soda 0;0;;;;
-Chocolat au lait;4;;;;
-Eau;0;;;;
-Eau de coco;0;;;;
-Décoction ayurvédique;0,5;;;;
-Isotonic (gatorade powerade);4;;;;
-Jus Breuss;6;;;;
-Jus d'orange;12;;;;
-Jus de pommes;7;;;;
-Jus de tomate;1;;;;
-Jus multifruits;8;;;;
-Jus la vie en rose;2;;;;
-Jus soleil indien;1,5;;;;
-Jus détox;0,5;;;;
-Jus vert;0,5;;;;
-Jus légumes provençal;3;;;;
-Lait de poule;1;;;;
-Jus de carotte;8;;;;
-Jus d’orange;12;;;;
-Jus de pamplemousse;8;;;;
-Ricoré au lait Neslé, estimation (comptez le poids de la cuillère de 10g pas de votre bol comprenant de l’eau);10,60;;;;
-Ricoré nature, estimation (comptez le poids de la cuillère de 10g pas de votre bol comprenant de l’eau);4;;;;
-Boisson Laxajus;8;;;;
-Limonade;6,5;;;;
-Lait de coco;1,5;;;;
-Lait d'or;2;;;;
-Jus de pruneaux MC;7;;;;
-Pepsi avec sucre;7;;;;
-Coca avec sucre;7;;;;
-Soda sans sucre ou 0;0;;;;
-Sodas en moyenne;7;;;;
-Thé glacé maison sucré au miel;4;;;;
-Boisson Virgin mojito MC ;1;;;;
-Boisson Virgin Mojicha MC;4;;;;
-Tonic;4;;;;
-Yannoh vanille;22;;;;
-Abricots sirop (boîte) ;10;;;;
-Ananas  (boîte) ;10;;;;
-Barres chocolatée sucrée;53;;;;
-Barre muesli aux fruits secs;32;;;;
-Bonbons;133;;;;
-Bonbons dragibus;160;;;;
-Boule de maïs soufflée au miel;46;;;;
-Chocolat blanc;26;;;;
-Chocolat noir > 40%  cacao;26;;;;
-Chocolat  noir> 70%  cacao;11;;;;
-Chocolat lait;26;;;;
-Confiture (en moyenne) ;38;;;;
-Cookies industriels;92;;;;
-Mars et barres chocolatées;122;;;;
-Gâteaux en moyenne (si pas maison);82;;;;
-Doughnuts;74;;;;
-Donuts industriels;37;;;;
-Pâte à tartiner type Nutella;32;;;;
-Pâte d'amandes;25;;;;
-Pêches au sirop (boîte);7;;;;
-Pop corn nature;32;;;;
-Crème glacée en bac;73;;;;
-Sorbet sucré ;19;;;;
-Compote de pomme sans sucre ajouté;19;;;;
-Glace en bâton type magnum;22;;;;
-Abricots secs;18;;;;
-Amandes;1,5;;;;
-Bananes séchées;42;;;;
-Canneberge ou cranberries;34,5;;;;
-Dattes;67;;;;
-Figues sèches;33;;;;
-Noix de coco;3;;;;
-Noix de Pécan;0,5;;;;
-Noix;1,5;;;;
-Noix Amazonie, Brésil;1,5;;;;
-Noisette;1;;;;
-Noix de cajou;5,5;;;;
-Olive noire;0;;;;
-Pomme séchée;20;;;;
-Pistaches;2;;;;
-Pruneau;29;;;;
-Raisins secs;58;;;;
-Tomate séchée;15;;;;
-Sauce Barbecue;14;;;;
-Coulis de tomate;3,5;;;;
-Concentré de tomates;5;;;;
-Harissa;0;;;;
-Ketchup;15;;;;
-Moutarde;2,5;;;;
-Sauce tomates;5;;;;
-Sauce Tamari (soja fermenté);3,5;;;;
-Agar-agar;0,5;;;;
-Ail, gousse ;6,5;;;;
-Anis étoilé (badiane);2,5;;;;
-Arrow Root fécule;11;;;;
-Bicarbonate de soude;0;;;;
-Cannelle en poudre ;1,5;;;;
-Cardamome;2;;;;
-Clou de girofle;3;;;;
-Cumin en poudre;2;;;;
-Curcuma en poudre;2;;;;
-Echalotes;2;;;;
-Epices (en moyenne);2;;;;
-Gélatine animale déconseillée;0;;;;
-Gingembre racine;0,5;;;;
-Gingembre moulu;9;;;;
-Levure de boulanger;12;;;;
-Levure chimique remplacer par bicarbonate;12;;;;
-Menthe feuille;0;;;;
-Oignon cuit;1;;;;
-Herbe de Provence;0;;;;
-Oignon cru;1;;;;
-Piment;3;;;;
-Poivre noir;2;;;;
-Vanille;1;;;;
-Thym;0;;;;
-Poisson pané;5,5;;;;
-Sardine à l’huile (privilégiez l’huile d'olive);0;;;;
-Saumon fumé;0;;;;
-Surimi attention aux additifs;6;;;;
-Tarama attention aux additifs;3,5;;;;
-Sushi;15;;;;
-Crustacés;0;;;;
-Filet de harengs;0;;;;
-Crevettes;0;;;;
-Homard;0;;;;
-Ecrevisse;0;;;;
-Huitre;0;;;;
-Moule;0;;;;
-Langouste, langoustine;0;;;;
-Crabe;0;;;;
-Purée Amandes;2;;;;
-Beurre de cacahuete;2,5;;;;
-Crème de Marrons/chataignes nature;12,5;;;;
-Purée de Noisettes;2;;;;
-Purée de Noix de cajoux;11;;;;
-Purée de Pistache;2;;;;
-Tahin, purée de sésame;6;;;;
-Purée de Sésame, tahin;6;;;;
-Petit suisse aromatisé 1/2 écrémé;15;;;;
-Skyr yaourt ;2;;;;
-Yaourt Skyr;2;;;;
-Gervita, fromage blanc et crème fouettée;6;;;;
-Fromage frais aux fruits, carrefour, estimation;3,60;;;;
-Petit Gervais aux fruits, Danone, estimation;4;;;;
-Danonino, petit suisse aux fruits, estimation;4;;;;
-Petit suisse Gervais aux fruits, estimation;4,5;;;;
-Petit suisse nature, estimation;1;;;;
-Danette au chocolat, estimation;7;;;;
-Danette vanille, estimation;5;;;;
-Danette caramel salé, estimation;6;;;;
-Danette Caramel, estimation;6;;;;
-Flanby Nestlé, estimation;6;;;;
-Fromage blanc 0%;1,2;;;;
-Fromage blanc 3%;1;;;;
-Fromage blanc nature ou aux fruits en moyenne;2;;;;
-Dessert au soja non sucré;1,5;;;;
-Dessert au lait de riz non sucré;14,5;;;;
-Dessert végétal sauf riz et soja, non sucré;6;;;;
-Yaourt, dessert végétal sauf riz et soja, non sucré;6;;;;
-Yaourt, dessert au lait de riz non sucré;14,5;;;;
-Yaourt, dessert au soja non sucré;1,5;;;;
-Yaourt 0% aux fruits sucré, déconseillé;19;;;;
-Yaourt au lait animal consommé seul, estimation;5;;;;
-Yaourt sans lactose si consommé seul hors des repas, estimation;6,4;;;;
-Yaourt sans lactose si consommé pendant un repas;1,5;;;;
-Yaourt 1/2 écrémé aromatisé sucré;19;;;;
-Yaourt 1/2 écrémé sucré;15;;;;
-Yaourt à boire sucré;17;;;;
-Yaourt allégé;4;;;;
-Yaourt aux fruits;14;;;;
-Yaourt lait de chèvre aromatisé, sucré, estimation;8;;;;
-Yaourt au lait de chèvre, nature 5%;0,5;;;;
-Yaourt de brebis à la grecque;5;;;;
-Yaourt au lait de brebis aromatisé sucré;3,35;;;;
-Yaourt de brebis marque Vrai nature;1,5;;;;
-Yaourt style à la grecque, topping miel;6;;;;
-Yoghurt greek style, honey topped;6;;;;
-Yaourt lait entier nature sucré;14,5;;;;
-Yaourt nature en moyenne, attention estimation 115 si consommé seul;1,26;;;;
-Biscuits salés apéritif;42;;;;
-Tortillas chips de maïs ;25;;;;
-Cacahuètes grillées salées;2;;;;
-Crackers fromage;36;;;;
-Crackers;87;;;;
-Houmous, purée de pois chiches;3;;;;
-Pâtisserie en moyenne;24;;;;
-Biscuit sucré;45,5;;;;
-Biscuits fourrés chocolat au lait Evernat, estimation;14,50;;;;
-Croissant ordinaire;79;;;;
-Flan patissier de boulangerie;24;;;;
-Croissant au beurre;23;;;;
-Brioche;30;;;;
-Brioche fit lait de chèvre;14;;;;
-Brioche fit lait de soja;14;;;;
-Brioche fit lait de vache;14;;;;
-Pain au lait artisanal;27;;;;
-Chausson aux pommes;17;;;;
-Petit beurre;37;;;;
-Pain au chocolat;25;;;;
-Spéculos;37;;;;
-Eclair au chocolat;15,5;;;;
-Maquereaux au vin blanc (estimation);1;;;;
-Nems en moyenne si frits (estimation);15;;;;
-Nems en moyenne si cuits au four (estimation);9;;;;
-Galette bretonne blé noir, sarrasin (estimation);19;;;;
-Feuille de brick;36;;;;
-Crêpe garnie aux oeufs MC;5;;;;
-Yummi avocat MC;2;;;;
-Croque madame;9,50;;;;
-Sauce blanche MC;2;;;;
-Salade cléopâtre avec sauce blanche MC;3;;;;
-Mélange fruits rouge surgelés;2;;;;
-Aubergine à la japonaise MC;4;;;;
-Marmite à la japonaise MC;4;;;;
-Tartare de saumon MC;5;;;;
-Lasagne MC;7;;;;
-Épeautre petiti dej banane MC;15;;;;
-Épeautre petit dej pomme MC;12;;;;
-Amlou MC;2;;;;
-Celeri remoulade MC;3;;;;
-Tartare d’algues MC;3;;;;
-Poireaux vinaigrette;1;;;;
-Quiche sans pâte MC;2;;;;
-Oeuf coque avec 2 mouillettes MC;5;;;;
-Oeuf imparfait centenaire;3;;;;
-Guacamole MC;1;;;;
-Fajitas poulet MC;5,5;;;;
-Taboulé de quinoa MC;3;;;;
-Petit pain santé poêlé MC;17;;;;
-Houmous maison MC;4;;;;
-Poulet mariné au citron MC;1;;;;
-Fauxmage de macadamia MC;0,5;;;;
-Salade asiatique avec sauce MC;2;;;;
-Marmite à la japonaise MC;4;;;;
-Curry rouge de gambas MC;1;;;;
-Salade du sud ouest MC;3,5;;;;
-Omelette roulée à la dinde MC;0,5;;;;
-Salade chou chinois et fenouil MC;1;;;;
-Poisson à la vietnamienne MC;2;;;;
-Crème végétale coco vanille MC;3,50;;;;
-Tiramisu maison MC;24;;;;
-Frozen banana MC;12;;;;
-Confiture maison MC;4;;;;
-Crème Ché Dau Do MC;6;;;;
-Carotte cake MC;15;;;;
-Gâteau cannelé cannelle MC;12;;;;
-Pudding coco-chia MC;7;;;;
-Pain d’épice végan MC;19;;;;
-Pain d’épices normal MC;11;;;;
-Créme glacée fruits rouges MC;9;;;;
-Cheesecake MC;6;;;;
-Charlotte poire chocolat MC;22;;;;
-Crème de myrtille fitolin MC;5;;;;
-Mixte d’oignons libanais MC;1;;;;
-Ratatouille MC;2,5;;;;
-Chantilly MC;7;;;;
-Salade de betteraves MC;5;;;;
-Omelette chakchouka libanaise MC;1;;;;
-Blanc-manger MC;3;;;;
-Jus du poète MC;3;;;;
-Croque monsieur au poulet MC;6;;;;
-Epinards au kéfir MC;1;;;;
-Nage de st Jacques et quinoa MC;2,5;;;;
-Oeufs au lait MC;2;;;;
-Jus des 4 mousquetaires MC ;1;;;;
-Muffin avocat saumon MC;4;;;;
-Brocolis rotis MC;0;;;;
-Oeufs mollets épinards MC;1,5;;;;
-Croquants aux amandes MC;16,5;;;;
-Jus de l’abuela MC;0;;;;
-Oeufs mimosas MC;0,5;;;;
-Soupe de lentilles corail coco MC;2;;;;
-Pain de saumon MC;2;;;;
-Mousse au chocolat MC;3;;;;
-Jus grand-mère MC;0,5;;;;
-Muffin anglais oeufs Bénédicte MC;4;;;;
-Soupe thaï raviolis vapeur MC;2;;;;
-Flan thé vert MC;1;;;;
-Sablés amandes et noix MC;10;;;;
-Jus Betty boom MC;5;;;;
-Faux gras MC;2;;;;
-Soupe butternut éclats de châtaignes MC;5;;;;
-Energie balls MC;46;;;;
-Jus choublette MC;0,5;;;;
-Crêpe saumon fromage MC;2,5;;;;
-Verrine butternut coco MC;2;;;;
-Choucroute de la mer patate douce MC;4;;;;
-Fondant chocolat amande MC;3;;;;
-Gimbéré arrangé MC;5;;;;
-Toast oeufs lardons poulet MC;8,5;;;;
-Soupe à l’oignon MC;0,5;;;;
-Chou farci à la viande MC;0,5;;;;
-Pana cotta vanille/framboise MC;3;;;;
-Toast avocat saumon MC;9;;;;
-Salade d’endives MC;2;;;;
-Gratin de patate douces et cabillaud MC;3;;;;
-Crumble de poire au FitOlin MC;9;;;;
-Galettes de patates douces et polenta MC;23;;;;
-Lentilles en salade orientale MC;10;;;;
-Saumon grillé purée de brocoli pécorino MC;0,10;;;;
-Crème de citron FitOlin MC;6;;;;
-Açai bowl MC;6;;;;
-Velouté de fenouil MC;2;;;;
-Endives au jambon MC;1;;;;
-Châtaignes grillées à la poêle MC;22;;;;
-Fitshake MC;2;;;;
-Salade d’hiver mi-cuite MC;4;;;;
-Saumon pimenté fenouil nouille de riz MC;3;;;;
-Tuiles aux amandes MC;9;;;;
-Tzatziki MC;1;;;;
-Calamar libanais sauce tarator MC;6;;;;
-Flan coco MC;0,5;;;;
-Omelette berrichonne;17;;;;
-Tapas espagnol aïoli et pain MC;7;;;;
-Gambas à l’ail MC;1;;;;
-Gratin de légumes libanais;1;;;;
-Mousse au chocolat pois chiches MC;9;;;;
-Pâté végétal à tartiner MC;2,5;;;;
-Asperge sauce mousseline MC;0,6;;;;
-Soufflé d’oeufs au four MC;0;;;;
-Palets bretons MC;15;;;;
-Oeufs Bénédicte au saumon et pain de mie MC;3,5;;;;
-Tomates vinaigrette MC;1;;;;
-Poulet korma MC;1;;;;
-Fitshake café glacé MC;6;;;;
-Carpaccio de courgette MC;1;;;;
-Pizza d’aubergine au chèvre MC;1;;;;
-Cake fondant au citron MC;11;;;;
-Carottes râpées sauce au miel MC;3;;;;
-Saumon grillé épinards à la crème MC;1;;;;
-Tarte au citron MC;11;;;;
-Muffins salés MC;9;;;;
-Frittata d’asperge et petits pois MC;1;;;;
-Pana cotta au chocolat MC;6;;;;
-Amarante du sportif MC;12;;;;
-Gazpacho avocat concombre MC;1;;;;
-Salade caesar MC;5;;;;
-Tarte fine aux fraises MC;9;;;;
-Salade concombre fraise menthe MC;5;;;;
-Oeufs à la mexicaine MC;2;;;;
-Taboulé libanais boulgour MC;9;;;;
-Escalope de poulet milanaise MC;5;;;;
-Fleur de courgette MC;1;;;;
-Toast avocat chèvre MC;5;;;;
-Salade de papaye verte MC;7;;;;
-Poulet thaï MC;1;;;;
-Pâtes sobą ;30;;;;
-Mangue shake kéfir de lait MC;3,5;;;;
-Gaufre au saumon MC;1,5;;;;
-Tajine de poulet MC;17;;;;
-Salade de fêta libanaise MC;1,5;;;;
-Sorbet bâton pastèque MC;13;;;;
-Galettes de courgette MC;1;;;;
-Caviar d’aubergine MC;1;;;;
-Moules farcies Midyé libanaises MC;4,5;;;;
-Smoothie glacé aux fruits d’été MC;15;;;;
-Blinis fromage frais saumon aneth MC;23;;;;
-Concombre farci saumon chèvre MC;0,5;;;;
-Bhaji d’aubergine MC;2;;;;
-Soupe de fruit rouge MC;3;;;;
-Cake fêta olive MC;6;;;;
-Sucré salé de chou blanc libanais MC;1;;;;
-Ceviche de loup;1;;;;
-Clafoutis MC;3,5;;;;
-Soupe de poisson croutons à l’ail MC;2;;;;
-Scones au blanc de poulet et fromage MC;5,5;;;;
-Caviar d'aubergine libanais rapide et pain mita MC;20;;;;
-Gigot d’agneau et haricots blancs tomate MC;3;;;;
-Artichauts mayonnaise amande MC;4;;;;
-Crème d’avocat et chia au kéfir MC;6;;;;
-Carpaccio de boeuf MC;0,5;;;;
-Frites au four MC;74;;;;
-Flan au café MC;6;;;;
-Sandwich pain au lait poulet fromage MC;4;;;;
-Salade au roquefort et noix MC;1,5;;;;
-Risotto de quinoa aux champignons MC;4;;;;
-Crumble pommes raisins MC;9;;;;
-Omelette aux champignons MC;1;;;;
-Pizza libanaise MC;10;;;;
-Crème vanille FitOlin MC;2,5;;;;
-Houmous libanais MC;3;;;;
-Tava de légumes libanais MC;1;;;;
-Poulet entier libanais MC;3;;;;
-Cornes de gazelle MC;11,5;;;;
-Houmous à la tomate MC;20;;;;
-Velouté potiron châtaignes ;7;;;;
-St Jacques purée de céleri aux truffes MC;4;;;;
-Baklawa libanais MC;18;;;;
-Toast de patates douces MC;7;;;;
-Cèleri rémoulade MC;1;;;;
-Poulet aux amandes et riz basmati MC;15;;;;
-Cookies d’Avrile MC;16;;;;
-Omelette aux fines herbes MC;1;;;;
-Velouté de chou-fleur coco MC;1;;;;
-Lasagnes végétariennes MC;4,5;;;;
-Rillettes de sardines et salade d’algues MC;12;;;;
-Bagel au saumon MC;20;;;;
-Terrine de châtaigne fenouil MC;10;;;;
-Pot au feu MC;2;;;;
-Ile flottante MC;5;;;;
-Oeuf cocotte et pain maison MC;6;;;;
-Soupe de patate douce MC;2,5;;;;
-Blanquette de poulet champignons MC;1;;;;
-Pain géorgien au fromage MC;3,5;;;;
-Verrines mâche chèvre MC;1;;;;
-Couscous végétarien MC;18;;;;
-Couscous végétarien oignons confits miel datte MC;24;;;;
-Brownie patate douce MC;10;;;;
-Patate douce rôtie MC;7;;;;
-Crème chocolat FitOlin rapide MC;3;;;;
-Tartiflette de patates douces MC;3;;;;
-Omelette fluffy MC;1;;;;
-Bailla, salade libanaise MC;12;;;;
-Filet de bar endives braisées MC;2;;;;
-Tourte niçoise aux blettes sucrée;32;;;;
-Toast patates douces au jambon MC;2,5;;;;
-Falafels libanais MC;5;;;;
-Mug cake FitOlin MC;6,5;;;;
-Soupe de légumes d’hiver MC;3,5;;;;
-Granola maison MC;18;;;;
-Ailes de poulet marinées libanaises MC;1;;;;
-Salade piquante libanaise MC;1,5;;;;
-Tartelette fraise rhubarbe MC;11;;;;
-Salade de printemps MC;1;;;;
-Shakshuka libanaise MC;2;;;;
-Paella valenciana MC;34;;;;
-Fondue au chocolat MC;14;;;;
-Cloud eggs sur toast MC;6,5;;;;
-Chirashi au saumon MC;20;;;;
-Framboisier express MC;6;;;;
-Avocat cocotte oeuf MC;1;;;;
-Fatayer libanais chaussons épinards MC;4;;;;
-Poivrons farcis ricotta MC;1,5;;;;
-Tartelette pomme gingembre MC;22;;;;
-Crêpe à l’amandella MC;12;;;;
-Houmous petits pois MC;2,5;;;;
-Pintade au chou MC;7;;;;
-Crêpe complète MC;3,5;;;;
-Pamplemousse au crabe MC;8,5;;;;
-Moussaka MC;3;;;;
-Laxabowl MC;2,5;;;;
-Mini pizza amandella coco MC;12;;;;
-Frittata brocoli MC;1;;;;
-Salade carottes betteraves MC;3;;;;
-Filet de cabillaud grillé MC;0,5;;;;
-Oeuf en cocotte de tomate MC;1;;;;
-Tatin de courgette chèvre miel MC;11;;;;
-Chou rouge libanais MC;1;;;;
-Bounty glacé MC;3;;;;
-Saumon à l’unilatéral MC;1;;;;
-Fleurs d’oeufs en poivron MC;1;;;;
-Aubergines parmigiana MC;5;;;;
-Muffins myrtille orange MC;8;;;;
-Mouhamara, crème de poivrons, pita MC;12;;;;
-Côte d’agneau libanaise riz basmati MC;9,5;;;;
-Brochette de crevettes poivrons, quinoa MC;12,5;;;;
-Empanadas d’Argentine MC;10;;;;
-Soupe de cerise MC;2,5;;;;
-Saumon gravelax avocat MC;2;;;;
-Cannelés MC;12;;;;
-Daurade mahi-mahi Créole MC;7;;;;
-Banana bread MC;19;;;;
-Salade verte sans frontière MC;1;;;;
-Poivrons à l’ail MC;1;;;;
-Oeufs à la diable MC;1;;;;
-Tarte tatin MC;16,5;;;;
-Tostada tomate rallada jambon MC;10;;;;
-Pêches au thon MC;2;;;;
-Magret de canard, haricots verts, pdt MC;10;;;;
-Chocolat chaud italien MC;5;;;;
-Gazpacho, tartines poivrons ail MC;10;;;;
-Pizza du matin MC;10;;;;
-Soupe froide italienne MC;1;;;;
-Gambas flambées pastis et riz basmati MC;3;;;;
-Guacamole et nachos MC;10;;;;
-Poisson et tomates provençales MC;1,5;;;;
-Oeufs durs farcis avocat MC;6;;;;
-Salade de chou chinois MC;4;;;;
-Houmous du chef libanais MC;1,5;;;;
-Pad thaï crevette tofu MC;4,5;;;;
-Rouleaux de printemps betterave MC;3;;;;
-Kefta libanais MC;1;;;;
-Tarte à la châtaigne MC;17;;;;
-Scone au fromage MC;10;;;;
-Salade fattouche libanaise MC;10;;;;
-Gâteau moelleux châtaigne MC;14;;;;
-Soupe au pistou MC;4;;;;
-Crumpet amlou baies MC;11;;;;
-Légumes rôtis bolognaise MC;3;;;;
-Tarte aux prunes alsacienne MC;15;;;;
-Poisson cru tahitienne MC;6;;;;
-Muffin oeuf bacon MC;4;;;;
-Salade de fenouil cru marocaine MC;1;;;;
-Cassoulet toulousain confit MC;3;;;;
-Gâteau d’automne MC;20;;;;
-Gâteau chocolat courgette MC;12;;;;
-Beureks arméniens MC;16;;;;
-Lasagnes de légumes sans pâte MC;1;;;;
-Bavarois myrtille MC;19;;;;
-Soupe au chou, tartine à l’ail MC;5;;;;
-Tortilla espagnole MC;16;;;;
-Terrine de sanglier MC;1;;;;
-Potée au chou MC;5;;;;
-Compote de banane MC;19;;;;
-Scampis diabolo MC;1;;;;
-Cappuccino pois cassés MC;4;;;;
-Burger maison MC;13;;;;
-Frites de patates douces MC;6;;;;
-Galette frangipane MC;19;;;;
-Courge spaghetti carbo de la mer MC;2,5;;;;
-Brioche fit garnie MC;15;;;;
-Soupe carotte cumin MC;4;;;;
-Chili con seitan MC;11;;;;
-Bûche chocolat châtaigne MC;6;;;;
-Tartine fromage frais jambon MC;13;;;;
-Salade de foies de volaille MC;4;;;;
-Quenelles de brochet MC;4;;;;
-Financiers citron MC;20;;;;
-Velouté de châtaignes MC;8;;;;
-Mille feuilles de pancake salé MC;5;;;;
-Avocat crevette MC;1;;;;
-Courgette farcie au poulet et riz MC;8;;;;
-Tarte potiron MC;17;;;;
-Soupe de lentilles vertes MC;1;;;;
-Dolce bowl MC;10;;;;
-Couscous libanais MC;16;;;;
-namoura, dessert libanais MC;30;;;;
-Galette aux pommes de terre berrichonne MC;11;;;;
-Pizza de chou-fleur MC;1;;;;
-Quinoa au lait MC;10;;;;
-Soupe de courge châtaignes MC;4,5;;;;
-Quiche fromage chèvre MC;9;;;;
-Burger du rebelle MC;23,5;;;;
-Chocolat viennois MC;6;;;;
-Purée potirons truffe MC;3,5;;;;
-Laxabowl poire MC;5;;;;
-Oignons rings MC;18;;;;
-Spaghettis de courgette carbonara MC;1,5;;;;
-Milkshake mango-choco MC;4;;;;
-Salade simple libanaise et pain pita MC;18;;;;
-Crêpe mille trous et amlou MC;5;;;;
-Salade d’endive pomme raisin MC;7;;;;
-Flan ricotta courgette et pain MC;10;;;;
-Crème brûlée MC;5;;;;
-Chou-fleur vapeur mayonnaise MC;1;;;;
-Courgettes farcies libanaise MC;4;;;;
-Far aux pruneaux breton MC;18;;;;
-Buddha bowl MC;8;;;;
-Crumble framboises FitOlin MC;7,5;;;;
-Salade fenouil menthe pamplemousse MC;1;;;;
-Pizza 4 fromages MC;10;;;;
-Clafoutis abricots MC;7;;;;
-Salade champignons amande MC;1;;;;
-Petit déjeuner trompe l’oeil MC;5;;;;
-Tarte soleil MC;11;;;;
-Poulet laqué sésame poivrons MC;2;;;;
-Compote de rhubarbe MC;7;;;;
-Pancake fourré amandella MC;3,5;;;;
-Salade marocaine MC;1;;;;
-Risotto truffe MC;13;;;;
-Mousse de framboises MC;3;;;;
-Accra de courge sauce chien MC;6;;;;
-Foccacia di Recco MC;10;;;;
-Gözlems turcs végans MC;4,5;;;;
-Poire pochée aux épices MC;15;;;;
-Soupe harira MC;8;;;;
+ALIMENT_FR;ALIMENTO_ES;ALIMENTO_EN;CG
+cookies;galletas;cookies;39.0
+granola;granola;granola;35.2
+Pain italien;pan italiano;Italian bread;34.3
+Huile végétale;aceite vegetal;vegetable oil;0.0
+Huile;aceite;oil;0.0
+crème fraîche épaisse;nata para montar;heavy cream;1.1
+crème;crema;cream;1.1
+thym séché;tomillo seco;dried thyme;4.1
+Noix de pecans;nueces pacanas picadas;chopped pecans;0.6
+piment rouge concassé;ají rojo triturado;crushed red pepper;3.2
+noix hachées;nueces picadas;chopped walnuts;1.1
+thym frais;tomillo fresco;fresh thyme;0.5
+Moutarde sèche;mostaza en polvo;dry mustard;8.8
+romarin frais;romero fresco;fresh rosemary;0.8
+clous de girofle moulus;clavo molido;ground cloves;4.1
+poivre blanc;pimienta blanca;white pepper;6.5
+salsa;salsa;salsa;0.9
+sauce piquante;salsa picante;hot sauce;0.3
+boeuf haché maigre;carne de res molida magra;lean ground beef;0.0
+flocons de piment rouge;hojuelas de chile rojo;red pepper flakes;3.2
+piment jalapeño;jalapeño;jalapeño;0.5
+tomates Roma;tomates pera;plum tomatoes;0.6
+mélange d’herbes italiennes;condimento italiano;Italian seasoning;3.0
+sel à l’ail;sal de ajo;garlic salt;2.9
+sucre brun foncé;azúcar moreno oscuro;dark brown sugar;63.7
+poivrons rouges rôtis;pimientos rojos asados;roasted red peppers;0.8
+citrouille en conserve;calabaza enlatada;canned pumpkin;7.5
+purée de potiron;puré de calabaza;pumpkin purée;7.5
+piment de la Jamaïque moulu;pimienta de Jamaica molida;ground allspice;7.7
+fromage Monterey Jack;queso Monterey Jack;Monterey Jack cheese;0.1
+origan frais;orégano fresco;fresh oregano;0.2
+Chamallow;malvaviscos;marshmallows;52.0
+sauce chili;salsa de chile;chili sauce;16.5
+moutarde jaune;mostaza amarilla;yellow mustard;0.3
+raisins secs blonds;pasas rubias;golden raisins;50.6
+sucre en poudre;azúcar superfino;caster sugar;65.0
+pommes de terre Russet;patatas Russet;russet potatoes;14.5
+tomates Roma;tomates Roma;Roma tomatoes;0.6
+chipotle;chipotle;chipotle;0.6
+courge jaune;calabaza amarilla;yellow squash;1.5
+pommes de terre Yukon Gold;patatas Yukon Gold;Yukon Gold potatoes;18.0
+feuilles de salade (laitue, mâche, épinard...);hojas de ensalada (lechuga, canónigos, espinaca…);salad greens (lettuce, lamb’s lettuce, spinach…);0.5
+cannellini;alubias cannellini;cannellini beans;7.0
+lait écrémé 1%;leche desnatada 1 %;1% skim milk;4.5
+haricots frits (purée de haricots refrits);frijoles refritos;refried beans;6.5
+tomates cerises;tomates uva;grape tomatoes;1.5
+fumée liquide;humo líquido;liquid smoke;0.0
+mélange d’épices cajun;condimento cajún;Cajun seasoning;3.0
+compote de pommes sans sucre ajouté;compota de manzana sin azúcar;unsweetened applesauce;10.0
+germes de haricots;brotes de soja;bean sprouts;1.0
+amandes blanchies ;almendras blanqueadas;blanched almonds;0.6
+pommes acidulées;manzanas ácidas;tart apples;6.0
+assaisonnement;condimento;seasoning;3.0
+poivre citronné;pimienta limón;lemon pepper;2.0
+tomatillos;tomatillos;tomatillos;1.5
+riz sauvage;arroz salvaje;wild rice;12.0
+sauce enchilada;salsa para enchiladas;enchilada sauce;10.0
+cassonnade dorée;azúcar moreno claro (cassonade dorée);light brown sugar;64.0
+chipotle chile;chile chipotle;chipotle chile;0.6
+teriyaki sauce;salsa teriyaki;teriyaki sauce;18.0
+low-fat sour cream;crema agria baja en grasa;low-fat sour cream;1.8
+sweet chili sauce;salsa de chile dulce;sweet chili sauce;22.0
+tortillas;tortillas;tortillas;30.0
+légumes verts;verduras verdes;green vegetables;1.0
+piment serrano;chile serrano;serrano chile;0.5
+flocons de piment;hojuelas de chile;chili flakes;3.0
+orge perlé;cebada perlada;pearl barley;25.0
+carotte râpée;zanahoria rallada;grated carrot;3.0
+pommes Golden Delicious;manzanas Golden Delicious;Golden Delicious apples;7.0
+haricots de Lima;habas de Lima;lima beans;7.0
+sirop doré;sirope dorado;golden syrup;75.0
+beurre de cacahuète crunchy;mantequilla de cacahuete crujiente;crunchy peanut butter;9.0
+lait de coco léger;leche de coco ligera;light coconut milk;2.5
+piments chipotle;chiles chipotle;chipotle peppers;1.0
+ail semoule;ajo granulado;granulated garlic;6.0
+bananes plantain;plátanos macho;plantains;32.0
+jus de grenade;zumo de granada;pomegranate juice;20.0
+Rotel(le) (tomates en dés aux piments);pasta rotelle;rotelle pasta;2.0
+châtaignes;castañas;chestnuts;15.0
+tamari;tamari;tamari;1.0
+céréales de riz;cereal de arroz;rice cereal;72.0
+ignames;ñames;yams;23.0
+levure instantanée;levadura instantánea;instant yeast;8.0
+piment thaï;chile tailandés;Thai chile;0.5
+laitue romaine;lechuga romana;romaine lettuce;0.4
+romaine;romana;romaine;0.4
+huile de carthame;aceite de cártamo;safflower oil;0.0
+persil frais finement haché;perejil fresco finamente picado;finely chopped fresh parsley;0.5
+laitue de Boston;lechuga Boston;Boston lettuce;0.4
+piment de la Jamaïque;pimienta de Jamaica;allspice;6.0
+half-and-half (crème légère moitié lait moitié crème);mezcla leche-nata (half & half);half-and-half;3.5
+edamame;edamame;edamame;6.0
+germes de luzerne;brotes de alfalfa;alfalfa sprouts;0.5
+copeaux de noix de coco;hojuelas de coco;coconut flakes;6.5
+spaghettis de courgettes;espaguetis de calabacín;zucchini noodles;1.0
+pommes de terre fingerling;patatas fingerling;fingerling potatoes;15.0
+farine sans gluten;harina sin gluten;gluten-free flour;60.0
+piments poblano;chiles poblano;poblano peppers;1.0
+coquilles pour tacos;tortillas crujientes para tacos;taco shells;45.0
+salsa verde;salsa verde;salsa verde;2.0
+feuilles de moutarde;hojas de mostaza;mustard greens;0.5
+pommes Gala;manzanas Gala;Gala apples;12.0
+basilic thaï;albahaca tailandesa;Thai basil;0.5
+nouilles soba;fideos soba;soba noodles;18.0
+pâte à tarte;masa para tarta;pie dough;45.0
+tomates anciennes;tomates tradicionales (heirloom);heirloom tomatoes;0.8
+mélasse de grenade;melaza de granada;pomegranate molasses;55.0
+farine d’avoine;harina de avena;oat flour;40.0
+fromage cotija;cotija;cotija;0.2
+miso blanc;miso blanco;white miso;2.0
+quinoa cuit;quinoa cocida;cooked quinoa;15.0
+udon;udon;udon noodles;22.0
+flocons de piment rouge concassé;hojuelas de chile rojo triturado;crushed red pepper flakes;3.0
+pommes de terre Yukon Gold;patata Yukon Gold;Yukon Gold potatoes;18.0
+piment serrano;serrano;serrano chile;0.5
+pico de gallo;pico de gallo;pico de gallo;1.5
+frites;patatas fritas;French fries;45.0
+bouillon de légumes pauvre en sodium;caldo de verduras bajo en sodio;low-sodium vegetable broth;0.5
+pain multigrains;pan multicereales;multigrain bread;32.0
+farine de pois chiches;harina de garbanzo;gram flour (chickpea flour);35.0
+riz à risotto;arroz para risotto;risotto rice;28.0
+poblano;poblano;poblano pepper;1.0
+Cornichon doux;pepinillo dulce;sweet pickle;40.0
+branche de thym frais;ramita de tomillo fresco;fresh thyme sprig;0.0
+seitan;seitán;seitan;10.0
+betterave dorées;remolachas doradas;golden beets;6.0
+bucatini;bucatini;bucatini;15.0
+brown rice syrup;sirope de arroz integral;brown rice syrup;30.0
+eau de coco;agua de coco;coconut water;4.0
+pains complets;panecillos integrales;whole grain buns;30.0
+mozzarella allégée râpée;mozzarella rallada baja en grasa;shredded low-fat mozzarella cheese;4.0
+riz étuvé;arroz vaporizado;parboiled rice;32.0
+sel et poivre noir moulu;sal y pimienta negra molida;salt & ground black pepper;0.0
+maldon sea salt;sal marina de Maldon;Maldon sea salt;0.0
+alaea sea salt;sal marina alaea;Alaea sea salt;0.0
+whole wheat macaroni;macarrones de trigo integral;whole wheat macaroni;38.0
+pale ale;pale ale;pale ale;6.0
+black salt;sal negra;black salt (kala namak);0.0
+riz cuit;arroz cocido;cooked rice;25.0
+panko breadcrumbs;pan rallado panko;panko breadcrumbs;42.0
+delicata squash;calabaza delicata;delicata squash;8.0
+lavender buds;flores de lavanda;lavender buds;0.0
+kimchi;kimchi;kimchi;2.0
+egg pasta;pasta al huevo;egg pasta;20.0
+graines de cumin noir;semillas de comino negro;black cumin seeds;2.0
+canned chipotles;chipotles enlatados;canned chipotles;1.0
+sugar snap;tirabeques;sugar snap peas;2.5
+jackfruit;yaca (jackfruit);jackfruit;12.0
+tarte à la citrouille ;tarta de calabaza;pumpkin pie;55.0
+ground flaxseed;linaza molida;ground flaxseed;0.6
+earth balance whipped spread;crema batida Earth Balance;Earth Balance whipped spread;0.0
+psyllium;psyllium;psyllium;0.0
+tomatillo salsa;salsa de tomatillo;tomatillo salsa;2.0
+fresno chile;chile Fresno;Fresno chile;0.5
+cacao powder;cacao en polvo;cocoa powder (unsweetened);4.0
+yellow potatoes;patatas amarillas;yellow potatoes;14.0
+green figs;higos verdes;green figs;6.0
+feuille de nori;hoja de nori;nori sheet;0.0
+canned beans;frijoles enlatados;canned beans;6.0
+dukkah;dukkah;dukkah;8.0
+tofu sour cream;crema agria de tofu;tofu sour cream;3.0
+brown rice pasta;pasta de arroz integral;brown rice pasta;15.0
+flaxseed meal;harina de linaza;flaxseed meal;1.5
+dillweed sprigs;ramitas de eneldo;dill sprigs;0.6
+garlic stems;tallos de ajo;garlic stems/scapes;0.5
+red potato;patata roja;red potato;14.0
+pomelo;pomelo;pomelo;8.0
+low-fat extra-firm tofu;tofu extra firme bajo en grasa;low-fat extra-firm tofu;6.0
+pear nectar;néctar de pera;pear nectar;5.0
+unsweetened low-fat coconut milk;leche de coco baja en grasa sin azúcar;unsweetened low-fat coconut milk;0.0
+kala namak;kala namak (sal negra india);kala namak (black salt);3.0
+snap pea;guisante tirabeque;snap pea;3.0
+champignon brun de paris;champiñón marrón de París (cremini);brown cremini mushroom;0.0
+medjool date;dátil Medjool;Medjool date;0.0
+liquid aminos;aminoácidos líquidos;liquid aminos;7.0
+makrut;hoja de lima makrut;makrut lime leaves;25.0
+kelp granules;gránulos de kelp;kelp granules;0.0
+low sodium chickpeas;garbanzos bajos en sodio;low-sodium chickpeas;7.0
+quinoa pasta;pasta de quinoa;quinoa pasta;25.0
+Vegan Condensed Milk;leche condensada vegana;vegan condensed milk;55.0
+Veganaise;veganaise (mayonesa vegana);Vegenaise;1.0
+nouille de riz cuite;fideo de arroz cocido;cooked rice noodles;22.0
+Chile Lime Dressing;aderezo chile-lima;Chile Lime Dressing;8.0
+Flax egg;huevo de linaza;flax egg;1.0
+radis pastèque;rábano sandía;watermelon radish;1.0
+Vegan butter;mantequilla vegana;vegan butter;0.0
+Canned black-eyed peas;frijoles carita enlatados;canned black-eyed peas;6.0
+Vegan bacon;beicon vegano;vegan bacon;2.0
+sesame cracker;galleta salada de sésamo;sesame cracker;30.0
+Canned kidney beans;frijoles rojos enlatados;canned kidney beans;6.0
+canned black beans;frijoles negros enlatados;canned black beans;7.0
+White Soy Miso;miso de soja blanco;white soy miso;3.0
+haricots cannellini en conserve;alubias cannellini en conserva;canned cannellini beans;6.0
+Crescent roll dough;masa de croissant (crescent) enlatada;crescent roll dough;45.0
+Chipotle powder;polvo de chipotle;chipotle powder;2.0
+Vegan Parmesan;parmesano vegano;vegan Parmesan;1.0
+Vegan Mozarella;mozzarella vegana;vegan mozzarella;3.0
+olives marinées;aceitunas marinadas;marinated olives;3.0
+Spelt Pasta;pasta de espelta;spelt pasta;1.0
+sauge fraîche;salvia fresca;fresh sage;32.0
+Salt flakes;escamas de sal;salt flakes;0.0
+Baby kale;kale baby;baby kale;0.0
+Vegan Yogurt;yogur vegano;vegan yogurt;0.5
+Frozen Artichokes;alcachofas congeladas;frozen artichokes;1.0
+Vegan chorizo;chorizo vegano;vegan chorizo;3.0
+Smoke flavoring;aromatizante ahumado;smoke flavoring;0.0
+Frozen artichoke hearts;corazones de alcachofa congelados;frozen artichoke hearts;1.0
+haricot rouge cuit;alubia roja cocida;cooked red beans;0.0
+Vegan Sour Cream;crema agria vegana;vegan sour cream;6.0
+haricot cuit;alubia cocida;cooked beans;2.0
+Basmati brown rice;arroz basmati integral;brown basmati rice;1.0
+Cooked black beans;frijoles negros cocidos;cooked black beans;6.0
+Almond yogurt;yogur de almendra;almond yogurt;7.0
+Garlic oil;aceite de ajo;garlic oil;6.0
+Chicken substitute;sustituto de pollo;chicken substitute;32.0
+Vegan beef;carne vegana;vegan beef;7.0
+Gluten Free Spaghetti;espaguetis sin gluten;gluten-free spaghetti;6.0
+Sweetheart cabbage;col hispi (sweetheart);sweetheart cabbage (Hispi);3.0
+Vegan protein powder;proteína vegana en polvo;vegan protein powder;1.0
+Honey Crip Apple;manzana Honeycrisp;Honeycrisp apple;0.0
+pépites de chocolat végan;chispas de chocolate veganas;vegan chocolate chips;8.0
+cookie aux éclats de gingembre;galleta con trocitos de jengibre;ginger chunk cookie;1.0
+Vegan Whipped Cream;nata montada vegana;vegan whipped cream;30.0
+Chipotle ranch sauce;salsa ranch con chipotle;chipotle ranch sauce;28.0
+Dried Chives;cebollino seco;dried chives;2.0
+Pound cake extract;extracto de bizcocho;pound cake extract;55.0
+abricot;albaricoque;apricot;0.0
+abricot sec;albaricoque seco;dried apricot;6.0
+agar-agar;agar-agar;agar-agar;25.0
+agneau;cordero;lamb;0.0
+ail;ajo;garlic;4.0
+airelle;arándano rojo;lingonberry;35.0
+amande;almendra;almond;45.0
+Amaretto;Amaretto;amaretto;0.0
+ananas;piña;pineapple;7.0
+anchois;anchoas;anchovies;0.0
+andouillette;andouillette;andouillette sausage;0.0
+aneth;eneldo;dill;0.5
+anguille;anguila;eel;0.0
+anis;anís;anise;1.0
+appenzeller;appenzeller;Appenzeller cheese;0.2
+Armagnac;Armagnac;Armagnac;0.0
+artichaut;alcachofa;artichoke;1.5
+asperge blanche;espárrago blanco;white asparagus;1.0
+aubergine;berenjena;eggplant;1.5
+autruche;avestruz;ostrich;0.0
+avocat;aguacate;avocado;2.0
+avoine;avena;oats;0.0
+bacon;bacon;bacon;9.0
+badiane;anís estrellado;star anise;1.0
+bagel;bagel;bagel;48.0
+baguette;baguette;baguette;52.0
+banane;plátano;banana;12.0
+bar;lubina;sea bass;0.0
+basilic;albahaca;basil;0.5
+batavia;lechuga batavia;Batavia lettuce;0.5
+bavette;bavette (vacío);flank steak;0.0
+beaufort;beaufort;Beaufort cheese;0.2
+béchamel;bechamel;béchamel sauce;6.0
+betterave;remolacha;beetroot;6.0
+beurre;mantequilla;butter;6.0
+beurre demi-sel;mantequilla semisalada;semi-salted butter;0.0
+beurre salé;mantequilla salada;salted butter;5.0
+bicarbonate alimentaire;bicarbonato alimentario;baking soda;32.0
+bière;cerveza;beer;45.0
+biscotte;biscote;rusks/toast biscuits;0.0
+biscuit;galleta;biscuit/cookie;0.0
+blanc d'œuf;clara de huevo;egg white;30.0
+blanc de poulet;pechuga de pollo;chicken breast;0.0
+blé;trigo;wheat;0.5
+blette;acelga;Swiss chard;0.2
+fromage bleu;queso azul;blue cheese;35.0
+blini;blinis;blini;8.0
+bolognaise;boloñesa;Bolognese sauce;6.0
+boudin blanc;morcilla blanca;white pudding sausage;0.0
+boudin noir;morcilla;blood sausage;0.5
+boudoir;soletilla;ladyfinger;35.0
+bouillon;caldo;stock/broth;0.5
+bouillon de légumes;caldo de verduras;vegetable stock;0.5
+bouillon de poisson;caldo de pescado;fish stock;0.5
+bouillon de volaille;caldo de ave;chicken stock;0.5
+boulgour;bulgur;bulgur;12.0
+bouquet garni;bouquet garni;bouquet garni;0.0
+brandade de morue;brandada de bacalao;brandade (salt cod purée);2.0
+bresaola;bresaola;bresaola;0.0
+brie;brie;brie;0.2
+brioche;brioche;brioche;45.0
+brochet;lucio;pike;0.0
+bœuf haché;carne de res picada;ground beef;0.0
+cabillaud;bacalao;cod;0.0
+cacahuète;cacahuete;peanut;0.0
+cacao;cacao;cocoa;4.0
+café;café;coffee;4.0
+caille;codorniz;quail;0.0
+calamar;calamar;squid;0.0
+calvados;calvados;Calvados;0.0
+canard;pato;duck;0.0
+cancoillotte;cancoillotte;cancoillotte cheese;1.0
+canette;pato joven (canette);duckling;22.0
+cannelle;canela;cinnamon;0.2
+cannelloni;canelones;cannelloni;0.5
+cantal;cantal;Cantal cheese;65.0
+câpre;alcaparra;capers;60.0
+carambar;carambar;Carambar caramel candy;1.0
+caramel;caramelo;caramel;3.0
+cardamome;cardamomo;cardamom;0.5
+carotte;zanahoria;carrot;6.0
+fane de carotte;hojas de zanahoria;carrot tops;0.5
+carré d'agneau;costillar de cordero;rack of lamb;0.0
+cassis;grosella negra (cassis);blackcurrant;8.0
+cassonade;azúcar moreno (cassonade);brown sugar;64.0
+caviar;caviar;caviar;0.0
+branche de céleri;rama de apio;celery stalk;0.5
+céleri-rave;apionabo;celeriac (celery root);3.0
+cèpe;boletus;porcini mushroom;1.5
+cèpe séché;boletus seco;dried porcini;6.0
+céréales petit déjeuner sucré;cereales de desayuno industriales;breakfast cereal;72.0
+cerfeuil;perifollo;chervil;0.5
+cerise;cereza;cherry;8.0
+chair à saucisse;carne de salchicha;sausage meat;0.0
+chair de crabe;carne de cangrejo;crab meat;0.0
+champagne;champán;Champagne;0.0
+champignon;seta/hongo;mushroom;0.0
+champignon de Paris;champiñón de París;button mushroom;1.0
+champignon shiitaké;shiitake;shiitake mushroom;1.0
+chapelure;pan rallado;breadcrumbs;1.0
+chapon;capón;capon;42.0
+cheddar;cheddar;cheddar;0.0
+bûche de chèvre;rulo de cabra;goat cheese log;0.5
+chèvre frais;queso de cabra fresco;fresh goat cheese;0.2
+chevreau;cabrito;kid (young goat);0.0
+chevreuil;corzo/venado;venison (roe deer);0.0
+chicorée;achicoria;chicory;2.0
+chipolata;salchicha chipolata;chipolata sausage;1.0
+chocolat;chocolate;chocolate;35.0
+chocolat au lait;chocolate con leche;milk chocolate;45.0
+chocolat blanc;chocolate blanco;white chocolate;55.0
+chocolat noir;chocolate negro;dark chocolate;25.0
+chocolat praliné;chocolate praliné;praline chocolate;45.0
+chorizo;chorizo;chorizo;1.0
+chou;col;cabbage;1.0
+chou blanc;col blanca;white cabbage;1.0
+chou chinois;col china (pak choi);Chinese cabbage (Napa);1.0
+chou de Bruxelles;coles de Bruselas;Brussels sprouts;2.0
+chou romanesco;romanesco;Romanesco cauliflower;1.5
+chou rouge;col lombarda;red cabbage;1.0
+chou-fleur;coliflor;cauliflower;1.0
+chouchen;chouchen (hidromiel bretón);chouchen (Breton mead);6.0
+choucroute;chucrut;sauerkraut;1.0
+ciabatta;ciabatta;ciabatta;45.0
+ciboulette;cebollino;chives;0.5
+cidre;sidra;cider;6.0
+citron jaune;limón amarillo;lemon;2.0
+citron vert;lima;lime;2.0
+citronnelle;hierba limón (lemongrass);lemongrass;0.5
+citrouille;calabaza;pumpkin;8.0
+clémentine;clementina;clementine;7.0
+clou de girofle;clavo de olor;clove;4.0
+cochon de lait;cochinillo;suckling pig;0.0
+haricot plat;judía plana;flat green bean;1.5
+Cognac;coñac;Cognac;0.0
+coing;membrillo;quince;5.0
+Cointreau;Cointreau;Cointreau;0.0
+colombo;colombo (mezcla de especias);Colombo curry powder;1.0
+comté;comté;Comté cheese;0.5
+concombre;pepino;cucumber;60.0
+confiture;mermelada;jam;58.0
+confiture de framboises;mermelada de frambuesa;raspberry jam;0.0
+congre;congrio;conger eel;0.0
+coppa;coppa;coppa;0.0
+coq;gallo;rooster;0.0
+coque;berberecho;cockle;0.0
+coquillettes;pasta “coquillettes”;small elbow pasta (coquillettes);1.0
+coriandre;cilantro;coriander (cilantro);0
+corn flakes;corn flakes;corn flakes;1.0
+cornichon;pepinillo;gherkin;0.0
+côte de veau;chuleta de ternera;veal chop;4.0
+coulis de framboises;coulis de frambuesa;raspberry coulis;8.0
+courge butternut;calabaza butternut;butternut squash;6.0
+courgette;calabacín;zucchini (courgette);1.0
+couscous;cuscús;couscous;12.0
+crabe;cangrejo;crab;0.0
+crackers;crackers (galletas saladas);crackers;30.0
+crème anglaise;crema inglesa;custard (crème anglaise);15.0
+crème chantilly;nata montada (chantilly);whipped cream;25.0
+crème de coco;crema de coco;coconut cream;6.0
+crème de marron;crema de castaña;chestnut cream;4.0
+crème fraîche épaisse;crème fraîche espesa;thick crème fraîche;3.0
+crème pâtissière;crema pastelera;pastry cream;35.0
+crêpe;crepe;crêpe;1.0
+crêpes dentelles;crêpes dentelle;gavotte lace crêpes;30.0
+cresson;berro;watercress;10.0
+crevette;gamba/camarón;shrimp;5.0
+crevette grise;quisquilla;brown shrimp;40.0
+crottin de chavignol;crottin de Chavignol;Crottin de Chavignol;1.0
+crozet;crozet (pasta saboyana);crozet pasta;15.0
+cuisse de canard;muslo de pato;duck leg;0.0
+cuisse de poulet;muslo de pollo;chicken leg;0.0
+curcuma;cúrcuma;tumeric (turmeric);2.0
+curry;curry;curry powder;3.0
+cœur d'artichaut;corazón de alcachofa;artichoke heart;1.5
+cœur de palmier;corazón de palmito;palm heart;1.0
+datte;dátil;date;70.0
+daurade;dorada;sea bream (dorade);0.0
+dinde;pavo;turkey;0.0
+eau;agua;water;0.0
+eau de rose;agua de rosas;rose water;0.0
+eau gazeuse;agua con gas;sparkling water;0.0
+eau-de-vie;aguardiente;eau-de-vie (fruit brandy);0.0
+échalote;chalota;shallot;3.0
+écrevisse;cangrejo de río;crayfish;0.0
+emmental;emmental;Emmental cheese;0.2
+endive;endibia;endive (Belgian endive);1.0
+épaule d'agneau;paletilla de cordero;lamb shoulder;0.5
+épeautre;espelta;spelt;0.0
+épices;especias;spices;20.0
+épinard;espinaca;spinach;3.0
+escargot;caracol;snail;1.0
+espadon;pez espada;swordfish;0.0
+estragon;estragón;tarragon;0.0
+extrait de vanille;extracto de vainilla;vanilla extract;0.0
+faisan;faisán;pheasant;0.5
+faisselle;requesón (faisselle);faisselle (fresh curd cheese);0.0
+farce;relleno;stuffing;2.0
+farfalles;farfalle;farfalle;6.0
+farine de blé;harina de trigo;wheat flour;22.0
+farine de châtaigne;harina de castaña;chestnut flour;70.0
+farine de maïs;harina de maíz;corn flour (cornmeal);45.0
+farine de petit épeautre;harina de espelta pequeña;small spelt flour;60.0
+farine de riz;harina de arroz;rice flour;55.0
+farine de riz complet;harina de arroz integral;brown rice flour;65.0
+farine de sarrasin;harina de alforfón/trigo sarraceno;buckwheat flour;60.0
+faux-filet;entrecot;sirloin steak;55.0
+fenouil;hinojo;fennel;0.0
+feta;feta;feta;2.0
+fetuccini;fettuccine;fettuccine;0.5
+feuille d'algues;hoja de alga;seaweed sheet;30.0
+feuille de basilic;hoja de albahaca;basil leaf;0.0
+feuille de chêne;lechuga hoja de roble;oak leaf lettuce;0.5
+feuille de riz;oblea de arroz;rice paper;0.5
+feuille de serpolet;hoja de serpol;wild thyme leaf;0.5
+fève;haba;fava bean (broad bean);6.0
+ficelle;pan “ficelle”;string bread (ficelle);45.0
+figue;higo;fig;12.0
+filet de bœuf;solomillo de ternera;beef tenderloin;0.0
+filet de porc;solomillo de cerdo;pork tenderloin;0.0
+filet mignon de porc;filete mignon de cerdo;pork fillet mignon;0.0
+flageolets;alubias flageolet;flageolet beans;7.0
+flétan;halibut;halibut;0.0
+fleur de courgette;flor de calabacín;zucchini blossom;1.0
+fleur de sel;flor de sal;fleur de sel;0.0
+flocon d'avoine;copos de avena;rolled oats;55.0
+foie de veau;hígado de ternera;calf’s liver;0.0
+foie de volaille;hígado de ave;chicken liver;0.0
+foie gras;foie gras;foie gras;0.0
+fourme d'ambert;fourme d’Ambert;Fourme d’Ambert;0.2
+fraise;fresa;strawberry;6.0
+framboise;frambuesa;raspberry;3.0
+fromage;queso;cheese;1.0
+fromage à raclette;queso para raclette;raclette cheese;0.5
+fromage blanc;queso fresco batido (fromage blanc);fromage blanc (fresh cheese);2.0
+fromage de brebis;queso de oveja;sheep’s cheese;2.0
+fruits de votre choix;frutas a elección;fruits of your choice;8.0
+fruit de la passion;maracuyá;passion fruit;1.0
+fruit rouge;fruto rojo;red berries;0.0
+fumet de poisson;fumet de pescado;fish fumet (stock);12.0
+galette de sarrasin;galette de trigo sarraceno;buckwheat galette;20.0
+galette de riz;torta/galleta de arroz;rice cake;0.0
+gambas;gambas;king prawns;2.0
+garam masala;garam masala;garam masala;6.0
+gariguette;fresa gariguette;Gariguette strawberry;1.0
+gélatine;gelatina;gelatin;55.0
+gelée;gelatina/jalea;jelly;65.0
+gelée de groseilles;gelée de grosella;redcurrant jelly;0.0
+gésier;molledo (gésier);gizzard;1.0
+gigot d'agneau;pierna de cordero;leg of lamb;6.0
+gin;ginebra;gin;0.0
+gingembre;jengibre;ginger;0.0
+gingembre en poudre;jengibre en polvo;ground ginger;0.5
+girolle;rebozuelo (girolle);chanterelle;3.0
+glace à la vanille;helado de vainilla;vanilla ice cream;3.0
+glaçon;hielo;ice cube;0.2
+gnocchi;ñoquis;gnocchi;35.0
+baie de goji;bayas de goji;goji berry;0.0
+gombo;okra (gombo);okra;40.0
+gorgonzola;gorgonzola;gorgonzola;25.0
+gouda;gouda;gouda;6.0
+gousse de vanille;vaina de vainilla;vanilla pod;2.0
+graine de chia;semilla de chía;chia seeds;1.0
+graines de fenouil;semillas de hinojo;fennel seeds;2.0
+graines de lin;semillas de lino;flax seeds;1.0
+graines de moutarde;semillas de mostaza;mustard seeds;2.0
+graines de pavot;semillas de amapola;poppy seeds;3.0
+graines de sésame blond;semillas de sésamo rubio;blond sesame seeds;2.0
+graines de sésame noir;semillas de sésamo negro;black sesame seeds;2.0
+graines germées;brotes germinados;sprouted seeds;1.0
+Grand Marnier;Grand Marnier;Grand Marnier;12.0
+grenade;granada;pomegranate;6.0
+grenadine;granadina;grenadine;65.0
+cerise griotte;guinda ácida (griotte);morello cherry (griotte);8.0
+gros sel;sal gorda;coarse salt;0.0
+groseille;grosella roja;redcurrant;6.0
+gruyère;gruyère;Gruyère;0.2
+guacamole;guacamole;guacamole;2.0
+haddock;eglefino ahumado (haddock);smoked haddock;0.0
+hareng;arenque;herring;0.0
+hareng fumé;arenque ahumado;smoked herring;0.0
+haricots;judías/alubias;beans;7.0
+haricot blanc;alubia blanca;white bean;7.0
+haricots rouges;alubias rojas;red beans;8.0
+haricots verts;judías verdes;green beans;1.0
+harissa;harissa;harissa;3.0
+herbes fraîches;hierbas frescas;fresh herbs;0.5
+homard;bogavante;lobster;0.0
+huile d'arachide;aceite de cacahuete;peanut oil;0.0
+huile d'olive;aceite de oliva;olive oil;0.0
+huile de coco;aceite de coco;coconut oil;0.0
+huile de noisette;aceite de avellana;hazelnut oil;0.0
+huile de sésame;aceite de sésamo;sesame oil;0.0
+huile de tournesol;aceite de girasol;sunflower oil;0.0
+huître;ostra;oyster;0.0
+jambon;jamón;ham;0.0
+jambon cru;jamón curado;cured ham;0.0
+jambon de parme;jamón de Parma;Parma ham;0.0
+jambonneau;codillo;ham hock;0.0
+jaune d'œuf;yema de huevo;egg yolk;0.5
+jeune pousse;brotes tiernos;baby greens;0.5
+jus d'ananas;zumo de piña;pineapple juice;22.0
+jus d'orange;zumo de naranja;orange juice;20.0
+jus de citron;zumo de limón;lemon juice;2.0
+jus de citron vert;zumo de lima;lime juice;2.0
+jus de mangue;zumo de mango;mango juice;25.0
+jus de pamplemousse rose;zumo de pomelo rosa;pink grapefruit juice;15.0
+jus de pomme;zumo de manzana;apple juice;20.0
+jus de tomate;zumo de tomate;tomato juice;5.0
+kaki;kaki;persimmon;15.0
+kirsch;kirsch;kirsch;0.0
+kiwi;kiwi;kiwi;7.0
+lait;leche;milk;5.0
+lait concentré;leche condensada;condensed milk;55.0
+lait d'amande;leche de almendra;almond milk;1.0
+lait de coco;leche de coco;coconut milk;3.0
+lait de soja;leche de soja;soy milk;4.0
+lait demi-écrémé;leche semidesnatada;semi-skimmed milk;5.0
+lait entier;leche entera;whole milk;6.0
+laitue;lechuga;lettuce;0.5
+langouste;langosta;spiny lobster;0.0
+langoustine;langostino;scampi (langoustine);0.0
+lapin;conejo;rabbit;0.0
+lard;tocino;fatback/pork fat;0.0
+lardon;trozos de panceta;bacon lardons;0.0
+lasagnes;lasaña;lasagna sheets;35.0
+laurier;laurel;bay leaf;0.5
+légumes;verduras;vegetables;5.0
+lentille;lenteja;lentil;7.0
+lentilles corail;lentejas coral;red lentils;10.0
+levure chimique;levadura química;baking powder;0.0
+lieu;abadejo;pollock;0.0
+lièvre;liebre;hare;0.0
+limonade;limonada;lemonade;40.0
+linguines;lingüini;linguine;30.0
+liqueur;licor;liqueur;20.0
+litchi;litchi;lychee;0.0
+lotte;rape;monkfish;0.0
+loup;lubina;sea bass (European);0.0
+macaron;macaron;macaron;65.0
+macaroni;macarrones;macaroni;30.0
+mâche;canónigos;lamb’s lettuce (mâche);0.0
+magret de canard;magret de pato;duck magret (breast);0.0
+maigre;corvina (maigre);meagre (fish);0.0
+maïs;maíz;corn;22.0
+mandarine;mandarina;mandarin;8.0
+mangue;mango;mango;15.0
+maquereau;caballa;mackerel;0.0
+maroilles;maroilles;Maroilles cheese;0.2
+marron;castaña;chestnut;30.0
+marsala;marsala;Marsala wine;0.0
+martini;martini;Martini;0.0
+mascarpone;mascarpone;mascarpone;1.0
+matcha;matcha;matcha;1.0
+mayonnaise;mayonesa;mayonnaise;0.5
+melon;melón;melon;10.0
+menthe;menta;mint;0.5
+merguez;merguez;merguez sausage;0.0
+meringue;merengue;meringue;70.0
+merlan;merlán;whiting;0.0
+merlu;merluza;hake;0.0
+mérou;mero;grouper;0.0
+mesclun;mezclum;mesclun;0.5
+miel;miel;honey;55.0
+millet;mijo;millet;18.0
+mimolette;mimolette;Mimolette cheese;0.2
+mirabelle;mirabel;mirabelle plum;12.0
+miso;miso;miso;2.0
+morille;colmenilla;morel;1.0
+mortadelle;mortadela;mortadella;0.0
+moules;mejillones;mussels;1.0
+moutarde;mostaza;mustard;0.0
+mouton;cordero (carne de);mutton;0.0
+muesli;muesli;muesli;35.0
+munster;munster;Munster cheese;0.2
+mûre;mora;blackberry;4.0
+muscade râpée;nuez moscada rallada;grated nutmeg;1.0
+muscat;moscatel;Muscat wine;6.0
+myrtille;arándano;blueberry;5.0
+navet;nabo;turnip;2.0
+nectarine;nectarina;nectarine;10.0
+Noilly Prat;Noilly Prat;Noilly Prat;0.0
+noisette;avellana;hazelnut;2.0
+noix;nuez;walnut;2.0
+noix de cajou;anacardo;cashew nut;9.0
+noix de coco;coco;coconut;4.0
+noix de coco râpée;coco rallado;shredded coconut;6.0
+noix de pécan;nuez pacana;pecan;1.0
+noix de Saint-Jacques;vieira;scallops;0.5
+nougatine;nougatina;nougatine;65.0
+nouille;fideo;noodles;30.0
+nouille de riz;fideo de arroz;rice noodles;22.0
+nuoc-mâm;nuoc-mâm (salsa de pescado vietnamita);fish sauce (nuoc-mam);0.5
+oie;oca;goose;0.0
+oignon;cebolla;onion;5.0
+oignon blanc;cebolla blanca;white onion;5.0
+oignon doux;cebolla dulce;sweet onion;6.0
+oignon rouge;cebolla roja;red onion;6.0
+oignon grelot;chalota perla;pearl onion;5.0
+oignon nouveau;cebolleta;spring onion/scallion;4.0
+olive;aceituna;olive;1.0
+olive noire;aceituna negra;black olive;1.0
+olive verte;aceituna verde;green olive;1.0
+orange;naranja;orange;10.0
+orange confite;naranja confitada;candied orange peel;55.0
+orange sanguine;naranja sanguina;blood orange;9.0
+orge;cebada;barley;20.0
+orgeat;orgeat (jarabe de almendra);orgeat syrup;65.0
+origan;orégano;oregano;1.0
+os à moelle;hueso de tuétano;marrow bone;0.0
+pain;pan;bread;35.0
+pain complet;pan integral;wholemeal bread;30.0
+pain d'épices;pan de especias;gingerbread;55.0
+pain de campagne;pan campesino;country bread;35.0
+pain de mie;pan de molde;sandwich bread;45.0
+pain pita;pan de pita;pita bread;40.0
+palourde;almeja;clam;0
+pamplemousse;pomelo;grapefruit;5.0
+panais;chirivía;parsnip;12.0
+pancetta;panceta italiana;pancetta;0.0
+papaye;papaya;papaya;7.0
+paprika;pimentón (paprika);paprika;2.0
+parmesan;parmesano;Parmesan cheese;0.2
+pastèque;sandía;watermelon;4.0
+patate douce;batata/boniato;sweet potato;12.0
+pâte à brioche;masa de brioche;brioche dough;45.0
+pâte à pizza;masa de pizza;pizza dough;40.0
+pâte brisée;masa quebrada;shortcrust pastry;40.0
+pâte d'amande;mazapán;marzipan;55.0
+pâte feuilletée;masa de hojaldre;puff pastry;45.0
+pâte fraîche;pasta fresca;fresh pasta;30.0
+pâte sablée;masa sablé;sweet shortcrust pastry;50.0
+pâtes;pasta;pasta;30.0
+pâtisson;pattypan (calabaza pâtisson);pattison squash (pattypan);2.0
+pêche;melocotón;peach;6.0
+pennes;penne;penne;30.0
+pépite de chocolat;pepitas de chocolate;chocolate chips;45.0
+persil;perejil;parsley;0.5
+Persil plat;perejil plano;flat-leaf parsley;0.5
+pesto;pesto;pesto;4.0
+pétale de rose;pétalo de rosa;rose petal;0.0
+petit beurre;galleta petit-beurre;petit-beurre biscuit;45.0
+petit-suisse;petit-suisse;petit-suisse cheese;2.0
+petits pois;guisantes;green peas;7.0
+picodon;picodon;Picodon cheese;0.2
+pied de veau;manita/pata de ternera;calf’s foot;0.0
+pigeon;paloma;pigeon;0.0
+pignon de pin;piñón;pine nut;2.0
+piment;chile/guindilla;chilli pepper;0.5
+piment d’espelette;piment d’Espelette;Espelette pepper;0.5
+piment oiseau;chile ojo de pájaro;bird’s eye chilli;0.5
+piment vert;chile verde;green chilli;0.5
+pintade;guinea (pintada);guinea fowl;0.0
+pistache;pistacho;pistachio;2.0
+pistou;pistou;pistou (basil purée);3.0
+pleurote;seta de ostra;oyster mushroom;1.0
+poire;pera;pear;10.0
+poireau;puerro;leek;3.0
+pois cassé;guisante partido;split peas;10.0
+pois chiche;garbanzo;chickpea;8.0
+pois gourmand;tirmabeques (guisante tirabeque);snow pea/sugar snap (mangetout);2.0
+poisson;pescado;fish;0.0
+poitrine de porc;pecho de cerdo;pork belly;0.0
+poitrine fumée;panceta ahumada;smoked bacon/pork belly;0.0
+poivre;pimienta;pepper;0.5
+poivron;pimiento;bell pepper;4.0
+poivron jaune;pimiento amarillo;yellow bell pepper;4.0
+poivron rouge;pimiento rojo;red bell pepper;4.0
+poivron vert;pimiento verde;green bell pepper;4.0
+polenta;polenta;polenta;22.0
+pomme;manzana;apple;10.0
+pomme de terre;patata;potato;15.0
+pomme golden;manzana Golden;Golden apple;12.0
+porc;cerdo;pork;0.0
+porto;Oporto;Port wine;0.0
+potimarron;potimarrón;red kuri squash (potimarron);12.0
+potiron;calabaza (potirón);pumpkin (winter squash);6.0
+poudre d'amande;almendra molida;ground almonds (almond meal);4.0
+poudre de noisettes;avellana molida;ground hazelnuts;3.0
+poule;gallina;hen;0.0
+poulet;pollo;chicken;0.0
+poulpe;pulpo;octopus;0.0
+pousses d'épinards;brotes de espinaca;baby spinach;0.5
+pralines;praliné;pralines;60.0
+provolone;provolone;provolone;0.2
+prune;ciruela;plum;10.0
+pruneau;ciruela pasa;prune (dried plum);25.0
+purée d'amande;puré de almendra;almond butter;4.0
+purée de tomates;puré de tomate;tomato purée;3.0
+quatre-épices;mezcla cuatro especias;four-spice mix;2.0
+quenelle;quenelle;quenelle;15.0
+quinoa;quinoa;quinoa;14.0
+radis;rábano;radish;1.0
+radis noir;rábano negro;black radish;1.0
+raie;raya;skate (fish);0.0
+raifort;rábano picante (raiforte);horseradish;2.0
+raisin;uva;grape;12.0
+raisin blanc;uva blanca;white grape;12.0
+raisins secs;pasas;raisins;50.0
+ratatouille;ratatouille;ratatouille;4.0
+raviole;ravioles;ravioles (tiny stuffed pasta);25.0
+ravioli;ravioli;ravioli;25.0
+reblochon;reblochon;Reblochon cheese;0.2
+rhubarbe;ruibarbo;rhubarb;2.0
+rhum;ron;rum;0.0
+rhum blanc;ron blanco;white rum;0.0
+ricotta;ricota;ricotta;2.0
+rillette;rillettes;rillettes;0.0
+riz;arroz;rice;28.0
+riz arborio;arroz arborio;Arborio rice;30.0
+riz basmati;arroz basmati;basmati rice;18.0
+riz rond;arroz redondo;short-grain rice;30.0
+romarin;romero;rosemary;0.5
+roquefort;roquefort;Roquefort cheese;0.2
+roquette;rúcula;arugula (rocket);0.5
+rose;rosa;rose;0.0
+rouget;salmonete;red mullet;0.0
+rumsteck;rumsteak;rump steak;0.0
+rutabaga;nabo sueco (rutabaga);rutabaga/swede;6.0
+sablé;galleta sablé;sablé biscuit;55.0
+safran;azafrán;saffron;0.0
+saindoux;manteca de cerdo;lard;0.0
+Saint-Nectaire;Saint-Nectaire;Saint-Nectaire cheese;0.2
+saké;sake;sake;7.0
+salsifi;salsifí;salsify;6.0
+sanglier;jabalí;wild boar;0.0
+sardine;sardina;sardine;0.0
+sardine à l'huile;sardina en aceite;sardine in oil;0.0
+sauce barbecue;salsa barbacoa;barbecue sauce;25.0
+sauce de poisson;salsa de pescado;fish sauce;0.5
+sauce miso;salsa de miso;miso sauce;5.0
+sauce soja;salsa de soja;soy sauce;1.0
+sauce tomate;salsa de tomate;tomato sauce;5.0
+sauce Worcestershire;salsa Worcestershire;Worcestershire sauce;10.0
+saucisse;salchicha;sausage;1.0
+saucisse de Francfort;salchicha tipo Frankfurt;frankfurter;1.0
+saucisson;salchichón;dry sausage (saucisson);0.5
+sauge;salvia;sage;0.5
+saumon;salmón;salmon;0.0
+saumon fumé;salmón ahumado;smoked salmon;0.0
+sauternes;sauternes;Sauternes wine;15.0
+seiche;seppia/jibia (sepia);cuttlefish;0.0
+sel;sal;salt;0.0
+sel de guérande;sal de Guérande;Guérande sea salt;0.0
+semoule de blé;sémola de trigo;wheat semolina;30.0
+semoule de maïs;sémola de maíz;cornmeal;25.0
+sirop;jarabe/sirope;syrup;65.0
+sirop d'agave;sirope de agave;agave syrup;60.0
+sirop d'érable;sirope de arce;maple syrup;55.0
+skyr;skyr;skyr;3.0
+sole;lenguado;sole;0.0
+sorbet;sorbete;sorbet;30.0
+spaghettis;espaguetis;spaghetti;30.0
+spéculoos;speculoos;speculoos;55.0
+steak;filete;steak;0.0
+steak haché de bœuf;carne de res picada (hamburguesa);ground beef patty;0.0
+sucre;azúcar;sugar;100.0
+sucre glace;azúcar glas;icing sugar (powdered sugar);100.0
+sucre roux;azúcar moreno;light brown sugar;100.0
+sucre vanillé;azúcar vainillado;vanilla sugar;95.0
+sumac;súmac;sumac;1.0
+surimi;surimi;surimi;8.0
+tabasco;tabasco;Tabasco;0.5
+tacos;tacos;tacos;30.0
+tagliatelles;tagliatelle;tagliatelle;30.0
+tahini;tahini (pasta de sésamo);tahini;3.0
+tapenade;tapenade;tapenade;2.0
+tapioca;tapioca;tapioca;85.0
+tequila;tequila;tequila;0.0
+thé;té;tea;0.0
+thé noir (infusé);té negro (infusionado);black tea (brewed);0.0
+thé vert (infusé);té verde (infusionado);green tea (brewed);0.0
+thon;atún;tuna;0.0
+thon blanc;atún blanco;albacore tuna;0.0
+thym;tomillo;thyme;0.5
+thym citron;tomillo limón;lemon thyme;0.5
+tofu;tofu;tofu;2.0
+tomate;tomate;tomato;2.0
+tomate cerise;tomate cherry;cherry tomato;1.5
+tomate séchée;tomate seco;sun-dried tomato;15.0
+tomme;tomme;tomme cheese;0.2
+topinambour;topinambur;Jerusalem artichoke;12.0
+tournedos;tournedó;tournedos (beef filet);0.0
+tripes;callos;tripe;0.0
+triple sec;triple seco;triple sec;30.0
+truffe;trufa;truffle;0.5
+truite;trucha;trout;0.0
+vanille;vainilla;vanilla;1.0
+veau;ternera;veal;0.0
+vermicelle;fideo fino (vermicelli);vermicelli;30.0
+vermicelle de riz;vermicelli de arroz;rice vermicelli;35.0
+vermouth blanc;vermut blanco;white vermouth;0.0
+viande;carne;meat;0.0
+viande de boeuf;carne de res;beef;0.0
+vin blanc;vino blanco;white wine;0.0
+vin rouge;vino tinto;red wine;0.0
+vinaigre;vinagre;vinegar;0.0
+vinaigre balsamique;vinagre balsámico;balsamic vinegar;5.0
+vinaigre de cidre;vinagre de sidra;cider vinegar;1.0
+vinaigre de framboises;vinagre de frambuesa;raspberry vinegar;5.0
+vinaigre de riz;vinagre de arroz;rice vinegar;2.0
+vinaigre de vin rouge;vinagre de vino tinto;red wine vinegar;0.0
+violette;violeta;violet;0.0
+vodka;vodka;vodka;0.0
+volaille;ave (carne de);poultry;0.0
+wakamé;wakame;wakame;0.5
+whisky;whisky;whisky;0.0
+yaourt grec;yogur griego;Greek yogurt;3.0
+yaourt nature;yogur natural;plain yogurt;4.0
+zeste d'orange;ralladura de naranja;orange zest;5.0
+zeste de citron;ralladura de limón;lemon zest;2.0
+œuf;huevo;egg;0.0
+sauce tartare;salsa tártara;tartar sauce;5.0
+filet de tilapia;filete de tilapia;tilapia fillet;0.0
+piment de cayenne;chile de cayena;cayenne pepper;1.0
+aile de poulet;ala de pollo;chicken wing;0.0
+herbes de provence;hierbas provenzales;herbes de Provence;0.5
+bison;bisonte;bison;0.0
+huile de colza;aceite de colza;rapeseed oil (canola);0.0
+bouillon de poulet;caldo de pollo;chicken broth;0.0
+fécule de maïs;fécula de maíz;cornstarch;0.5
+bouillon de boeuf;caldo de carne (res);beef broth;0.0
+concentré de tomates;concentrado de tomate;tomato paste;70.0
+margarine;margarina;margarine;0.5
+marjolaine;mejorana;marjoram;5.0
+piment rouge;chile rojo;red chilli;1.0
+graines de tournesol;semillas de girasol;sunflower seeds;0.5
+graines de sésame;semillas de sésamo;sesame seeds;2.0
+porc haché;carne de cerdo picada;ground pork;2.0
+lard fumé;tocino ahumado;smoked bacon;0.0
+veau haché;carne de ternera picada;ground veal;0.0
+graines de coriandre;semillas de cilantro;coriander seeds;0.0
+cumin en poudre;comino molido;ground cumin;2.0
+pain à hamburger;pan de hamburguesa;hamburger bun;1.0
+doré;dorado (pescado);haddock (smoked) / pollack (context-dependent);3.0
+palette de bœuf;paleta de res;beef shoulder (palette);2.0
+papier d'aluminium;papel de aluminio;aluminium foil;0.0
+papier sulfurisé;papel de horno (sulfurizado);parchment paper;0.0
+tomate italienne;tomate italiana;Italian plum tomato;0.0
+légumineuses;legumbres;legumes (pulses);0.0
+haricots noirs;frijoles negros;black beans;0.0
+poulet haché;carne de pollo picada;ground chicken;2.0
+nouilles chinoises;fideos chinos;Chinese noodles;8.0
+sauce hoisin;salsa hoisin;hoisin sauce;7.0
+papier absorbant;papel absorbente;paper towel;0.0
+cannelle en poudre;canela en polvo;ground cinnamon;30.0
+thé sarriette;té de ajedrea;savory tea (herbal);0.0
+chou de savoie;col de Savoie;Savoy cabbage;1.0
+côtelette de porc;chuleta de cerdo;pork chop;0.0
+champignon portobello;champiñón portobello;portobello mushroom;1.0
+sherry;jerez (sherry);sherry;0.0
+brochettes;brochetas;skewers;2.0
+côtelette de veau;chuleta de ternera;veal chop;0.0
+gelée de pommes;gelatina/gelea de manzana;apple jelly;60.0
+vinaigre blanc;vinagre blanco;white vinegar;0.0
+côtelette d'agneau;chuleta de cordero;lamb chop;0.0
+mélange de légumes surgelés;mix de verduras congeladas;frozen mixed vegetables;5.0
+intérieur de ronde de boeuf;redondo de res (interior);inside round beef (top round);0.0
+contrefilet de boeuf;solomillo/entrecot de res;sirloin (striploin);0.0
+bok choy;bok choy (pak choi);bok choy;1.0
+sauce aux huîtres;salsa de ostras;oyster sauce;6.0
+pâte d'anchois;pasta de anchoa;anchovy paste;1.0
+scarole;escarola;escarole;0.5
+dinde hachée;carne de pavo picada;ground turkey;0.0
+tortilla de maïs;tortilla de maíz;corn tortilla;30.0
+pilon de poulet;muslo inferior de pollo (pilon);chicken drumstick;0.0
+oignon vert;cebolleta/cebolla de verdeo;green onion (scallion);3.0
+ketchup;kétchup;ketchup;20.0
+vinaigrette;vinagreta;vinaigrette;5.0
+pecorino romano;pecorino romano;Pecorino Romano;0.2
+spaghettinis;spaghettinis;spaghettini;30.0
+gruyère rapé;gruyère rallado;grated Gruyère;0.2
+saucisse de Strasbourg;salchicha de Estrasburgo;frankfurter (Strasbourg sausage);0.0
+sauce rosée;salsa rosa;rosé sauce (tomato-cream);6.0
+darne de thon;rodaja de atún;tuna steak (cutlet);5.0
+tempeh;tempeh;tempeh;0.0
+ras el hanout;ras el hanout;ras el hanout;10.0
+jambon fumé;jamón ahumado;smoked ham;0.0
+emporte-pièce;cortapastas;cookie cutter;0.0
+parmesan en copeaux;parmesano en lascas;Parmesan shavings;0.2
+fromage ail et fines herbes;queso con ajo y finas hierbas;garlic & herb cream cheese;2.0
+toast rond;tostada redonda;round toast;30.0
+tortilla de blé;tortilla de trigo;wheat tortilla;35.0
+vol-au-vent;vol-au-vent;vol-au-vent case;45.0
+escalope de veau;escalope de ternera;veal escalope;0.0
+yaourt de soja;yogur de soja;soy yogurt;4.0
+beurre de châtaigne;mantequilla/crema de castaña;chestnut butter;6.0
+pain brioché;pan brioche;brioche bread;0.0
+lait en poudre;leche en polvo;milk powder;1.0
+huile de noix;aceite de nuez;walnut oil;0.0
+sauce brune;salsa marrón (demi-glace);brown sauce;10.0
+saucisse de poulet;salchicha de pollo;chicken sausage;6.0
+epaule de porc;paleta de cerdo;pork shoulder;0.0
+tzatziki;tzatziki;tzatziki;3.0
+crème fraîche liquide;crème fraîche líquida;pouring crème fraîche (liquid);2.0
+eau de fleur d'oranger;agua de azahar;orange blossom water;0.0
+graines de courge;semillas de calabaza;pumpkin seeds;2.0
+levure maltée;levadura de cerveza inactiva (nutricional);nutritional yeast;6.0
+chou vert;col verde;green cabbage;1.0
+huile de truffe;aceite de trufa;truffle oil;0.0
+mahi-mahi;mahi-mahi (dorado);mahi-mahi;0.0
+gressin;colín/galleta de pan (grissini);breadstick (grissini);35.0
+cure-dents;palillos;toothpick;0.0
+filet mignon de boeuf;solomillo de res;beef tenderloin (filet mignon);0.0
+champignon noirs;setas negras (oreja de Judas);wood ear mushrooms;1.0
+crème de vinaigre balsamique;crema de vinagre balsámico;balsamic cream;20.0
+yaourt bulgare;yogur búlgaro;Bulgarian yogurt;4.0
+yaourt brassé;yogur batido;stirred yogurt;4.0
+escalope de poulet;escalope de pollo;chicken escalope (cutlet);0.0
+fonds d'artichauts;fondos de alcachofa;artichoke bottoms;3.0
+Viandox;Viandox (concentrado);Viandox seasoning sauce;1.0
+Saint-Marcellin;Saint-Marcellin;Saint-Marcellin cheese;0.2
+emmental rapé;emmental rallado;grated Emmental;0.2
+tomate confite;tomate confitado;sun-dried tomato in oil (confit);10.0
+asperge verte;espárrago verde;green asparagus;1.0
+poisson blanc;pescado blanco;white fish;0.0
+tomate concassée;tomate triturado (concassé);crushed tomatoes;2.0
+épaule de mouton;paleta de cordero;mutton shoulder;0.0
+ris de veau;mollejas de ternera;sweetbreads (veal);0.0
+petits poissons variés;pescaditos surtidos;assorted small fish;0.0
+poitrine d'agneau;pecho de cordero;lamb breast;0.0
+confiture de figues;mermelada de higos;fig jam;60.0
+agneau haché;carne de cordero picada;ground lamb;0.0
+graines de cumin;semillas de comino;cumin seeds;2.0
+oeufs de saumon;huevas de salmón;salmon roe;0.0
+farce de porc;relleno de cerdo;pork stuffing;2.0
+farce de lapin;relleno de conejo;rabbit stuffing;2.0
+compote de pommes;compota de manzana;applesauce;10.0
+échine de porc;aguja de cerdo;pork collar/neck;0.0
+foie de porc;hígado de cerdo;pork liver;0.0
+crème de cassis;licor/crema de cassis;crème de cassis;45.0
+coulis de fruits rouges;coulis de frutos rojos;red berry coulis;20.0
+fruit de saison;fruta de temporada;seasonal fruit;10.0
+poire au sirop;pera en almíbar;pear in syrup;35.0
+galette au beurre;galleta/mantecada bretona;butter galette biscuit;55.0
+épices à pain d'épices;especias para pan de especias;gingerbread spice mix;2.0
+fève de galette des rois;haba/sorpresa de roscón;kings-cake charm (fève);0.0
+sucre en gros grains;azúcar granulado grueso (perlado);pearl sugar;100.0
+vanille en poudre;vainilla en polvo;vanilla powder;1.0
+chocolat en poudre;cacao/chocolate en polvo;cocoa powder (sweetened);50.0
+yaourt à boire;yogur para beber;drinking yogurt;6.0
+caissette en papier;cápsula de papel (magdalenas);paper baking cup;0.0
+fruits confits;frutas confitadas;candied fruit;55.0
+confiture de cerises noires;mermelada de cereza negra;black cherry jam;65.0
+purée de potiron;puré de calabaza (potirón);pumpkin purée;7.5
+coulis de tomates;coulis de tomate;tomato coulis;3.0
+rillettes de saumon;rillettes de salmón;salmon rillettes;2.0
+pince de tourteau;pinza de buey de mar;brown crab claw;0.0
+ramequins;ramequines;ramekins;2.0
+julienne de légumes;juliana de verduras;vegetable julienne;8.0
+purée de petits pois;puré de guisantes;mashed peas;20.0
+chutney de mangue;chutney de mango;mango chutney;0.5
+fines herbes;finas hierbas;fines herbs;0.5
+cube de bouillon de volaille;cubo de caldo de ave;chicken bouillon cube;0.5
+cube de bouillon de légumes;cubo de caldo de verduras;vegetable bouillon cube;0.5
+fève de tonka;haba tonka;tonka bean;1.0
+vinaigre de noix;vinagre de nuez;walnut vinegar;2.0
+poivron confit;pimiento confitado;roasted marinated bell pepper;8.0
+vinaigre de Xérès;vinagre de Jerez;sherry vinegar;1.0
+macédoine de légumes;macedonia de verduras;mixed vegetable macédoine;5.0
+courge spaghetti;calabaza espagueti;spaghetti squash;6.0
+lanière de porc;tiras de cerdo;pork strips;0.0
+stracchino;stracchino;Stracchino cheese;12.0
+pate de tamarin;pasta de tamarindo;tamarind paste;30.0
+pâtes courtes;pasta corta;short pasta;35.0
+rapini;grelo/brócoli rabe;rapini (broccoli rabe);1.0
+sauce demi-glace;demi-glace;demi-glace sauce;10.0
+chou-rave;colinabo;kohlrabi;2.0
+chicorée rouge;radicchio;radicchio (red chicory);5.0
+canneberge séchée;arándano rojo seco (cranberry);dried cranberry;2.0
+graines de luzerne;semillas de alfalfa;alfalfa seeds;0.5
+sauce au poulet;salsa de pollo;chicken sauce;45.0
+cervelas;salchicha cervelas;cervelat sausage;1.0
+épaule de veau;paleta de ternera;veal shoulder;0.0
+bolet séché;bolet seco;dried bolete;0.0
+pain de seigle;pan de centeno;rye bread;2.0
+germes de blé;germen de trigo;wheat germ;0.0
+piment doux;pimentón dulce;sweet paprika (mild chilli);0.0
+tortis;pasta tortis;twisted pasta (tortis);0.0
+Guinness;Guinness;Guinness;0.5
+surimi rapé;surimi rallado;grated surimi;30.0
+zeste de citron vert;ralladura de lima;lime zest;20.0
+carvi;alcaravea;caraway;1.0
+mélasse;melaza;molasses;30.0
+étamine;estameña (gasa fina);cheesecloth (straining cloth);6.0
+crème de tartre;cremor tártaro;cream of tartar;8.0
+sauce au chocolat;salsa de chocolate;chocolate sauce;5.0
+sauce aux canneberges;salsa de arándanos rojos;cranberry sauce;30.0
+gomme de xanthane;goma xantana;xanthan gum;5.0
+farine de riz blanc;harina de arroz blanco;white rice flour;2.0
+farine de riz brun;harina de arroz integral;brown rice flour;60.0
+farine de quinoa;harina de quinoa;quinoa flour;45.0
+farine de tapioca;harina de tapioca;tapioca flour;85.0
+farine de millet;harina de mijo;millet flour;55.0
+marante;maranta (arrurruz);arrowroot (maranta);70.0
+pêche au sirop;melocotón en almíbar;peach in syrup;35.0
+biscuit de savoie;bizcocho de Saboya;Savoie sponge cake;45.0
+épices pour tajine;especias para tajín;tagine spice mix;2.0
+baie de genièvre;enebro (baya);juniper berry;1.0
+rôti de porc;asado de cerdo;roast pork;0.0
+hachis de veau;carne de ternera picada;ground veal;0.0
+fond de veau;fondo de ternera;veal stock concentrate;0.5
+baie rose;pimienta rosa;pink peppercorn;1.0
+oreo;Oreo;Oreo cookie;70.0
+café instantané;café instantáneo;instant coffee;2.0
+purée de pommes;puré de manzana;apple purée;10.0
+fruits au sirop;fruta en almíbar;fruit in syrup;25.0
+alcool de poire;licor/aguardiente de pera;pear brandy;30.0
+jus de clémentine;zumo de clementina;clementine juice;18.0
+fond de volaille;fondo de ave;chicken stock concentrate;0.5
+sucre de canne;azúcar de caña;cane sugar;100.0
+glace à la fraise;helado de fresa;strawberry ice cream;55.0
+limoncello;limoncello;limoncello;0.0
+crème de citron;crema de limón;lemon curd/cream;25.0
+shnaps;schnapps;schnapps;0.0
+jus de fruits exotiques;zumo de frutas exóticas;exotic fruit juice;22.0
+madeleine;magdalena (madeleine);madeleine;45.0
+huile essentielle de citron;aceite esencial de limón;lemon essential oil;0.0
+colorant;colorante;food coloring;0.0
+biscuit rose;bizcocho rosa de Reims;pink biscuit (Reims);45.0
+marron glacé;castaña confitada;candied chestnut;60.0
+moule circulaire;aro/molde circular;ring mold;0.0
+abricots en conserve;albaricoques en conserva;canned apricots;25.0
+confiture d'abricots;mermelada de albaricoque;apricot jam;55.0
+prune rouge;ciruela roja;red plum;10.0
+prune jaune;ciruela amarilla;yellow plum;10.0
+coulis de fraises;coulis de fresa;strawberry coulis;20.0
+sucre gélifiant;azúcar gelificante;jam sugar (gelling sugar);100.0
+extrait d'amande;extracto de almendra;almond extract;1.0
+soupe de pois;sopa de guisantes;pea soup;15.0
+fusili;fusilli;fusilli;30.0
+jarret d'agneau;jarete de cordero;lamb shank;0.0
+jarret de veau;jarete de ternera;veal shank;0.0
+fécule de pomme de terre;fécula de patata;potato starch;90.0
+palette de veau;paleta de ternera;veal shoulder blade (paletta);0.0
+jarret de porc;jarete de cerdo;pork shank;0.0
+vermouth rouge;vermut rojo;red vermouth;0.0
+substitut d'œuf;sustituto de huevo;egg replacer;5.0
+viande chevaline;carne de caballo;horse meat;0.0
+encre de seiche;tinta de sepia;cuttlefish ink (squid ink);0.0
+Base d'ail et de persil;base de ajo y perejil;garlic-parsley base;2.0
+pieuvre;pulpo;octopus;0.0
+rôti de veau;asado de ternera;roast veal;0.0
+roti de dinde;asado de pavo;roast turkey;0.0
+roti de boeuf;asado de res;roast beef;0.0
+sauce sriracha;salsa sriracha;sriracha sauce;8.0
+saucisse végétarienne;salchicha vegetariana;vegetarian sausage;6.0
+saucisse italienne;salchicha italiana;Italian sausage;1.0
+graines de céleri;semillas de apio;celery seeds;2.0
+légumes de saison;verduras de temporada;seasonal vegetables;5.0
+côte de porc;chuleta de cerdo;pork rib chop;0.0
+crozet au sarrazin;crozet de trigo sarraceno;buckwheat crozet pasta;30.0
+bahrat;baharat (mezcla de especias);baharat spice mix;2.0
+cœur de céleri;corazón de apio;celery heart;1.0
+cuisse de canard confite;muslo de pato confitado;duck leg confit;0.0
+escalope de dinde;escalope de pavo;turkey escalope;0.0
+carpe;carpa;carp;0.0
+pâte à crêpes;masa de crêpes;crêpe batter;40.0
+bébé carotte;zanahoria baby;baby carrot;5.0
+racine de persil;raíz de perejil;parsley root;5.0
+riz brun;arroz integral;brown rice;18.0
+riz au jasmin;arroz jazmín;jasmine rice;22.0
+sauce aux haricots noirs et à l'ail;salsa de frijol negro y ajo;black bean & garlic sauce;6.0
+pâté végétarien;paté vegetal;vegetarian pâté;4.0
+cube de bouillon de boeuf;cubo de caldo de res;beef bouillon cube;0.5
+carpaccio de boeuf;carpaccio de res;beef carpaccio;0.0
+cosses de petits pois;vainas de guisantes;pea pods;2.0
+porc fumé;cerdo ahumado;smoked pork;0.0
+graisse d'oie;grasa de oca;goose fat;0.0
+cuisse de dinde;muslo de pavo;turkey thigh;0.0
+saucisse de Montbéliard;salchicha de Montbéliard;Montbéliard sausage;0.0
+pâte de tandoori;pasta tandoori;tandoori paste;0.0
+bonite;bonito;bonito;1.0
+racine de manioc;raíz de yuca;cassava root;0.0
+foie de génisse;hígado de ternera joven;heifer liver;30.0
+aiguillette de canard;solomillo de pato (aiguillette);duck tenderloin;0.0
+bisque de homard;bisque de bogavante;lobster bisque;0.0
+pâte de curry;pasta de curry;curry paste;0.0
+épices indiennes;especias indias;Indian spice mix;5.0
+riz thai;arroz tailandés;Thai rice;6.0
+Pois verts cassés;guisantes verdes partidos;split green peas;2.0
+mahleb;mahalab (mahlepi);mahlep (mahlab) spice;18.0
+côte d'agneau;chuleta de cordero;lamb chop;10.0
+kangourou;canguro;kangaroo;1.0
+Malibu;Malibu;Malibu rum;0.0
+Épices pour paëlla;especias para paella;paella spice mix;0.0
+pâté de foie de volaille;paté de hígado de ave;chicken liver pâté;0.0
+cuisse de lapin;muslo de conejo;rabbit leg;0.0
+aiguillette de poulet;solomillo de pollo;chicken tenderloin;0.0
+Marrons en boîte;castañas en conserva;canned chestnuts;30.0
+Sauce pad-thaï;salsa pad thai;pad thai sauce;25.0
+cube de bouillon de poisson;cubo de caldo de pescado;fish bouillon cube;0.5
+cœur de laitue;corazón de lechuga;lettuce heart;0.5
+Coca-cola;Coca-Cola;Coca-Cola;65.0
+farine de lupin;harina de altramuz;lupin flour;5.0
+farine de pois chiche;harina de garbanzo;chickpea flour;35.0
+sarrasin;trigo sarraceno (alforfón);buckwheat;20.0
+courge;calabaza;squash;6.0
+betterave rouge crue;remolacha roja cruda;raw red beet;6.0
+Ortie;ortiga;nettle;1.0
+crépinette;crépinette (salchicha en redaño);crépinette sausage;0.0
+haché végétal;carne vegetal picada;plant-based ground “meat”;0.0
+poivre vert;pimienta verde;green peppercorn;0.5
+Oeuf de caille;huevo de codorniz;quail egg;0.0
+Viande des grisons;carne de los Grisones (Bündnerfleisch);Bündnerfleisch (air-dried beef);0.0
+Coquelet;coquelete (pollo tomatero);spring chicken (poussin);0.0
+lait d'avoine;leche de avena;oat milk;8.0
+Huile de pépins de raisin;aceite de pepitas de uva;grapeseed oil;0.0
+burrata;burrata;burrata;2.0
+fromage râpé;queso rallado;grated cheese;0.2
+cacao non sucré;cacao sin azúcar;unsweetened cocoa powder;4.0
+levure de boulanger fraîche;levadura fresca de panadería;fresh baker’s yeast;3.0
+jus de raisin;zumo de uva;grape juice;65.0
+joue de boeuf;carrillera de res;beef cheek;0.0
+pois chiche en boîte;garbanzos en conserva;canned chickpeas;7.0
+purée de noisette;crema/puré de avellana;hazelnut butter;4.0
+praliné amandes noisettes;praliné de almendra y avellana;almond-hazelnut praline;45.0
+saucisse de Toulouse;salchicha de Toulouse;Toulouse sausage;1.0
+saucisse de Morteau;salchicha de Morteau;Morteau sausage;1.0
+haut de cuisse de poulet;contramuslo de pollo;chicken thigh (upper);0.0
+bretzel ;pretzel;pretzel;55.0
+sirop de framboise;jarabe de frambuesa;raspberry syrup;65.0
+Conchiglionis;conchiglioni;conchiglioni;30.0
+Pousses de bambou;brotes de bambú;bamboo shoots;1.0
+Neufchatel;Neufchâtel;Neufchâtel cheese;0.2
+Foie de bœuf;hígado de res;beef liver;0.0
+crème de riz;crema de arroz;rice cream;20.0
+Côtes levées de porc;costillas de cerdo;pork spare ribs;0.0
+crème d'amande;crema de almendra;almond cream;10.0
+queue de boeuf;rabo de res;oxtail;0.0
+poitrine de boeuf;pecho de res;beef brisket;0.0
+épices mexicaines;especias mexicanas;Mexican spice mix;1.0
+pied de porc;pata de cerdo;pig’s trotter;0.0
+onglet de boeuf;solomillo de res (hampe/onglet);hanger steak;0.0
+poivrons piquillo;pimientos del piquillo;piquillo peppers;4.0
+pâte de pistache;pasta de pistacho;pistachio paste;30.0
+mousse de canard;mouse de pato;duck mousse;1.0
+ail en poudre;ajo en polvo;garlic powder;6.0
+oignon en poudre;cebolla en polvo;onion powder;20.0
+farine de blé complète;harina de trigo integral;whole wheat flour;45.0
+sucre cristal;azúcar cristal;granulated sugar;100.0
+truite fumée;trucha ahumada;smoked trout;0.0
+sauce chili;salsa chili;chili sauce;16.0
+poivre de Sichuan;pimienta de Sichuán;Sichuan pepper;1.0
+épices chinoises;cinco especias chinas;Chinese five-spice (or Chinese spices);2.0
+gomasio;gomasio;gomasio;3.0
+pain nordique;pan nórdico;Nordic bread;25.0
+amandes effilées;almendra laminada;flaked almonds;2.0
+paupiettes de veau;rollitos de ternera (paupiettes);veal paupiettes;0.0
+farine de manioc;harina de yuca/mandioca;cassava flour;70.0
+knackis;salchichas tipo knacki;frankfurter mini sausages (knacki);1.0
+fraise tagada;fresa “Tagada”;Tagada strawberry candy;90.0
+fleurs de sureau;flores de saúco;elderflowers;1.0
+joue de porc;carrillera de cerdo;pork cheek;0.0
+sucre perle;azúcar perlado;pearl sugar;100.0
+cœur de canard;corazón de pato;duck heart;0.0
+côte de bœuf;chuleton de res;bone-in ribeye (côte de bœuf);0.0
+sel rose d'Himalaya;sal rosa del Himalaya;Himalayan pink salt;0.0
+riz rouge;arroz rojo;red rice;20.0
+rognon de veau;riñón de ternera;veal kidney;0.0
+jujubes;azufaifas;jujubes;12.0
+Salicorne;salicornia;samphire (glasswort);1.0
+petit épeautre;espelta pequeña (escanda menor);small spelt (einkorn);15.0
+Fane de radis;hojas de rábano;radish greens;0.5
+Magret de canard tranché;magret de pato en lonchas;sliced duck breast (magret);0.0
+pâte à tartiner;crema para untar;chocolate hazelnut spread;45.0
+wrap;wrap;wrap;30.0
+pousses de haricot mungo;brotes de soja (mung);mung bean sprouts;1.0
+pappardelles;pappardelle;pappardelle;30.0
+patidou;calabaza patidou (sweet dumpling);sweet dumpling squash (patidou);5.0
+houmous;hummus;hummus;10.0
+pissenlit;diente de león;dandelion greens;0.5
+amarante;amaranto;amaranth;20.0
+sucrine du berry;lechuga sucrine du Berry;“sucrine du berry” lettuce;0.5
+bolognaise végétale;boloñesa vegetal;plant-based Bolognese;25.0
+sirop d'amidon;jarabe de almidón;starch syrup;70.0
+sirop de maïs;jarabe de maíz;corn syrup;65.0
+sirop de canne à sucre;jarabe de caña de azúcar;cane syrup;70.0
+sirop de datte;jarabe de dátil;date syrup;60.0
+sirop de glucose;jarabe de glucosa;glucose syrup;70.0
+sucre de coco;azúcar de coco;coconut sugar;45.0
+pousses de soja;brotes de soja;soybean sprouts;1.0
+lait de riz;leche de arroz;rice milk;20.0
+pâtes de konjac;pasta de konjac;konjac noodles;0.0
+sauce satay;salsa satay;satay sauce;8.0
+banane séchée;plátano seco;dried banana;55.0
+mûre blanche;mora blanca;white mulberry;15.0
+Épine-vinette;agracejo (azufaifa roja);barberry;8.0
+pavé de sarrasin;bloque/pan de trigo sarraceno;buckwheat slab bread;6.0
+gomme de guar;goma guar;guar gum;30.0
+farine de patate douce;harina de batata;sweet potato flour;0.0
+poudre de baobab;polvo de baobab;baobab powder;60.0
+feuilles de bissap;hojas de bissap (hibisco);hibiscus leaves;10.0
+taboulé;tabulé;tabbouleh;0.0
+soupe de butternut;sopa de calabaza butternut;butternut soup;8.0
+soupe de carotte;sopa de zanahoria;carrot soup;2.0
+soupe de fenouil;sopa de hinojo;fennel soup;10.0
+taboulé aux épices;tabulé especiado;spiced tabbouleh;12.0
+taboulé courgette;tabulé de calabacín;zucchini tabbouleh;10.0
+soupe de courgette;sopa de calabacín;zucchini soup;10.0
+kasha curry;kasha al curry;buckwheat groats curry;12.0
+kasha pois cassés;kasha de guisantes partidos;split pea kasha;8.0
+kasha sarrasin torréfié;kasha de trigo sarraceno tostado;toasted buckwheat (kasha);15.0
+pavé de sarrasin ail;pan/bloque de trigo sarraceno al ajo;buckwheat loaf with garlic;18.0
+pavé de sarrasin champignon;pan/bloque de trigo sarraceno con champiñones;buckwheat loaf with mushrooms;20.0
+pavé de sarrasin tomate;pan/bloque de trigo sarraceno con tomate;buckwheat loaf with tomato;18.0
+sarrasin décortiqué;trigo sarraceno pelado;hulled buckwheat;18.0
+soupe thaie;sopa tailandesa;Thai soup;18.0
+soupe curry indien;sopa de curry indio;Indian curry soup;6.0
+pad thai;pad thai;pad thai;22.0
+ramen riz demi complet;ramen de arroz semicompleto;half-brown rice ramen;28.0
+riz thai complet;arroz tailandés integral;wholegrain Thai rice;18.0
+riz thai rouge;arroz tailandés rojo;red Thai rice;20.0
+galette pois chiche;crepe/torta de garbanzo;chickpea pancake (socca);15.0
+lentille verte;lenteja verde;green lentil;7.0
+quinoa orientale ;quinoa estilo oriental;Oriental-style quinoa;14.0
+risotto champignons;risotto de setas/champiñones;mushroom risotto;18.0
+riz basmati noix de coco;arroz basmati con coco;coconut basmati rice;22.0
+riz basmati gingembre;arroz basmati con jengibre;ginger basmati rice;20.0
+riz pois cassés;arroz con guisantes partidos;split pea rice;18.0
+riz olives;arroz con aceitunas;olive rice;16.0
+soupe potimarron;sopa de potimarrón;red kuri squash soup;5.0
+soupe de poisson;sopa de pescado;fish soup;2.0
+bento quinoa;bento de quinoa;quinoa bento;14.0
+bento riz basmati;bento de arroz basmati;basmati rice bento;22.0
+cocotte de fenouil;cazuela de hinojo;braised fennel casserole;3.0
+courgette crème curry;calabacín con crema y curry;zucchini with curry cream;6.0
+fondant patates douces;fondant de boniato/batata;sweet potato fondant;18.0
+soupe légumes;sopa de verduras;vegetable soup;5.0
+légumes couscous;verduras para cuscús;couscous vegetables;6.0
+légumes indienne;verduras estilo indio;Indian-style vegetables;6.0
+ravioli aubergines;raviolis de berenjena;eggplant ravioli;22.0
+ravioli chèvre;raviolis de queso de cabra;goat-cheese ravioli;24.0
+soupe au pistou;sopa al pistou;pistou soup;4.0
+soupe lentilles blondes;sopa de lentejas rubias;blond lentil soup;7.0
+soupe lentilles corails;sopa de lentejas coral;red lentil soup;10.0
+soupe butternut;sopa de calabaza butternut;;6.0
+soupe de betterave;sopa de remolacha;beet soup;5.0
+soupe de tomate;sopa de tomate;tomato soup;5.0
+soupe marocaine;sopa marroquí (harira);Moroccan soup;6.0
+soupe provençale;sopa provenzal;Provençal soup;6.0
+soupe thai;sopa thai;Thai soup;6.0
+taboulé petit épeautre;tabulé de espelta pequeña;small-spelt tabbouleh (einkorn);5.0
+tajine d'aubergines;tajín de berenjenas;eggplant tagine;18.0
+risotto mijoté;risotto guisado;slow-cooked risotto;8.0
+bol de riz;bol de arroz;rice bowl;28.0
+mijoté pois chiches;guiso de garbanzos;stewed chickpeas;8.0
+colombo bio;colombo ecológico;organic Colombo curry;10.0
+tajine bio;tajín ecológico;organic tagine;12.0
+tikka masala;tikka masala;tikka masala;12.0
+wrap carotte;wrap de zanahoria;carrot wrap;30.0
+wrap épinard;wrap de espinaca;spinach wrap;30.0
+canneberge;arándano rojo (cranberry);cranberry;6.0
+ poudre d'açaï;polvo de açaí;açaí powder;2.0
+flocons de soja;copos de soja;soy flakes;15.0
+huile de cameline;aceite de camelina;camelina oil;0.0
+pâtes de pois chiches;pasta de garbanzo;chickpea pasta;30.0
+Tempeh Sauce Cacahuettes;tempeh salsa de cacahuete;tempeh with peanut sauce;10.0
+fromage végétal en tranches;queso vegetal en lonchas;sliced plant-based cheese;2.0
+huile de chanvre;aceite de cáñamo;hemp oil;0.0
+Poudre à lever;polvo de hornear;raising powder;0.0
+levain;masa madre;sourdough starter;10.0
+mix veggie;mezcla vegetal (mix veggie);veggie mix;5.0
+sauce thailandaise;salsa tailandesa;Thai sauce;20.0
+tagliatelles de riz;tagliatelle de arroz;rice tagliatelle;30.0
+marinade tandoori;marinado tandoori;tandoori marinade;5.0
+sticky rice;arroz glutinoso (sticky);sticky rice;30.0
+marinade teriyaki;marinado teriyaki;teriyaki marinade;25.0
+tagliatelles à l'encre de seiche;tagliatelle con tinta de sepia;squid-ink tagliatelle;28.0
+églefin;eglefino;haddock;0.0
+confit de canard;confit de pato;duck confit;0.0
+tortellini;tortellini;tortellini;30.0
+Filet de daurade;filete de dorada;sea bream fillet;0.0
+purée de noix de cajou;crema/puré de anacardo;cashew butter (purée);4.0
+Mozzarella de bufflonne;mozzarella de búfala;buffalo mozzarella;0.2
+beurre de cacahuète;mantequilla de cacahuete;peanut butter;9.0
+graines de chanvre;semillas de cáñamo;hemp seeds;1.0
+fideua;fideuá;fideuà;35.0
+pâte de haricot noir;pasta de frijol negro;black bean paste;20.0
+betterave cuite;remolacha cocida;cooked beetroot;6.0
+dashi;dashi;dashi;0.5
+Laitue de mer;lechuga de mar (alga);sea lettuce;0.5
+ail des ours;ajo de oso;wild garlic (ramsons);0.5
+graisse de coco;grasa de coco;coconut fat;0.0
+fleur de lavande;flor de lavanda;lavender flower;0.0
+Ghee;ghee (mantequilla clarificada);ghee (clarified butter);0.0
+poudre de coriandre;cilantro molido;ground coriander;1.0
+noix du brésil;nuez de Brasil;Brazil nut;2.0
+spiruline;espirulina;spirulina;1.0
+poivre rose;pimienta rosa;pink peppercorn;0.5
+olives kalamata;aceitunas kalamata;Kalamata olives;1.0
+thé noir (poudre);té negro en polvo;black tea (powder);2.0
+thé vert (poudre);té verde en polvo;green tea (powder);2.0
+lasagne fraîche;lasaña fresca;fresh lasagna sheets;30.0
+spaghettis complets;espaguetis integrales;whole-wheat spaghetti;35.0
+thon en boîte;atún en lata;canned tuna;0.0
+vin de shaoxing;vino de Shaoxing;Shaoxing wine;0.0
+kéfir de lait;kéfir de leche;milk kefir;4.0
+jarret de boeuf;jarete de res;beef shank;0.0
+tofu soyeux;tofu sedoso;silken tofu;2.0
+magret de canard séché;magret de pato seco;air-dried duck breast;0.0
+farine d'épeautre;harina de espelta;spelt flour;55.0
+chips de pomme de terre;patatas chips;potato chips;45.0
+poularde;poularda;fattened hen (poularde);0.0
+morille déshydratée;colmenilla deshidratada;dried morel;10.0
+farine de coco;harina de coco;coconut flour;4.0
+algues en paillettes;algas en copos;seaweed flakes;1.0
+champignon noir déshydraté;seta negra deshidratada;dried black fungus (wood ear);2.0
+diot de Savoie;salchicha diot de Saboya;Savoy diot sausage;2.0
+pomme de terre grenaille;patata baby/grenaille;new potatoes (baby);0.0
+Encornet;calamar/encornet;squid (calamari);12.0
+vinaigre de vin blanc;vinagre de vino blanco;white wine vinegar;0.0
+cerfeuil frais;perifollo fresco;fresh chervil;0.0
+souris d'agneau;jarrete/souris de cordero;lamb shank (mouse);0.5
+ravioles du Dauphiné;ravioles del Dauphiné;Dauphiné ravioles;25.0
+Pomme de terre à chair ferme;patata de carne firme;firm-flesh potato;15.0
+filet de veau;filete de ternera;veal fillet;0.0
+filet de cabillaud;filete de bacalao;cod fillet;0.0
+maquereau fumé;caballa ahumada;smoked mackerel;0.0
+chanterelle;rebozuelo (chantarela);chanterelle;1.0
+Filet de canard;filete de pato;duck breast fillet;0.0
+levure boulangère sèche;levadura seca de panadería;active dry yeast;6.0
+paprika fumé;pimentón ahumado;smoked paprika;2.0
+mangue séchée;mango seco;dried mango;45.0
+rapadura;rapadura (panela);rapadura sugar;95.0
+moutarde à l'ancienne;mostaza a la antigua;wholegrain mustard;1.0
+mûre blanche séchée;mora blanca seca;dried white mulberry;55.0
+yaourt de brebis;yogur de oveja;sheep’s yogurt;4.0
+huile essentielle de lavande;aceite esencial de lavanda;lavender essential oil;0.0
+huile essentielle de pamplemousse;aceite esencial de pomelo;grapefruit essential oil;0.0
+zeste de pamplemousse;ralladura de pomelo;grapefruit zest;1.0
+huile essentielle de menthe;aceite esencial de menta;mint essential oil;0.0
+sauce framboise;salsa de frambuesa;raspberry sauce;12.0
+yaourt coco;yogur de coco;coconut yogurt;4.0
+feuille de mélisse;hoja de melisa;lemon balm leaf;0.5
+riz a sushi;arroz para sushi;sushi rice;30.0
+badiane moulue;anís estrellado molido;ground star anise;2.0
+sel de céleri;sal de apio;celery salt;0.5
+farine d'avoine;harina de avena;oat flour;40.0
+verveine;verbena;verbena;0.5
+verveine sèche;verbena seca;dried verbena;0.5
+pâtes sans gluten;pasta sin gluten;gluten-free pasta;35.0
+lait de brebis;leche de oveja;sheep’s milk;5.0
+ferment lactique;fermento láctico;starter culture;0.0
+boisson végétale noisette;bebida vegetal de avellana;hazelnut plant drink;6.0
+croissant;croissant;croissant;45.0
+viande chèvre;carne de cabra;goat meat;0.0
+sarriette;ajedrea;savory (herb);0.5
+encornet;calamar;squid;0.0
+oeufs de lompe;huevas de lumpo;lumpfish roe;0.0
+nutella;Nutella (crema de avellanas);Nutella;2.0
+viande de porc;carne de cerdo;pork meat;55.0
+mozarella;mozzarella;mozzarella;0.0
+pétoncle;zamburiña;scallop;0.2
+fumet de poisson liquide;fumet de pescado líquido;liquid fish stock;0.5
+huile essentielle d'orange;aceite esencial de naranja;orange essential oil;0.0
+farine d'amande;harina de almendra;almond flour;4.0
+xylitol;xilitol;xylitol;0.0
+figues séchées;higos secos;dried figs;50.0
+amande au chocolat;almendra con chocolate;chocolate-coated almond;55.0
+sirop de coco;jarabe de coco;coconut syrup;45.0
+Crème de riz IronShark Nutrition;crema de arroz IronShark Nutrition;IronShark Nutrition rice cream;75.0
+pain sans gluten ;pan sin gluten;gluten-free bread;40.0
+mini maïs;mini maíz (baby corn);baby corn;6.0
+vermicelle de couleur;fideos de colores (decoración);colored sprinkles;30.0
+alfalfa germé;alfalfa germinada;sprouted alfalfa;1.0
+flocons de quinoa ;copos de quinoa;quinoa flakes;35.0
+foies de volaille confits;hígados de ave confitados;confit chicken livers;0.0
+Piment de la Jamaïque;pimienta de Jamaica;allspice;1.0
+Huile d'avocat;aceite de aguacate;avocado oil;0.0
+Haricots en conserve;alubias en conserva;canned beans;7.0
+Haricots rouges en conserve;alubias rojas en conserva;canned red beans;8.0
+Haricots blancs en conserve;alubias blancas en conserva;canned white beans;7.0
+Châtaigne;castaña;chestnut;30.0
+Nouilles de sarrasin;fideos de trigo sarraceno (soba);buckwheat noodles (soba);18.0
+Poudre de piment de chipotle ;polvo de chile chipotle;chipotle chili powder;2.0
+Cerise séchée;cereza seca;dried cherry;45.0
+Chili en poudre;chile en polvo;chili powder;3.0
+Parmesan râpé ;parmesano rallado;grated Parmesan;0.2
+Petits pois surgelés;guisantes congelados;frozen peas;7.0
+Stevia;estevia;stevia;0.0
+Whey;suero de leche en polvo (whey);whey protein;4.0
+steak haché de bœuf 5%;carne picada de res 5% grasa;5% fat ground beef patty;0.0
+fromage blanc 0%;queso fresco batido 0%;0% fat fromage blanc;2.0
+emmental allégé;emmental ligero;light Emmental;0.2
+blanc de pintade;pechuga de pintada;guinea fowl breast;0.0
+pâte brisée sans beurre;masa quebrada sin mantequilla;butter-free shortcrust pastry;45.0
+marmelade d'orange;marmelada de naranja;orange marmalade;55.0
+protéine végétale en poudre;proteína vegetal en polvo;plant protein powder;6.0
+farine sans gluten (mix);harina sin gluten (mezcla);gluten-free flour (blend);35.0
+pâte feuilletée sans gluten;masa de hojaldre sin gluten;gluten-free puff pastry;45.0
+halloumi;halloumi;halloumi;0.5
+fécule de tapioca;fécula de tapioca;tapioca starch;85.0
+lait végétal;bebida vegetal;plant-based milk;5.0
+sucrine;lechuga sucrine;little gem lettuce;2.0
+mini kiwi Nergi;mini kiwi Nergi;Nergi mini kiwi;5.0
+noix de macadamia;nuez de macadamia;macadamia nut;10.0
+sauce soja sucrée;salsa de soja dulce;sweet soy sauce;2.0
+gluten de blé;gluten de trigo;vital wheat gluten;12.0
+panisse;panisse (harina de garbanzo);panisse (chickpea slab);15.0
+pollen;polen;pollen;5.0
+pépite de chocolat blanc;chips de chocolate blanco;white chocolate chip;55.0
+allumettes de bacon;taquitos de bacon;bacon matchsticks;0.0
+fromage à tartiner;queso para untar;cream cheese (spread);2.0
+oeufs de cabillaud;huevas de bacalao;cod roe;0.0
+mélange 5 baies;mezcla 5 bayas (pimientas);five-pepper mix;1.0
+confiture de châtaigne;mermelada de castaña;chestnut jam;60.0
+crème de pistache;crema de pistacho;pistachio cream;20.0
+tome fraîche;tome fresca;fresh tomme cheese;0.2
+farine d’orge mondé;harina de cebada mondada;pearled barley flour;45.0
+farine de cacahuète;harina de cacahuete;peanut flour;10.0
+pommes paille;patatas paja;shoestring fries;55.0
+fitolin;FitOlin;FitOlin;0.0
+érythritol;eritritol;erythritol;0.0
+foie de morue;hígado de bacalao;cod liver;0.0
+Margarine oméga 3 coco chia;margarina omega 3 coco chía;omega-3 coconut-chia margarine;0.0
+chantifix;chantifix (estabilizante);stabilizer for whipped cream (Chantifix);75.0
+feuille de combava;hoja de combava (kaffir);kaffir lime leaf;0.5
+haricot mungo;judía mungo;mung bean;7.0
+huile d'argan;aceite de argán;argan oil;0.0
+blanc de dinde tranché;pechuga de pavo en lonchas;sliced turkey breast;0.0
+succédané de café;sucedáneo de café;coffee substitute;2.0
+sel de chitosan;sal de quitósano;chitosan salt;0.0
+farine de lin;harina de lino;flaxseed flour;2.0
+curcuma frais;cúrcuma fresco;fresh turmeric;2.0
+lait de chèvre;leche de cabra;goat’s milk;5.0
+infusion aux fruits;infusión de frutas;fruit infusion (herbal tea);10.0
+Pomme;manzana;apple;10.0
+Chou pointu ;col puntiaguda (sweetheart);pointed cabbage;1.0
+Son d'avoine;salvado de avena;oat bran;15.0
+Queus de cerises;rabos de cereza (infusión);cherry stems;12.0
+flocons d'algue;copos de algas;seaweed flakes;1.0
+farine de blé tendre T80;harina de trigo T80;T80 wheat flour;45.0
+farine de blé tendre T110;harina de trigo T110;T110 wheat flour;50.0
+chocolat noir >40% cacao;chocolate negro >40% cacao;dark chocolate >40% cocoa;20.0
+banane mûre;plátano maduro;ripe banana;20.0
+farine de grand épeautre T110;harina de espelta grande T110;T110 spelt flour;30.0
+farine d'arrow-root;harina de arrurruz;arrowroot flour;50.0
+farine de soja;harina de soja;soy flour;45.0
+farine de seigle complète;harina de centeno integral;whole rye flour;40.0
+lait concentré non sucré;leche condensada sin azúcar;evaporated milk (unsweetened);3.0
+muffin anglais;mollete inglés;English muffin;45.0
+margarine oméga 3;margarina omega 3;omega-3 margarine;0.0
+protéine de soja texturé;proteína de soja texturizada;textured soy protein (TVP);12.0
+café de céréales type yannoh;café de cereales tipo Yannoh;cereal coffee (Yannoh-type);20.0
+faisselle de chèvre;requesón de cabra;goat’s curd (faisselle);2.0
+poivrons grillés;pimientos asados;grilled peppers;4.0
+blanc de poulet tranché;pechuga de pollo en lonchas;sliced chicken breast;0.0
+Lait concentré non sucré;leche condensada sin azúcar;evaporated milk (unsweetened);3.0
+Lait concentré sucré;leche condensada azucarada;sweetened condensed milk;55.0
+Lait amandes sucré, enrichi calcium voir aussi boisson végétale;leche de almendra azucarada, enriquecida en calcio;sweetened almond milk, calcium-fortified;6.0
+Boisson végétale amandes sucré, enrichi calcium;bebida vegetal de almendra azucarada, enriquecida en calcio;sweetened almond plant drink, calcium-fortified;6.0
+Lait millet amande noisette estimation voir aussi boisson végétale;leche de mijo, almendra y avellana (estimación);millet-almond-hazelnut milk (est.);7.0
+Boisson végétale riz et moka estimation;bebida vegetal de arroz y moca (estimación);rice & mocha plant drink (est.);10.0
+Boisson végétale millet amande noisette estimation;bebida vegetal de mijo, almendra y avellana (estimación);millet-almond-hazelnut plant drink (est.);7.0
+Boisson végétale avoine vanille estimation;bebida vegetal de avena vainilla (estimación);vanilla oat plant drink (est.);10.0
+Boisson végétale au sarrasin (buckwheat) estimation;bebida vegetal de alforfón (trigo sarraceno) (estimación);buckwheat plant drink (est.);6.0
+Lait amandes nature non sucré voir aussi boisson végétale;leche de almendra natural sin azúcar;unsweetened almond milk;1.0
+Boisson végétale amandes nature non sucré;bebida vegetal de almendra natural sin azúcar;unsweetened almond plant drink;1.0
+Lait avoine nature voir aussi boisson végétale;leche de avena natural;plain oat milk;8.0
+Boisson végétale avoine nature;bebida vegetal de avena natural;plain oat plant drink;8.0
+Lait de chèvre entier cru;leche de cabra entera cruda;raw whole goat’s milk;5.0
+Lait de chèvre entier UHT;leche de cabra entera UHT;UHT whole goat’s milk;5.0
+Lait de chèvre demi écrémé;leche de cabra semidesnatada;semi-skimmed goat’s milk;5.0
+Lait de coco;leche de coco;coconut milk;3.0
+Lait de riz, voir aussi boisson végétale;leche de arroz;rice milk;10.0
+Boisson végétale au riz;bebida vegetal de arroz;rice plant drink;10.0
+Boisson végétale riz épeautre amandes;bebida vegetal de arroz, espelta y almendra;rice-spelt-almond plant drink;8.0
+Boisson végétale riz épeautre noisettes;bebida vegetal de arroz, espelta y avellana;rice-spelt-hazelnut plant drink;8.0
+Boisson végétale riz millet macadamia;bebida vegetal de arroz, mijo y macadamia;rice-millet-macadamia plant drink;8.0
+Boisson végétale riz chocolat noisette estimation;bebida vegetal de arroz chocolate y avellana;rice-hazelnut chocolate plant drink (est.);12.0
+Boisson végétale riz châtaigne avoine;bebida vegetal de arroz, castaña y avena;rice-chestnut-oat plant drink;10.0
+Boisson végétale riz cacao estimation;bebida vegetal de arroz cacao;rice-cocoa plant drink (est.);12.0
+Boisson végétale noisettes;bebida vegetal de avellana;hazelnut plant drink;6.0
+Boisson végétale coco;bebida vegetal de coco;coconut plant drink;3.0
+Boisson végétale noix de cajou;bebida vegetal de anacardo;cashew plant drink;5.0
+Boisson végétale au soja nature;bebida vegetal de soja natural;plain soy plant drink;2.0
+Boisson végétale au chanvre sans sucre;bebida vegetal de cáñamo sin azúcar;unsweetened hemp plant drink;1.0
+Boisson végétale amande chocolat estimation;bebida vegetal de almendra chocolate;chocolate almond plant drink (est.);10.0
+Boisson végétale amande vanille estimation;bebida vegetal de almendra vainilla;vanilla almond plant drink (est.);10.0
+Lait de vache entier UHT;leche de vaca entera UHT;UHT whole cow’s milk;6.0
+Lait de vache écrémé ;leche desnatada de vaca;skimmed cow’s milk;5.0
+Lait écrémé en poudre ;leche desnatada en polvo;skim milk powder;55.0
+Lait entier en poudre;leche entera en polvo;whole milk powder;55.0
+Lait en poudre 1/2 écrémé;leche semidesnatada en polvo;semi-skimmed milk powder;50.0
+Lait fermenté à boire nature;leche fermentada para beber natural;plain drinking fermented milk;4.0
+Kéfir de lait;kéfir de leche;milk kefir;4.0
+Haricots Flageolets verts bouilli/cuit à l’eau;alubias flageolet verdes cocidas;green flageolet beans, boiled;6.0
+Haricots flageolet surgelés;alubias flageolet congeladas;frozen flageolet beans;6.0
+Haricots rouges bouilli/cuits à l’eau;alubias rojas cocidas;red beans, boiled;8.0
+Haricots blancs, bouilli/cuit à l’eau;alubias blancas cocidas;white beans, boiled;7.0
+Haricots coco, bouilli/cuits à l’eau;alubias coco cocidas;coco beans, boiled;7.0
+Lentilles vertes, bouillie/cuite à l’eau;lentejas verdes cocidas;green lentils, boiled;7.0
+Lentilles blondes, bouillie/cuite à l’eau;lentejas rubias cocidas;blonde lentils, boiled;7.0
+Lentilles corail, bouillie / cuite à l’eau;lentejas coral cocidas;red lentils, boiled;10.0
+Petits pois surgelés, cuits;guisantes congelados, cocidos;frozen peas, cooked;7.0
+Petits pois purée;puré de guisantes;pea purée;10.0
+Petits pois cuits;guisantes cocidos;peas, cooked;7.0
+Pois cassés, bouilli/cuit à l’eau;guisantes partidos cocidos;split peas, boiled;8.0
+Fèves cuites;habas cocidas;broad beans, cooked;6.0
+Pois chiches, bouilli/cuit à l’eau;garbanzos cocidos;chickpeas, boiled;8.0
+Alcamatin estimation;Alcamatin (estimación);Alcamatin (est.);12.0
+Cacao raw powder, Purasana estimation;cacao crudo en polvo Purasana (estimación);raw cacao powder, Purasana (est.);4.0
+Poudre de cacao cru,Purasana estimation;polvo de cacao crudo Purasana (estimación);raw cocoa powder, Purasana (est.);4.0
+Bouillie de millet Alcamatin estimation;papilla de mijo Alcamatin (estimación);millet porridge, Alcamatin (est.);18.0
+Amarante;amaranto;amaranth;15.0
+Flocons d’avoine;copos de avena;rolled oats;35.0
+Muesli moyen sans sucre ajouté;muesli medio sin azúcar añadido;medium muesli, no added sugar;30.0
+Crousty 3 chocolats, Auchan, estimation;Crousty 3 chocolates, Auchan (estimación);Crousty 3 chocolates (Auchan), est.;55.0
+Cruesli chocolat au lait, Quaker, estimation;Cruesli chocolate con leche, Quaker (estimación);Cruesli milk chocolate (Quaker), est.;60.0
+Muesli bio flocons d’avoine et noix, estimation;muesli bio de copos de avena y nueces (estimación);organic muesli oats & nuts, est.;32.0
+Son d’avoine;salvado de avena;oat bran;15.0
+Flocon d’épeautre;copo de espelta;spelt flakes;35.0
+Blé (type Ebly);trigo (tipo Ebly);wheat (Ebly-style);16.0
+Boulgour;bulgur;bulgur;12.0
+Céréales complets (petit dej);cereales (desayuno) integrales;breakfast cereals whole grain;45.0
+Corn flakes natures;corn flakes naturales;plain corn flakes;70.0
+Maïs ;maíz;corn;12.0
+Maïs en conserve;maíz en conserva;canned corn;12.0
+Orge perlé cuit;cebada perlada cocida;cooked pearl barley;18.0
+Petit épeautre;espelta pequeña (escanda menor);einkorn (small spelt);20.0
+Quinoa;quinoa;quinoa;14.0
+Riz blanc cuit;arroz blanco cocido;cooked white rice;15.0
+Riz Basmati cuit;arroz basmati cocido;cooked basmati rice;25.0
+Riz complet cuit;arroz integral cocido;cooked brown rice;18.0
+Riz sauvage cuit;arroz salvaje cocido;cooked wild rice;10.0
+Riz gluant;arroz glutinoso;glutinous rice;30.0
+Riz thai cuit;arroz tailandés cocido;cooked Thai rice;20.0
+Tapioca;tapioca;tapioca;85.0
+Lupins, délice en morceaux, estimation;lupinos, “délice” en trozos (estimación);lupin chunks (“Délice”);8.0
+Délice en morceaux, Lupins, estimation;“délice” en trozos, lupinos (estimación);lupin “Délice” chunks;8.0
+Semoule de maïs, polenta;sémola de maíz, polenta;cornmeal, polenta;22.0
+Semoule blé cuite;sémola de trigo cocida;cooked wheat semolina;18.0
+weetabix céréales;cereales Weetabix;Weetabix cereal;55.0
+Chips;patatas fritas (chips);potato chips;45.0
+Gingembre racine;jengibre raíz;ginger root;2.0
+Gingembre confit;jengibre confitado;crystallized ginger;60.0
+Pomme de terre au four sans peau;patata al horno sin piel;baked potato (without skin);25.0
+Pomme de terre au four avec peau;patata al horno con piel;baked potato (with skin);22.0
+Pomme de terre duchesse surgelées cuite;patata “duquesa” congelada, cocida;duchess potatoes (frozen), cooked;30.0
+Pomme de terre dauphine surgelée, cuite;patata “dauphine” congelada, cocida;pommes dauphine (frozen), cooked;40.0
+Pomme de terre cuites vapeur;patata cocida al vapor;steamed potatoes;15.0
+Pomme de terre sauté, pré-frite, surgelée, cuite;patata salteada (prefrita, congelada), cocida;pre-fried frozen sautéed potatoes, cooked;35.0
+Patates douces, cuite;batata/boniato, cocido;cooked sweet potatoes;18.0
+Pomme de terre Frites;patatas fritas;French fries;45.0
+Purée de Pomme de terre;puré de patata;mashed potatoes;18.0
+Purée de pomme de terre en flocons;puré de patata en copos;instant mashed potatoes (flakes);30.0
+Topinambourg;topinambur;Jerusalem artichoke;70.0
+Farine d’Avoine;harina de avena;oat flour;12.0
+FitOlin (farine de lin minceur);FitOlin (harina de lino);FitOlin (slimming flax flour);40.0
+Farine d’Arrow root;harina de arrurruz;arrowroot flour;15.0
+Farine d’Amarante;harina de amaranto;amaranth flour;85.0
+Linette (farine de lin);Linette (harina de lino);Linette (flax flour);40.0
+Farine de Blé tendre T80;harina de trigo blando T80;soft wheat flour T80;45.0
+Farine de Blé T110;harina de trigo T110;wheat flour T110;40.0
+Farine de Blé intégrale  T150;harina de trigo integral T150;whole wheat flour T150;45.0
+Farine de Blé T45;harina de trigo T45;wheat flour T45 (pastry);70.0
+Farine de Blé T55;harina de trigo T55;wheat flour T55 (all-purpose);65.0
+Farine de Chataignes;harina de castaña;chestnut flour;45.0
+Farine de Coco;harina de coco;coconut flour;20.0
+Farine de pois chiches;harina de garbanzo;chickpea flour;35.0
+Farine de Grand épeautre T110;harina de espelta grande T110;spelt flour T110;45.0
+Farine de Grand épeautre complète T130;harina de espelta grande completa T130;whole spelt flour T130;40.0
+Farine de Grand épeautre intégrale T150;harina de espelta grande integral T150;whole spelt flour T150;35.0
+Farine de Kamut;harina de kamut;Kamut flour;50.0
+Farine de Lentilles;harina de lentejas;lentil flour;30.0
+Farine de Lupin;harina de altramuz;lupin flour;15.0
+Maïzena (choisir arrow root);Maizena (mejor arrurruz);cornstarch (prefer arrowroot);85.0
+Fécule de maïs (choisir plutôt arrow root);fécula de maíz (mejor arrurruz);cornstarch (prefer arrowroot);85.0
+Farine de maïs;harina de maíz;corn flour;60.0
+Poudre de Noisettes;harina/polvo de avellana;hazelnut meal;6.0
+Poudre d’Amandes;harina/polvo de almendra;almond meal;4.0
+Farine de Quinoa;harina de quinoa;quinoa flour;45.0
+Farine de millet;harina de mijo;millet flour;55.0
+Farine de Petit épautre;harina de espelta pequeña;einkorn (small spelt) flour;40.0
+Farine de Riz;harina de arroz;rice flour;65.0
+Farine de Sarrasin (sans gluten);harina de trigo sarraceno (sin gluten);buckwheat flour (gluten-free);45.0
+Farine de Soja;harina de soja;soy flour;15.0
+Farine de Souchet;harina de chufa (souchet);tiger nut flour;40.0
+Farine de Seigle complète;harina de centeno integral;whole rye flour;45.0
+Bagel;bagel;bagel;50.0
+Baguette blanche ;baguette blanca;white baguette;50.0
+Biscottes;biscotes;rusks;45.0
+Blini ;blinis;blini;30.0
+Brioche;brioche;brioche;45.0
+Crêpe V1 pâte MC;crepe V1 masa MC;crêpe V1 (MC batter);25.0
+Crêpe V2 lait d’amande MC;crepe V2 leche de almendra MC;crêpe V2 almond milk (MC);22.0
+Crêpe mille trous;baghrir (crepe mil agujeros);thousand-hole crêpe (baghrir);30.0
+Croissant;croissant;croissant;45.0
+Crumpet anglais MC;crumpet inglés MC;English crumpet (MC);30.0
+Crozet à la châtaigne;crozet de castaña;chestnut crozet pasta;30.0
+Foccacia MC;focaccia MC;focaccia (MC);35.0
+Gaufres salées légères MC;gofres salados ligeros MC;light savory waffles (MC);28.0
+Gaufres rapides MC;gofres rápidos MC;quick waffles (MC);30.0
+Gaufres liégeoises rapides MC;gofres de Lieja rápidos MC;quick Liège waffles (MC);60.0
+Génoise rapide MC;bizcocho genovés rápido MC;quick sponge cake (génoise) (MC);40.0
+Krisprolls;Krisprolls;Krisprolls;40.0
+Muffin anglais MC;mollete inglés MC;English muffin (MC);45.0
+Naan nature ou fromage MC;naan natural o con queso MC;naan (plain or cheese) (MC);30.0
+Naan ail MC;naan al ajo MC;garlic naan (MC);35.0
+Nachos MC;nachos MC;nachos (MC);35.0
+Pain au son;pan con salvado;bran bread;40.0
+Pain azyme;pan ácimo;matzo (unleavened bread);30.0
+Pain au lait artisanal;pan de leche artesanal;milk bread (artisan);35.0
+Pain au lait MC;pan de leche MC;milk bread (MC);45.0
+Pain au levain en moyenne;pan de masa madre (medio);sourdough bread (average);40.0
+Pain blanc;pan blanco;white bread;45.0
+Pain complet ;pan integral;wholemeal bread;35.0
+Pain au Kamut;pan de kamut;Kamut bread;40.0
+Pain de mie;pan de molde;sandwich bread;45.0
+Pain de mie MC;pan de molde MC;sandwich bread (MC);35.0
+Pain hamburger classique;pan de hamburguesa clásico;classic hamburger bun;40.0
+Pain bun MC hamburger;pan bun MC hamburguesa;hamburger bun (MC);35.0
+Pain épeautre intégral;pan de espelta integral;whole spelt bread;35.0
+Pain de seigle complet;pan de centeno integral;whole rye bread;30.0
+Pain des fleurs sarrasin;galletas “Le Pain des Fleurs” trigo sarraceno;Le Pain des Fleurs buckwheat crispbread;20.0
+Pain géorgien MC;pan georgiano MC;Georgian bread (MC);35.0
+Pain noir allemand;pan negro alemán;German black bread (pumpernickel);25.0
+Pain au chocolat;napolitana de chocolate;chocolate croissant (pain au chocolat);45.0
+Pain aux raisins;caracola de pasas;raisin swirl pastry;45.0
+Pain grillé;pan tostado;toast;40.0
+Pain santé Méthode Chataigner;pan salud Método Chataigner;Méthode Chataigner health bread;30.0
+Pancake MC;panqueque MC;pancake (MC);35.0
+Pâte sablée MC;masa sablé MC;sweet shortcrust pastry (MC);45.0
+Riz soufflé en galette;tortas de arroz inflado;rice cakes;30.0
+Scones anglais MC;scones ingleses MC;English scones (MC);35.0
+Wasa estimation;Wasa (estimación);Wasa crispbread, est.;30.0
+Wasa fibres estimation;Wasa fibras (estimación);Wasa fiber crispbread, est.;20.0
+Pâte à lasagnes MC;masa para lasaña MC;lasagna sheets (MC);35.0
+Pâte à lasagnes au sarrasin MC;masa de lasaña de trigo sarraceno MC;buckwheat lasagna sheets (MC);30.0
+Pâte à pizza chou-fleur MC;masa pizza coliflor MC;cauliflower pizza dough (MC);15.0
+Pâtes au blé complet cuites;pasta de trigo integral cocida;cooked whole-wheat pasta;25.0
+Pâtes de riz;pasta de arroz;rice pasta;30.0
+Vermicelles de riz;vermicelli de arroz;rice vermicelli;30.0
+Nouilles de riz;fideos de arroz;rice noodles;30.0
+Pâtes aux œufs cuites;pasta con huevo cocida;cooked egg pasta;20.0
+Pâtes blanches al dente;pasta blanca al dente;white pasta, al dente;30.0
+Pâtes blanches cuisson normale;pasta blanca cocción normal;white pasta, regular cook;35.0
+Pâtes blanches bien cuites;pasta blanca muy cocida;white pasta, well cooked;40.0
+Pâte brisée MC;masa quebrada MC;shortcrust pastry (MC);45.0
+Pâte feuilletée;masa de hojaldre;puff pastry;35.0
+Pâte feuilletée maison FitOlin;hojaldre casero Fitolin;homemade puff pastry FitOlin;40.0
+Pâtes fraiches aux œufs cuites;pasta fresca con huevo cocida;cooked fresh egg pasta;30.0
+Pâte gnocchis;masa de ñoquis;gnocchi dough;30.0
+Gnocchis;ñoquis;gnocchi;30.0
+Abricot ;albaricoque;apricot;8.0
+Ananas;piña;pineapple;22.0
+Avocat;aguacate;avocado;2.0
+Banane ;plátano;banana;12.0
+Banane mûre;plátano maduro;ripe banana;20.0
+Baies de goji;bayas de goji;goji berries;35.0
+Banane plantain cuite;plátano macho cocido;cooked plantain;18.0
+Brugnon ;brugñón (nectarina roja);nectarine (yellow peach);10.0
+Cassis;grosella negra (cassis);blackcurrant;8.0
+Cerise ;cereza;cherry;12.0
+Châtaigne;castaña;chestnut;30.0
+Citron;limón;lemon;2.0
+Citron zeste;ralladura de limón;lemon zest;0.5
+Clémentine;clementina;clementine;8.0
+Coing;membrillo;quince;12.0
+Datte ;dátil;date;70.0
+Figue;higo;fig;12.0
+Fraise ;fresa;strawberry;4.0
+Framboises;frambuesas;raspberries;3.0
+Fruit de la passion;maracuyá;passion fruit;6.0
+Goyave;guayaba;guava;8.0
+Grenade ;granada;pomegranate;6.0
+Groseilles;grosella roja;redcurrants;5.0
+Kaki ;kaki/caqui;persimmon;15.0
+Kiwi ;kiwi;kiwi;7.0
+Litchi au sirop;litchi en almíbar;lychee in syrup;18.0
+Litchi ;litchi;lychee;25.0
+Mandarine;mandarina;mandarin;8.0
+Mangue ;mango;mango;15.0
+Mélange fruits rouges surgelés;mix de frutos rojos congelados;frozen mixed berries;5.0
+Melon;melón;melon;10.0
+Mirabelle ;ciruela mirabel;mirabelle plum;12.0
+Mûre ;mora;blackberry;8.0
+Myrtille;arándano;blueberry;6.0
+Nectarine ;nectarina;nectarine;6.0
+Nefle;níspero;medlar;10.0
+Orange (attention CG + élevée si mangée seule);naranja (ojo CG más alta si sola);orange (note: higher GL if eaten alone);10.0
+Papaye;papaya;papaya;10.0
+Pamplemousse ;pomelo;grapefruit;7.0
+Pastèque ;sandía;watermelon;4.0
+Pêche ;melocotón;peach;6.0
+Poire (attention CG + élevée si mangée seule);pera (ojo CG más alta si sola);pear (note: higher GL if eaten alone);4.0
+Pomme (attention CG + élevée si mangée seule);manzana (ojo CG más alta si sola);apple (note: higher GL if eaten alone);10.0
+Pomme au four;manzana al horno;baked apple;10.0
+Prune;ciruela;plum;15.0
+Purée de prunes (Frutto puro) estimation;puré de ciruelas (Frutto puro) estimación;plum purée (Frutto Puro) est.;15.0
+Pruneaux cuits;ciruelas pasas cocidas;stewed prunes;12.0
+Raisin ;uva;grapes;10.0
+Rhubarbe cuite;ruibarbo cocido;cooked rhubarb;30.0
+Tomate ;tomate;tomato;1.0
+Aubergines;berenjenas;eggplants;2.0
+Ail;ajo;garlic;1.5
+artichaut;alcachofa;artichoke;1.0
+Asperge blanche;espárrago blanco;white asparagus;1.0
+Asperge verte;espárrago verde;green asparagus;5.0
+Betteraves crues;remolacha cruda;raw beets;6.0
+Betteraves cuites;remolacha cocida;cooked beets;6.0
+Blettes;acelgas;Swiss chard;1.0
+Brocoli;brócoli;broccoli;1.0
+Carottes crues;zanahoria cruda;raw carrots;2.0
+Carottes cuites;zanahoria cocida;cooked carrots;5.0
+Cèleri rave cuit;apionabo cocido;cooked celeriac;4.0
+Cèleri rave cru;apionabo crudo;raw celeriac;2.0
+Cèleri branche;apio;celery stalk;1.0
+Champignons;setas/hongos;mushrooms;1.0
+Champignons de paris;champiñón de París;button mushrooms;1.0
+Choux de Bruxelle cuits;coles de Bruselas cocidas;cooked Brussels sprouts;2.0
+Choux blanc;col blanca;white cabbage;2.0
+Choux rouge;col lombarda;red cabbage;2.0
+Choux fleur;coliflor;cauliflower;1.0
+Choux Kale;kale (col rizada);kale;1.0
+Kale choux;kale (col);kale;1.0
+Choucroute cuite;chucrut cocido;cooked sauerkraut;2.0
+Citrouilles;calabazas;pumpkins;5.0
+Concombre;pepino;cucumber;1.0
+Coeur de palmier;corazón de palmito;palm heart;1.0
+Courges;calabazas;squash;4.0
+Courgettes;calabacines;zucchini (courgette);1.0
+Endives;endibias;endives (Belgian endive);1.0
+Épinard;espinaca;spinach;1.0
+Fenouil;hinojo;fennel;1.0
+Graines germées;brotes germinados;sprouted seeds;1.0
+Haricots verts ;judías verdes;green beans;1.0
+Haricots beurre cuit;judía manteca cocida;cooked wax beans;2.0
+Haricots blancs;alubias blancas;white beans;7.0
+Haricot mungo, pousse de soja;brotes de soja (mungo);mung bean sprouts (soy sprouts);1.0
+Laitue;lechuga;lettuce;0.5
+Mache;canónigos;lamb’s lettuce (mâche);0.5
+Mélange légumes surgelés;mix de verduras congeladas;frozen mixed vegetables;3.0
+Navet cuit;nabo cocido;cooked turnip;4.0
+Olive;aceituna;olive;1.0
+Oseille;acedera;sorrel;0.5
+Oignon cuit;cebolla cocida;cooked onion;4.0
+Panais;chirivía;parsnip;12.0
+Petits pois;guisantes;green peas;7.0
+Poireau;puerro;leek;3.0
+Poivrons;pimientos;bell peppers;4.0
+Potiron;calabaza (potirón);pumpkin (winter squash);15.0
+Pomme de terre cuite puis refroidie ;patata cocida y enfriada;potato cooked then cooled;25.0
+Pomme de terre au four, vapeur ou bouillie;patata al horno, vapor o hervida;baked/steamed/boiled potato;45.0
+Pomme de terre frites;patatas fritas;French fries;1.0
+Radis;rábano;radish;1.0
+radis noir;rábano negro;black radish;6.0
+Rutabaga, choux;rutabaga (nabo sueco);rutabaga (swede), cabbage;6.0
+Sasifis;salsifíes;salsify;8.0
+Soja graine;soja grano;soybeans;2.0
+Tomates;tomates;tomatoes;2.0
+Tempeh;tempeh;tempeh;6.0
+Topinambour;topinambur;Jerusalem artichoke;12.0
+Menthe feuilles;hojas de menta;mint leaves;0.5
+Coriandre, persil, herbes de Provence;cilantro, perejil, hierbas provenzales;coriander, parsley, herbes de Provence;0.5
+Basilic feuilles;hojas de albahaca;basil leaves;0.5
+Cacahuètes grillées salées;cacahuetes tostados salados;roasted salted peanuts;6.0
+Graines de Chia;semillas de chía;chia seeds;1.0
+Graines de Courges;semillas de calabaza;pumpkin seeds;2.0
+Graines de Lin;semillas de lino;flax seeds;1.0
+Graines de Sarrasin;semillas de trigo sarraceno;buckwheat groats (kasha);20.0
+Graines de Sésame;semillas de sésamo;sesame seeds;2.0
+Graines de Soja;semillas de soja;soybean seeds;6.0
+Graines de Tournesol;semillas de girasol;sunflower seeds;3.0
+Huile de coco;aceite de coco;coconut oil;0.0
+Huile de Lin;aceite de lino;linseed oil (flaxseed oil);0.0
+Huile d’Olive;aceite de oliva;olive oil;0.0
+Margarine diverse;margarina variada;various margarine;0.0
+Huile de Pépins de Raisin;aceite de pepitas de uva;grapeseed oil;0.0
+Beurre clarifié, ghee;mantequilla clarificada (ghee);clarified butter, ghee;0.0
+Beurre ;mantequilla;butter;0.0
+Huile de Sésame;aceite de sésamo;sesame oil;0.0
+Vita Coco;Vita Coco;Vita Coco (coconut drink);3.0
+Vita chia;Vita chia;Vita Chia (chia drink);4.0
+Saint Hubert omégas 3;Saint Hubert omega 3;Saint Hubert omega-3 spread;0.0
+Margarine St hubert omégas 3;margarina St Hubert omega 3;Saint Hubert omega-3 margarine;0.0
+Margarine Primevère bio;margarina Primevère bio;Primevère organic margarine;0.0
+Huile d’arachide;aceite de cacahuete;peanut oil;0.0
+Huile de paraffine;aceite de parafina;paraffin oil (mineral oil);0.0
+Huile de Tournesol;aceite de girasol;sunflower oil;0.0
+Crème allégée vache ;nata ligera de vaca;light cow’s cream;0.0
+Crème d’Amande de cuisine;crema culinaria de almendra;almond cooking cream;0.0
+Crème fraîche de Brebis;nata fresca de oveja;sheep’s crème fraîche;0.0
+Crème fraîche de Chèvre;nata fresca de cabra;goat’s crème fraîche;2.0
+Crème de Coco;crema de coco;coconut cream;3.0
+Crème fraîche entière de vache ;nata fresca entera de vaca;full-fat cow’s crème fraîche;2.0
+Crème Fleurette ;nata líquida (fleurette);pouring cream (fleurette);2.0
+Crème de soja;crema de soja;soy cream;3.0
+Mascarpone;mascarpone;mascarpone;1.0
+Crème de Riz;crema de arroz;rice cream;20.0
+Oeuf bio si possible bleu blanc coeur;huevo ecológico (ideal sello bienestar animal);egg (organic if possible “Bleu-Blanc-Cœur”);0.5
+Bœuf;carne de res;beef;0.0
+Autruche;avestruz;ostrich;0.0
+Charcuterie;charcutería (embutidos);cold cuts (charcuterie);1.0
+Jambon;jamón;ham;0.0
+Viande;carne;meat;0.0
+Kangourou;canguro;kangaroo;0.0
+Steak, steak haché nature;bistec, carne picada natural;steak, plain ground beef;0.0
+Cheval;caballo;horse meat;0.0
+Caille;codorniz;quail;0.0
+Chèvre;cabra (carne);goat (meat);0.0
+Dinde;pavo;turkey;0.0
+Foie d'agneau;hígado de cordero;lamb liver;0.0
+Foie de veau;hígado de ternera;calf’s liver;0.0
+Foie de morue (super riche en vit D et oméga 3);hígado de bacalao (muy rico en vit D y omega 3);cod liver (very rich in vit D & omega-3);0.0
+Gibier;caza;game meat;0.0
+Veau;ternera;veal;0.0
+Pigeon;paloma;pigeon;0.0
+Lapin;conejo;rabbit;0.0
+Poulet;pollo;chicken;0.0
+Seitan ;seitán;seitan;0.0
+Tofu, tofu lacto fermenté (estimation);tofu, tofu lactofermentado (estimación);tofu, fermented tofu (est.);10.0
+Produits de la mer, crustacées…;productos del mar, mariscos…;seafood, shellfish…;0.0
+Escargots;caracoles;snails;0.0
+Poisson blanc;pescado blanco;white fish;0.0
+Mollusques;moluscos;mollusks;0.0
+Coquillages;mariscos con concha (bivalvos);shellfish;0.0
+Poisson gras (omégas 3);pescado azul (rico en omega 3);fatty fish (omega-3);0.0
+Fromage Brebis corse, Pyrénées;queso de oveja (Córcega, Pirineos);sheep cheese (Corsica, Pyrenees);0.2
+Fromage Feta;queso feta;feta cheese;0.2
+Fromage bleu, roquefort…;queso azul, roquefort…;blue cheese, Roquefort;0.2
+Fromage Fondu;queso fundido;processed cheese;1.0
+Fromage Gruyère;queso gruyère;Gruyère cheese;0.2
+Fromage Mozzarella de bufflonne;mozzarella de búfala;buffalo mozzarella;0.2
+Fromage Parmesan;queso parmesano;Parmesan cheese;0.2
+Fromage Raifort;queso al rábano picante;horseradish cheese;0.2
+Fromage Camembert;queso camembert;Camembert cheese;2.0
+Fromage à tartiner;queso para untar;cream cheese (spread);2.0
+Fromage de chèvre;queso de cabra;goat cheese;2.0
+Vinaigre balsamique;vinagre balsámico;balsamic vinegar;5.0
+Vinaigre cidre;vinagre de sidra;apple cider vinegar;2.0
+Sucre Blanc ;azúcar blanco;white sugar;100.0
+Amidon modifié;almidón modificado;modified starch;85.0
+Chantifix;chantifix (estabilizante);whipping stabilizer (Chantifix);75.0
+Sucre Coco;azúcar de coco;coconut sugar;55.0
+Sucre Complet/intégral;azúcar integral/completo;whole cane sugar (panela/rapadura);70.0
+Sucre Eritritol;eritritol;erythritol;0.0
+Miel;miel;honey;65.0
+Miel d'accacia;miel de acacia;acacia honey;60.0
+Sucre Roux ;azúcar moreno;light brown sugar;100.0
+Sirop de blé, sirop de riz;jarabe de trigo, jarabe de arroz;wheat syrup, rice syrup;75.0
+Sirop de glucose;jarabe de glucosa;glucose syrup;70.0
+Sirop de maïs;jarabe de maíz;corn syrup;75.0
+Sirop d’agave (attention au fructose libre qu’il contient);sirope de agave (ojo fructosa libre);agave syrup;15.0
+Sucrettes, édulcorants;edulcorantes;tabletop sweeteners;0.0
+Bières;cervezas;beers;5.0
+Alcool / incalculable;alcohol / incalculable;alcohol / not computable;0.0
+Thé, tisane;té, infusión;tea, herbal tea;0.0
+Café du matin +9% d’augmentation glycémie;café de la mañana +9% subida glucemia;morning coffee (+9% glycemia note);0.0
+Café du midi +15% d’augmentation glycémie;café del mediodía +15% subida glucemia;noon coffee (+15% glycemia note);0.0
+Café le soir +26% d’augmentation glycémie;café por la noche +26% subida glucemia;evening coffee (+26% glycemia note);0.0
+Café en poudre;café soluble en polvo;instant coffee powder;2.0
+Foodspring Sparkling aminos, IG non testé, contient de la caféine et des édulcorants perturbateur du microbiote intestinal;Foodspring Sparkling aminos (IG no probado);Foodspring Sparkling aminos (untested GI;0.0
+Thé chai latte au miel, lait de chèvre;chai latte con miel y leche de cabra;chai latte with honey, goat milk;12.0
+Boisson No café frappé;bebida “No café” frappé;“No coffee” frappé drink;25.0
+Cidre;sidra;cider;20.0
+Café de céréales instantané type Yannoh (comptez le poids de la cuillère de 10g pas de votre bol comprenant de l’eau);café de cereales instantáneo tipo Yannoh;instant cereal coffee (Yannoh-type);6.0
+Soda normal;refresco azucarado;regular soda;60.0
+soda 0;refresco 0/ligth;diet soda (zero);0.0
+Chocolat au lait;chocolate con leche;milk chocolate;35.0
+Eau;agua;water;0.0
+Eau de coco;agua de coco;coconut water;4.0
+Décoction ayurvédique;decocción ayurvédica;Ayurvedic decoction;0.0
+Isotonic (gatorade powerade);isotónica (tipo Gatorade/Powerade);isotonic drink (e.g., Gatorade/Powerade);12.0
+Jus Breuss;zumo Breuss;Breuss juice;15.0
+Jus d'orange;zumo de naranja;orange juice;20.0
+Jus de pommes;zumo de manzana;apple juice;20.0
+Jus de tomate;zumo de tomate;tomato juice;5.0
+Jus multifruits;zumo multifrutas;multifruit juice;22.0
+Jus la vie en rose;zumo “la vie en rose”;“la vie en rose” juice;18.0
+Jus soleil indien;zumo “sol indio”;“Indian sun” juice;18.0
+Jus détox;zumo détox;detox juice;15.0
+Jus vert;zumo verde;green juice;12.0
+Jus légumes provençal;zumo de verduras provenzal;Provençal vegetable juice;8.0
+Lait de poule;ponche de huevo (lait de poule);egg-nog (milk & egg drink);10.0
+Jus de carotte;zumo de zanahoria;carrot juice;12.0
+Jus d’orange;zumo de naranja;orange juice;20.0
+Jus de pamplemousse;zumo de pomelo;grapefruit juice;5.0
+Ricoré au lait Neslé, estimation (comptez le poids de la cuillère de 10g pas de votre bol comprenant de l’eau);Ricoré con leche Nestlé (estimación);Ricoré with milk (Nestlé), est.;15.0
+Ricoré nature, estimation (comptez le poids de la cuillère de 10g pas de votre bol comprenant de l’eau);Ricoré natural (estimación);Ricoré plain, est.;8.0
+Boisson Laxajus;bebida Laxajus;“Laxajus” drink;10.0
+Limonade;limonada;lemonade;40.0
+Lait de coco;leche de coco;coconut milk (drink);3.0
+Lait d'or;leche dorada (golden milk);golden milk (turmeric milk);8.0
+Jus de pruneaux MC;zumo de ciruela pasa MC;prune juice (MC);35.0
+Pepsi avec sucre;Pepsi con azúcar;Pepsi (with sugar);65.0
+Coca avec sucre;Coca-Cola con azúcar;Coca-Cola (with sugar);65.0
+Soda sans sucre ou 0;refresco sin azúcar / 0;zero-sugar soda;0.0
+Sodas en moyenne;refrescos (promedio);sodas (average);35.0
+Thé glacé maison sucré au miel;té helado casero endulzado con miel;homemade iced tea sweetened with honey;20.0
+Boisson Virgin mojito MC ;bebida virgin mojito MC;Virgin mojito drink (MC);12.0
+Boisson Virgin Mojicha MC;bebida virgin mojicha MC;Virgin “Mojicha” drink (MC);10.0
+Tonic;tónica;tonic water;12.0
+Yannoh vanille;Yannoh vainilla;vanilla Yannoh (cereal drink);15.0
+Abricots sirop (boîte) ;albaricoques en almíbar (lata);apricots in syrup (canned);25.0
+Ananas  (boîte) ;piña (lata);pineapple (canned);25.0
+Barres chocolatée sucrée;barritas de chocolate azucaradas;sweet chocolate bars;55.0
+Barre muesli aux fruits secs;barra de muesli con frutos secos;fruit & nut muesli bar;45.0
+Bonbons;caramelos/golosinas;candies;65.0
+Bonbons dragibus;caramelos “dragibus”;Dragibus candies;70.0
+Boule de maïs soufflée au miel;bola de maíz inflado con miel;honey puffed corn ball;55.0
+Chocolat blanc;chocolate blanco;white chocolate;55.0
+Chocolat noir > 40%  cacao;chocolate negro >40% cacao;dark chocolate >40% cocoa;35.0
+Chocolat  noir> 70%  cacao;chocolate negro >70% cacao;dark chocolate >70% cocoa;25.0
+Chocolat lait;chocolate con leche;milk chocolate;40.0
+Confiture (en moyenne) ;mermelada (promedio);jam (average);55.0
+Cookies industriels;galletas “cookies” industriales;store-bought cookies;55.0
+Mars et barres chocolatées;Mars y barritas de chocolate;Mars & chocolate bars;60.0
+Gâteaux en moyenne (si pas maison);pasteles (promedio, no caseros);cakes (average, store-bought);65.0
+Doughnuts;dónuts;doughnuts;60.0
+Donuts industriels;dónuts industriales;industrial donuts;65.0
+Pâte à tartiner type Nutella;crema para untar tipo Nutella;chocolate-hazelnut spread (e.g., Nutella);55.0
+Pâte d'amandes;mazapán (pasta de almendra);marzipan (almond paste);50.0
+Pêches au sirop (boîte);melocotones en almíbar (lata);peaches in syrup (canned);25.0
+Pop corn nature;palomitas naturales;plain popcorn;10.0
+Crème glacée en bac;helado en tarrina;tub ice cream;35.0
+Sorbet sucré ;sorbete azucarado;sweet sorbet;55.0
+Compote de pomme sans sucre ajouté;compota de manzana sin azúcar añadido;unsweetened applesauce;10.0
+Glace en bâton type magnum;helado en palo tipo Magnum;ice cream bar (e.g., Magnum);45.0
+Abricots secs;albaricoques secos;dried apricots;35.0
+Amandes;almendras;almonds;6.0
+Bananes séchées;plátano seco;dried bananas;30.0
+Canneberge ou cranberries;arándano rojo (cranberry);cranberries (dried);40.0
+Dattes;dátiles;dates;70.0
+Figues sèches;higos secos;dried figs;35.0
+Noix de coco;coco;coconut (dried);30.0
+Noix de Pécan;nuez pacana;pecans;5.0
+Noix;nueces;walnuts;3.0
+Noix Amazonie, Brésil;nuez de Brasil;Brazil nuts;2.0
+Noisette;avellana;hazelnuts;2.0
+Noix de cajou;anacardo;cashew nuts;3.0
+Olive noire;aceituna negra;black olive;9.0
+Pomme séchée;manzana deshidratada;dried apple;1.0
+Pistaches;pistachos;pistachios;25.0
+Pruneau;ciruela pasa;prune (dried plum);12.0
+Raisins secs;pasas;raisins;25.0
+Tomate séchée;tomate seco;sun-dried tomato;15.0
+Sauce Barbecue;salsa barbacoa;barbecue sauce;25.0
+Coulis de tomate;coulis de tomate;tomato coulis;5.0
+Concentré de tomates;concentrado de tomate;tomato paste;10.0
+Harissa;harissa;harissa;3.0
+Ketchup;kétchup;ketchup;20.0
+Moutarde;mostaza;mustard;1.0
+Sauce tomates;salsa de tomate;tomato sauce;5.0
+Sauce Tamari (soja fermenté);salsa tamari (soja fermentado);tamari (fermented soy sauce);1.0
+Agar-agar;agar-agar;agar-agar;0.0
+Ail, gousse ;ajo, diente;garlic clove;2.0
+Anis étoilé (badiane);anís estrellado (badiane);star anise;1.0
+Arrow Root fécule;arrurruz (fécula);arrowroot starch;85.0
+Bicarbonate de soude;bicarbonato sódico;baking soda;0.0
+Cannelle en poudre ;canela en polvo;ground cinnamon;2.0
+Cardamome;cardamomo;cardamom;1.0
+Clou de girofle;clavo de olor;clove;1.0
+Cumin en poudre;comino molido;ground cumin;2.0
+Curcuma en poudre;cúrcuma en polvo;ground turmeric;2.0
+Echalotes;chalotas;shallots;5.0
+Epices (en moyenne);especias (promedio);spices (average);2.0
+Gélatine animale déconseillée;gelatina animal (no recomendada);animal gelatin (discouraged);0.0
+Gingembre racine;jengibre raíz;ginger root;2.0
+Gingembre moulu;jengibre molido;ground ginger;2.0
+Levure de boulanger;levadura de panadería;baker’s yeast;8.0
+Levure chimique remplacer par bicarbonate;levadura química (mejor bicarbonato);baking powder (prefer baking soda);0.0
+Menthe feuille;hoja de menta;mint leaf;0.5
+Oignon cuit;cebolla cocida;cooked onion;4.0
+Herbe de Provence;hierbas provenzales;Herbes de Provence;0.5
+Oignon cru;cebolla cruda;raw onion;5.0
+Piment;chile/guindilla;chilli pepper;1.0
+Poivre noir;pimienta negra;black pepper;0.5
+Vanille;vainilla;vanilla;1.0
+Thym;tomillo;thyme;0.5
+Poisson pané;pescado empanado;breaded fish;20.0
+Sardine à l’huile (privilégiez l’huile d'olive);sardina en aceite (mejor aceite de oliva);sardine in oil (prefer olive oil);0.0
+Saumon fumé;salmón ahumado;smoked salmon;0.0
+Surimi attention aux additifs;surimi (ojo aditivos);surimi (watch additives);8.0
+Tarama attention aux additifs;tarama (ojo aditivos);tarama (watch additives);10.0
+Sushi;sushi;sushi;22.0
+Crustacés;crustáceos;crustaceans;0.0
+Filet de harengs;filete de arenque;herring fillet;0.0
+Crevettes;gambas/camarones;shrimp;0.0
+Homard;bogavante/langosta (según país);lobster;0.0
+Ecrevisse;cangrejo de río;crayfish;0.0
+Huitre;ostra;oyster;0.0
+Moule;mejillón;mussel;0.0
+Langouste, langoustine;langosta, cigala;spiny lobster, scampi;0.0
+Crabe;cangrejo;crab;0.0
+Purée Amandes;puré/pasta de almendra;almond butter;4.0
+Beurre de cacahuete;mantequilla de cacahuete;peanut butter;9.0
+Crème de Marrons/chataignes nature;crema de castañas natural;plain chestnut cream;25.0
+Purée de Noisettes;puré/pasta de avellana;hazelnut butter;4.0
+Purée de Noix de cajoux;puré/pasta de anacardo;cashew butter;9.0
+Purée de Pistache;puré/pasta de pistacho;pistachio butter;6.0
+Tahin, purée de sésame;tahin, pasta de sésamo;tahini (sesame paste);4.0
+Purée de Sésame, tahin;pasta de sésamo, tahini;sesame paste (tahini);4.0
+Petit suisse aromatisé 1/2 écrémé;petit-suisse aromatizado semidesnatado;flavored petit-suisse, semi-skimmed;10.0
+Skyr yaourt ;skyr (yogur);skyr yogurt;4.0
+Yaourt Skyr;skyr (yogur islandés);skyr yogurt;4.0
+Gervita, fromage blanc et crème fouettée;Gervita, queso fresco y nata montada;Gervita (fromage blanc with whipped cream);6.0
+Fromage frais aux fruits, carrefour, estimation;queso fresco con frutas (Carrefour), estimación;fruit fresh cheese (Carrefour), est.;18.0
+Petit Gervais aux fruits, Danone, estimation;Petit Gervais con frutas, estimación;Petit Gervais fruit (Danone), est.;20.0
+Danonino, petit suisse aux fruits, estimation;Danonino, petit-suisse con frutas, estimación;Danonino fruit petit-suisse, est.;22.0
+Petit suisse Gervais aux fruits, estimation;Petit-suisse Gervais con frutas, estimación;Gervais fruit petit-suisse, est.;20.0
+Petit suisse nature, estimation;petit-suisse natural, estimación;plain petit-suisse, est.;4.0
+Danette au chocolat, estimation;Danette de chocolate, estimación;Danette chocolate dessert, est.;28.0
+Danette vanille, estimation;Danette de vainilla, estimación;Danette vanilla dessert, est.;26.0
+Danette caramel salé, estimation;Danette caramelo salado, estimación;Danette salted caramel dessert, est.;30.0
+Danette Caramel, estimation;Danette caramelo, estimación;Danette caramel dessert, est.;28.0
+Flanby Nestlé, estimation;Flanby Nestlé, estimación;Flanby (Nestlé), est.;22.0
+Fromage blanc 0%;queso fresco batido 0%;fromage blanc 0% fat;2.0
+Fromage blanc 3%;queso fresco batido 3%;fromage blanc 3% fat;3.0
+Fromage blanc nature ou aux fruits en moyenne;queso fresco batido natural o con frutas (promedio);fromage blanc (plain or fruit), avg.;6.0
+Dessert au soja non sucré;postre de soja sin azúcar;unsweetened soy dessert;3.0
+Dessert au lait de riz non sucré;postre de leche de arroz sin azúcar;unsweetened rice-milk dessert;5.0
+Dessert végétal sauf riz et soja, non sucré;postre vegetal (salvo arroz y soja), sin azúcar;unsweetened plant dessert (not rice/soy);4.0
+Yaourt, dessert végétal sauf riz et soja, non sucré;yogur/postre vegetal (salvo arroz y soja), sin azúcar;unsweetened plant yogurt/dessert (not rice/soy);4.0
+Yaourt, dessert au lait de riz non sucré;yogur/postre de leche de arroz sin azúcar;unsweetened rice-milk yogurt/dessert;10.0
+Yaourt, dessert au soja non sucré;yogur/postre de soja sin azúcar;unsweetened soy yogurt/dessert;2.0
+Yaourt 0% aux fruits sucré, déconseillé;yogur 0% con frutas azucarado, desaconsejado;0% fruit yogurt, sweetened (not advised);30.0
+Yaourt au lait animal consommé seul, estimation;yogur de leche animal consumido solo, estimación;animal-milk yogurt eaten alone, est.;8.0
+Yaourt sans lactose si consommé seul hors des repas, estimation;yogur sin lactosa tomado solo fuera de comidas, estimación;lactose-free yogurt alone between meals, est.;12.0
+Yaourt sans lactose si consommé pendant un repas;yogur sin lactosa tomado durante la comida;lactose-free yogurt during a meal;8.0
+Yaourt 1/2 écrémé aromatisé sucré;yogur semidesnatado aromatizado azucarado;semi-skimmed flavored sweetened yogurt;20.0
+Yaourt 1/2 écrémé sucré;yogur semidesnatado azucarado;semi-skimmed sweetened yogurt;22.0
+Yaourt à boire sucré;yogur líquido azucarado;sweetened drinking yogurt;30.0
+Yaourt allégé;yogur ligero;light yogurt;6.0
+Yaourt aux fruits;yogur con frutas;fruit yogurt;18.0
+Yaourt lait de chèvre aromatisé, sucré, estimation;yogur de leche de cabra aromatizado, azucarado, estimación;flavored sweetened goat-milk yogurt, est.;22.0
+Yaourt au lait de chèvre, nature 5%;yogur de leche de cabra natural 5%;goat-milk yogurt, plain 5% fat;5.0
+Yaourt de brebis à la grecque;yogur de oveja estilo griego;sheep’s milk Greek-style yogurt;4.0
+Yaourt au lait de brebis aromatisé sucré;yogur de leche de oveja aromatizado y azucarado;flavored sweetened sheep’s milk yogurt;25.0
+Yaourt de brebis marque Vrai nature;yogur de oveja Vrai natural;Vrai brand sheep’s yogurt, plain;4.0
+Yaourt style à la grecque, topping miel;yogur estilo griego con topping de miel;Greek-style yogurt with honey topping;35.0
+Yoghurt greek style, honey topped;yogur estilo griego con miel;Greek-style yogurt, honey topped;35.0
+Yaourt lait entier nature sucré;yogur de leche entera natural azucarado;whole-milk yogurt, sweetened;15.0
+Yaourt nature en moyenne, attention estimation 115 si consommé seul;yogur natural promedio (115 si solo), estimación;plain yogurt avg., note est. 115 if eaten alone;12.0
+Biscuits salés apéritif;galletas saladas de aperitivo;savory crackers (party snacks);35.0
+Tortillas chips de maïs ;nachos/chips de maíz;corn tortilla chips;45.0
+Cacahuètes grillées salées;cacahuetes tostados salados;roasted salted peanuts;6.0
+Crackers fromage;crackers de queso;cheese crackers;35.0
+Crackers;crackers/galletas saladas;crackers;30.0
+Houmous, purée de pois chiches;hummus, puré de garbanzo;hummus, chickpea purée;8.0
+Pâtisserie en moyenne;pastelería (promedio);pastry (average);55.0
+Biscuit sucré;galleta dulce;sweet biscuit (cookie);55.0
+Biscuits fourrés chocolat au lait Evernat, estimation;galletas rellenas de chocolate con leche Evernat, estimación;milk-chocolate filled biscuits (Evernat), est.;60.0
+Croissant ordinaire;croissant normal;regular croissant;45.0
+Flan patissier de boulangerie;flan de pastelería;bakery custard tart (flan);40.0
+Croissant au beurre;croissant de mantequilla;butter croissant;45.0
+Brioche;brioche;brioche;45.0
+Brioche fit lait de chèvre;brioche “fit” con leche de cabra;“fit” brioche with goat milk;35.0
+Brioche fit lait de soja;brioche “fit” con leche de soja;“fit” brioche with soy milk;35.0
+Brioche fit lait de vache;brioche “fit” con leche de vaca;“fit” brioche with cow’s milk;35.0
+Pain au lait artisanal;pan de leche artesanal;artisan milk bread;45.0
+Chausson aux pommes;empanadilla de manzana (chausson);apple turnover;50.0
+Petit beurre;petit-beurre (galleta);petit-beurre biscuit;45.0
+Pain au chocolat;napolitana de chocolate;chocolate croissant (pain au chocolat);45.0
+Spéculos;speculoos;speculoos;55.0
+Eclair au chocolat;éclair de chocolate;chocolate éclair;50.0
+Maquereaux au vin blanc (estimation);caballa al vino blanco (estimación);mackerel in white wine, est.;0.0
+Nems en moyenne si frits (estimation);rollitos nem fritos (promedio);spring rolls fried, avg., est.;35.0
+Nems en moyenne si cuits au four (estimation);rollitos nem al horno (promedio);spring rolls baked, avg., est.;28.0
+Galette bretonne blé noir, sarrasin (estimation);galette bretona de trigo sarraceno (estimación);Breton buckwheat crêpe (galette), est.;22.0
+Feuille de brick;hoja de brick;brick pastry sheet;15.0
 `.trim();
 function parseAliments(csv) {
   // Normalise les fins de ligne
