@@ -2338,19 +2338,35 @@ if (!['fr','es','en'].includes(LANG)) LANG='fr';
 
 // Libellés UI
 const I18N = {
-  fr:{ title:"Ma journée – Calculateur de charge glycémique",
-       search_ph:"Rechercher un aliment…", add:"+ Ajouter l’aliment",
-       save:"Sauvegarder", clear:"Vider la journée",
-       total_title:"Charge glycémique totale du jour" },
-  es:{ title:"Mi día – Calculadora de Carga Glucémica",
-       search_ph:"Buscar un alimento…", add:"+ Añadir alimento",
-       save:"Guardar", clear:"Borrar el día",
-       total_title:"Carga glucémica total del día" },
-  en:{ title:"My Day – Glycemic Load Calculator",
-       search_ph:"Search a food…", add:"+ Add food",
-       save:"Save", clear:"Clear day",
-       total_title:"Daily total glycemic load" }
+  fr:{
+    title:"Ma journée – Calculateur de charge glycémique",
+    search_ph:"Rechercher un aliment…",
+    add:"+ Ajouter l’aliment",
+    save:"Sauvegarder",
+    clear:"Vider la journée",
+    total_title:"Charge glycémique totale du jour",
+    warn:"Taper les premières lettres de l'aliment ou recette. Cliquer sur ajouter l’aliment. Entrer le poids de la portion consommée, cliquer sur sauvegarder. Recommencer pour tout ce que vous avez mangé dans la journée. Pour perdre de la masse grasse : la charge glycémique de la journée doit être inférieure à 80."
+  },
+  es:{
+    title:"Mi día – Calculadora de Carga Glucémica",
+    search_ph:"Buscar un alimento…",
+    add:"+ Añadir alimento",
+    save:"Guardar",
+    clear:"Borrar el día",
+    total_title:"Carga glucémica total del día",
+    warn:"Escriba las primeras letras del alimento o receta. Haga clic en añadir alimento. Introduzca el peso de la porción consumida y haga clic en guardar. Repita para todo lo que haya comido durante el día. Para perder grasa corporal: la carga glucémica diaria debe ser inferior a 80."
+  },
+  en:{
+    title:"My Day – Glycemic Load Calculator",
+    search_ph:"Search a food…",
+    add:"+ Add food",
+    save:"Save",
+    clear:"Clear day",
+    total_title:"Daily total glycemic load",
+    warn:"Type the first letters of the food or recipe. Click add food. Enter the weight of the consumed portion and click save. Repeat for everything you ate during the day. To lose body fat: daily glycemic load should be under 80."
+  }
 };
+
 
 // Applique les libellés
 function applyI18n(){
