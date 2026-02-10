@@ -2125,16 +2125,24 @@ function parseAliments(csv) {
   const text = csv.replace(/\r\n?/g, '\n').trim();
   const lines = text.split('\n');
   if (!lines.length) return [];
-  // Détection du séparateur sur la LIGNE D’EN-TÊTE uniquement
+
+  // Ligne d’en-tête CSV
   const header = lines[0];
+
   const count = s => (header.match(new RegExp('\\' + s, 'g')) || []).length;
   const cSemis = count(';'), cCommas = count(','), cTabs = count('\t');
+
   let sep = ';';
   if (cSemis >= cCommas && cSemis >= cTabs && cSemis > 0) sep = ';'
   else if (cCommas >= cTabs && cCommas > 0) sep = ','
   else if (cTabs > 0) sep = '\t';
 
+  // 👉 headers DOIT être défini avant col()
   const headers = header.split(sep).map(h => h.trim());
+
+  // 👉 helper robuste (insensible à la casse)
+  const col = h =>
+    headers.findIndex(x => x.toLowerCase() === h.toLowerCase());
 
   const idxName = headers.findIndex(h => /aliment/i.test(h));
   const idxCg   = headers.findIndex(h => /^cg$/i.test(h));
@@ -2144,28 +2152,9 @@ function parseAliments(csv) {
   const out = [];
   for (let i = 1; i < lines.length; i++) {
     if (!lines[i].trim()) continue;
-    const cells = lines[i].split(sep).map(s => s.trim());
 
-    const name = (cells[nameCol] || '').replace(/^"|"$/g, '');
-    let cgStr  = (cells[cgCol]   || '').replace(/^"|"$/g, '');
+    const cells = lines[i].split(sep).map(s =
 
-    if (!name || !cgStr) continue;
-
-    // virgule décimale -> point
-    cgStr = cgStr.replace(',', '.');
-
-    const cg100 = Number(cgStr);
-    if (!Number.isFinite(cg100)) continue;
-
-out.push({
-  fr: (cells[headers.indexOf('ALIMENT_FR')] || '').replace(/^"|"$/g,''),
-  es: (cells[headers.indexOf('ALIMENTO_ES')] || '').replace(/^"|"$/g,''),
-  en: (cells[headers.indexOf('ALIMENTO_EN')] || '').replace(/^"|"$/g,''),
-  cg100
-});
-  }
-  return out;
-}
 </script>
 </head>
 <body>
