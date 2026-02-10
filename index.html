@@ -2363,20 +2363,26 @@ function applyI18n(){
   document.querySelector('.card.total > div:first-child').textContent = t.total_title;
   document.getElementById('warnText').textContent = t.warn;
 }
-window.addEventListener('DOMContentLoaded', () => {const $lang = document.getElementById('lang');
-if ($lang){
-  $lang.value = LANG;
-  $lang.addEventListener('change', ()=>{
-    LANG = $lang.value;
-    applyI18n();
-    fillDatalist();   // ✅ LIGNE MANQUANTE
-  });
-}
-applyI18n();
+window.addEventListener('DOMContentLoaded', () => {
+  const $lang = document.getElementById('lang');
+  if ($lang){
+    $lang.value = LANG;
+    $lang.addEventListener('change', ()=>{
+      LANG = $lang.value;
+      applyI18n();
+      fillDatalist();
+
+      // 🔧 Hack iOS WebKit pour <datalist>
+      $search.value = '';
+      $search.blur();
+      setTimeout(() => $search.focus(), 0);
+    });
+  }
+  applyI18n();
   fillDatalist();
   hydrate(load());
   updateTotal();
-                                                   });
+});
 
   const $btnAdd   = document.getElementById('add');
   const $btnSave  = document.getElementById('save');
