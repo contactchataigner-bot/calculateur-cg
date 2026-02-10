@@ -2157,7 +2157,12 @@ function parseAliments(csv) {
     const cg100 = Number(cgStr);
     if (!Number.isFinite(cg100)) continue;
 
-    out.push({ name, cg100 });
+out.push({
+  fr: (cells[headers.indexOf('ALIMENT_FR')] || '').replace(/^"|"$/g,''),
+  es: (cells[headers.indexOf('ALIMENTO_ES')] || '').replace(/^"|"$/g,''),
+  en: (cells[headers.indexOf('ALIMENTO_EN')] || '').replace(/^"|"$/g,''),
+  cg100
+});
   }
   return out;
 }
@@ -2234,7 +2239,7 @@ function hydrate(list){
 function fillDatalist(){
   if (!Array.isArray(FOODS) || !FOODS.length) return;
   $list.innerHTML = FOODS
-    .map(f => `<option value="${escapeHtml(f.name)}"></option>`)
+    .map(f => `<option value="${escapeHtml(f[LANG])}"></option>`)
     .join('');
 }
 function load(){
@@ -2267,7 +2272,9 @@ function format(x){
 // --- retrouver un aliment par son nom (insensible à la casse/espaces) ---
 function findFoodByName(name){
   const n = String(name || '').trim().toLowerCase();
-  return FOODS.find(f => f.name.toLowerCase() === n) || null;
+  return FOODS.find(f =>
+    [f.fr, f.es, f.en].some(v => v.toLowerCase() === n)
+  ) || null;
 }
 
 // --- gabarit HTML d'une ligne ---
