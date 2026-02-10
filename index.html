@@ -2375,7 +2375,14 @@ function applyI18n(){
   document.getElementById('warnText').textContent = t.warn;
 }
 window.addEventListener('DOMContentLoaded', () => {const $lang = document.getElementById('lang');
-if ($lang){ $lang.value = LANG; $lang.addEventListener('change', ()=>{ LANG=$lang.value; applyI18n(); }); }
+if ($lang){
+  $lang.value = LANG;
+  $lang.addEventListener('change', ()=>{
+    LANG = $lang.value;
+    applyI18n();
+    fillDatalist();   // ✅ LIGNE MANQUANTE
+  });
+}
 applyI18n();
   fillDatalist();
   hydrate(load());
