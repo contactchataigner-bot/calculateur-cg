@@ -2200,12 +2200,7 @@ out.push({
     <div id="total">0.0</div>
   </div>
 
-  <div class="card warn">
-    Taper les premières lettres de l'aliment ou recette. Cliquer sur ajouter l'aliment. 
-    Entrer le poids de la portion consommée, cliquer sur sauvergarder. 
-    Recommencer pour tout ce que vous avez mangé dans la journée. 
-    Pour perdre de la masse grasse : la charge glycémique de la journée doit être inférieure à 80. 
-  </div>
+ <div class="card warn" id="warnText"></div>
 
   <div class="footer"> © Méthode Chataigner —
   <a href="https://linktr.ee/Methode.Chataigner" target="_blank" rel="noopener noreferrer">
@@ -2377,6 +2372,7 @@ function applyI18n(){
   document.getElementById('save').textContent = t.save;
   document.getElementById('clearAll').textContent = t.clear;
   document.querySelector('.card.total > div:first-child').textContent = t.total_title;
+  document.getElementById('warnText').textContent = t.warn;
 }
 window.addEventListener('DOMContentLoaded', () => {const $lang = document.getElementById('lang');
 if ($lang){ $lang.value = LANG; $lang.addEventListener('change', ()=>{ LANG=$lang.value; applyI18n(); }); }
