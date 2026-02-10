@@ -2137,7 +2137,7 @@ function parseAliments(csv) {
   const headers = header.split(sep).map(h => h.trim());
 
   const idxName = headers.findIndex(h => /aliment/i.test(h));
-  const idxCg   = headers.findIndex(h => /(CG).*?(100|cg)/i.test(h));
+  const idxCg   = headers.findIndex(h => /^cg$/i.test(h));
   const nameCol = idxName !== -1 ? idxName : 0;
   const cgCol   = idxCg   !== -1 ? idxCg   : 1;
 
