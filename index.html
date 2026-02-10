@@ -2121,39 +2121,46 @@ Galette bretonne blé noir, sarrasin (estimation);galette bretona de trigo sarra
 Feuille de brick;hoja de brick;brick pastry sheet;15.0
 `.trim();
 function parseAliments(csv) {
-  // Normalise les fins de ligne
   const text = csv.replace(/\r\n?/g, '\n').trim();
   const lines = text.split('\n');
   if (!lines.length) return [];
 
-  // Ligne d’en-tête CSV
   const header = lines[0];
-
   const count = s => (header.match(new RegExp('\\' + s, 'g')) || []).length;
   const cSemis = count(';'), cCommas = count(','), cTabs = count('\t');
 
   let sep = ';';
-  if (cSemis >= cCommas && cSemis >= cTabs && cSemis > 0) sep = ';'
-  else if (cCommas >= cTabs && cCommas > 0) sep = ','
+  if (cSemis >= cCommas && cSemis >= cTabs && cSemis > 0) sep = ';';
+  else if (cCommas >= cTabs && cCommas > 0) sep = ',';
   else if (cTabs > 0) sep = '\t';
 
-  // 👉 headers DOIT être défini avant col()
   const headers = header.split(sep).map(h => h.trim());
+  const col = h => headers.findIndex(x => x.toLowerCase() === h.toLowerCase());
 
-  // 👉 helper robuste (insensible à la casse)
-  const col = h =>
-    headers.findIndex(x => x.toLowerCase() === h.toLowerCase());
-
-  const idxName = headers.findIndex(h => /aliment/i.test(h));
-  const idxCg   = headers.findIndex(h => /^cg$/i.test(h));
-  const nameCol = idxName !== -1 ? idxName : 0;
-  const cgCol   = idxCg   !== -1 ? idxCg   : 1;
+  const idxCg = headers.findIndex(h => /^cg$/i.test(h));
+  const cgCol = idxCg !== -1 ? idxCg : 1;
 
   const out = [];
+
   for (let i = 1; i < lines.length; i++) {
     if (!lines[i].trim()) continue;
 
-    const cells = lines[i].split(sep).map(s =
+    const cells = lines[i].split(sep).map(s => s.trim());
+
+    let cgStr = (cells[cgCol] || '').replace(/^"|"$/g, '').replace(',', '.');
+    const cg100 = Number(cgStr);
+    if (!Number.isFinite(cg100)) continue;
+
+    out.push({
+      fr: (cells[col('ALIMENT_FR')]  || ''),
+      es: (cells[col('ALIMENTO_ES')] || ''),
+      en: (cells[col('ALIMENTO_EN')] || ''),
+      cg100
+    });
+  }
+
+  return out;
+}
 
 </script>
 </head>
